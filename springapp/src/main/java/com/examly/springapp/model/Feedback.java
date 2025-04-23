@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 public class Feedback {
-    @Id
     private Long feedbackId;
     private String feedbackText;
     private LocalDate date;
