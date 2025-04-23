@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 
-@Entity
 public class Feedback {
     private Long feedbackId;
     private String feedbackText;
