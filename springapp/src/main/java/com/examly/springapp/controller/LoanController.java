@@ -41,11 +41,11 @@ public class LoanController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Loan>> viewAllLoans() {
+    public ResponseEntity<List<Loan>> getAllLoans() {
         List<Loan> loans = loanService.getAllLoans();
-        if(!loans.isEmpty())
+        //if(!loans.isEmpty())
             return ResponseEntity.status(200).body(loans);
-        return ResponseEntity.status(404).body(null);
+        //return ResponseEntity.status(404).body(null);
     }
 
     @PutMapping("/{loanId}")

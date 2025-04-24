@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 public class LoanApplication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Long loanApplicationId;
+	private Long loanApplicationId;
     private LocalDate submissionDate;
     private int loanStatus;
     private String farmLocation;
