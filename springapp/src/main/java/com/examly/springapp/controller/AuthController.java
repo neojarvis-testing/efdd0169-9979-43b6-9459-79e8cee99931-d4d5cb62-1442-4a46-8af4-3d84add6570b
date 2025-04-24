@@ -28,8 +28,4 @@ public class AuthController {
         user=service.loginUser(user);
         return ResponseEntity.status(201).body(user);
     }
-
-
-
-
 }
