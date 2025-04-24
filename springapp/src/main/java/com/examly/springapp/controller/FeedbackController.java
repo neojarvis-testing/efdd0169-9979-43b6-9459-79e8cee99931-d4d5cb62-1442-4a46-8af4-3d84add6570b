@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackService;
+import com.examly.springapp.service.FeedbackServiceImpl;
 
 import java.util.List;
 
