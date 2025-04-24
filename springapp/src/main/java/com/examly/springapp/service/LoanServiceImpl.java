@@ -38,7 +38,7 @@ public class LoanServiceImpl implements LoanService {
             updatedLoan.setLoanId(loanId);
             return loanRepository.save(updatedLoan);
         }
-        return null;
+        return null; // replace with exception
     }
 
     @Override
