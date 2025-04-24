@@ -10,18 +10,18 @@ import com.examly.springapp.repository.LoanApplicationRepo;
 import com.examly.springapp.repository.UserRepo;
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService{
-    @Autowired
-    LoanApplicationRepo loanApplicationRepo;
-
-    @Autowired
-    UserRepo userRepo;
+    
+    private final LoanApplicationRepo loanApplicationRepo;
+    public LoanApplicationServiceImpl(LoanApplicationRepo loanApplicationRepo){
+        this.loanApplicationRepo=loanApplicationRepo;
+    }
 
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
         return loanApplicationRepo.save(loanApplication);
         
     }
 
-    public LoanApplication getLoanApplicationById(long loanApplicationId) {
+    public LoanApplication getLoanApplicationById(long loanApplicationId) {   
        return loanApplicationRepo.findById(loanApplicationId).orElse(null);
         
     }
