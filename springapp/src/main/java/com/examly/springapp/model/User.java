@@ -54,4 +54,16 @@ public class User {
         this.userRole = userRole;
     }
     
+// constructors
+    public User() {
+    }
+    public User(Long userId, String email, String password, String username, String mobileNumber, String userRole) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.mobileNumber = mobileNumber;
+        this.userRole = userRole;
+    }
+    
 }
