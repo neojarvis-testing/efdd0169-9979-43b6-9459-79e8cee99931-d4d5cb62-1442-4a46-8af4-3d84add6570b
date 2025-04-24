@@ -9,11 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+
 @Entity 
 public class LoanApplication {
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Long loanApplicationId;
     private LocalDate submissionDate;
     private int loanStatus;
