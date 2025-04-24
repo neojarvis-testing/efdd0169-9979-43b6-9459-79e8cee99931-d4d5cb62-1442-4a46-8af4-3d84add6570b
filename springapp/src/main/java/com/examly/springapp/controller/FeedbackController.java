@@ -1,7 +1,7 @@
 
 package com.examly.springapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {
+    private final FeedbackServiceImpl feedbackService;
 
-    @Autowired
-    private FeedbackServiceImpl feedbackService;
+    public FeedbackController(FeedbackServiceImpl feedbackService) {
+        this.feedbackService = feedbackService;
+    }
+
 
     @PostMapping("/{userId}")
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback, @PathVariable Long userId) {
@@ -31,20 +34,12 @@ public class FeedbackController {
     }
 
     @GetMapping
-<<<<<<< HEAD
-    // public ResponseEntity <List<Feedback>> getAllFeedbacks() {
-    public ResponseEntity <List<Feedback>> getFeedbackAll() {
-        // List <Feedback> feedbackList = feedbackService.getAllFeedbacks();
-        List <Feedback> feedbackList = feedbackService.getFeedbackAll();
-        return ResponseEntity.status(200).body(feedbackList); // 200 OK
-=======
-    public ResponseEntity <List<Feedback>> getAllFeedbacks() {
-        List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
+    public ResponseEntity<List<Feedback>> getAllFeedbacks() {
+        List<Feedback> feedbackList= feedbackService.getAllFeedbacks();
             return ResponseEntity.status(200).body(feedbackList); // 200 OK
->>>>>>> cb43e237bba4e62e0b4599ce66519b994a7c36ba
-       
-        
+         
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteFeedback(@PathVariable Long id) {
