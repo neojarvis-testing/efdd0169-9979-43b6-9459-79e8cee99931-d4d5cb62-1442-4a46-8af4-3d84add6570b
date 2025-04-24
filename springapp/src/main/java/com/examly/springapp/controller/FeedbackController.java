@@ -26,7 +26,12 @@ public class FeedbackController {
     @GetMapping("/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long id) {
         Feedback feedback = feedbackService.getFeedbackById(id);
-            return ResponseEntity.status(200).body(feedback); // 200 OK
+            return ResponseEntity.status(200).body(feedback);
+        // Feedback feedback = feedbackService.getFeedbackById(id);
+        // if (feedback == null) {
+        //     throw new FeedbackNotFoundException("Feedback with ID " +id+ " not found.");
+        // }
+        // return ResponseEntity.status(200).body(feedback);
          
     }
 
