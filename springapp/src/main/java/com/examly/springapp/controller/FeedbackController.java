@@ -32,7 +32,7 @@ public class FeedbackController {
 
     @GetMapping
     public ResponseEntity <List<Feedback>> getAllFeedbacks() {
-        List <Feedback> feedbackList = feedbackService.getAllFeedbacks();
+        List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
             return ResponseEntity.status(200).body(feedbackList); // 200 OK
        
         
