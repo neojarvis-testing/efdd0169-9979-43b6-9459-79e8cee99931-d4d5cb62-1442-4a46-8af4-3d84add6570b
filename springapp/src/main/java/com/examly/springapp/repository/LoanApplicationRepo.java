@@ -19,6 +19,4 @@ List<LoanApplication> getLoanApplicationByApplicationId(Long userId);
     
 } 
 
-    
-}
 
