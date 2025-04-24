@@ -28,15 +28,15 @@ public class LoanApplicationController {
         return ResponseEntity.status(201).body(loanApplication);
     }
 
-    // @GetMapping("/api/loanapplication/{loanApplicationById}")
-    // public ResponseEntity<LoanApplication> getLoanApplicationByApplicationId(@PathVariable Long loanApplicationId){
-    //     LoanApplication loanApplication = loanApplicationService.getLoanApplicationByApplicationId(loanApplicationId);
-    //     if(loanApplication != null){
-    //         return ResponseEntity.status(200).body(loanApplication);
-    //     }else{
-    //         return ResponseEntity.status(404).body(null);
-    //     }
-    // }
+    @GetMapping("/api/loanapplication/{loanApplicationId}")
+    public ResponseEntity<LoanApplication> getLoanApplicationByApplicationId(@PathVariable Long loanApplicationId){
+        LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(loanApplicationId);
+        if(loanApplication != null){
+            return ResponseEntity.status(200).body(loanApplication);
+        }else{
+            return ResponseEntity.status(404).body(null);
+        }
+    }
 
     @GetMapping("/api/loanapplication")
     public ResponseEntity<List<LoanApplication>> getAllLoanAplications(){
@@ -50,14 +50,14 @@ public class LoanApplicationController {
         return ResponseEntity.status(200).body(list);
     }
 
-    @PutMapping("/api/loanapplication/{loanApplicationById}")
+    @PutMapping("/api/loanapplication/{loanApplicationId}")
     public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable long loanApplicationId, @RequestBody LoanApplication updatedLoanApplication){
         updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId, updatedLoanApplication);
         return ResponseEntity.status(200).body(updatedLoanApplication);
 
     }
 
-    @DeleteMapping("/api/loanapplication/{loanApplicationById}")
+    @DeleteMapping("/api/loanapplication/{loanApplicationId}")
     public ResponseEntity<?> deleteLoanApplication(@PathVariable long loanApplicationId){
         boolean loanApplication = loanApplicationService.deleteLoanApplication(loanApplicationId);
         return ResponseEntity.status(200).body(loanApplication);
