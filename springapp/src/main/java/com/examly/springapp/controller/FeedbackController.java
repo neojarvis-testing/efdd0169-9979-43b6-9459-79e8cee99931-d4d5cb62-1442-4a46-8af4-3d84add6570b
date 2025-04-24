@@ -17,7 +17,7 @@ public class FeedbackController {
     private FeedbackServiceImpl feedbackService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity <Feedback> addFeedback(@RequestBody Feedback feedback, @PathVariable int userId) {
+    public ResponseEntity <Feedback> addFeedback(@RequestBody Feedback feedback, @PathVariable Long userId) {
         Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
         return ResponseEntity.status(201).body(createdFeedback); // 201 Created
     }
@@ -53,7 +53,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity <List<Feedback>> getFeedbacksByUserId(@PathVariable int userId) {
+    public ResponseEntity <List<Feedback>> getFeedbacksByUserId(@PathVariable Long userId) {
         List<Feedback> feedbackList = feedbackService.getFeedbacksByUserId(userId);
         if (!feedbackList.isEmpty()) {
             return ResponseEntity.status(200).body(feedbackList); // 200 OK
