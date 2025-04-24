@@ -18,13 +18,13 @@ public class AuthContoller {
     UserServiceImpl service;
 
     @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@RequestBody User user){
         user=service.createUser(user);
         return ResponseEntity.status(201).body(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user){
+    public ResponseEntity<User> loginUser(@RequestBody User user){
         user=service.loginUser(user);
         return ResponseEntity.status(201).body(user);
     }
