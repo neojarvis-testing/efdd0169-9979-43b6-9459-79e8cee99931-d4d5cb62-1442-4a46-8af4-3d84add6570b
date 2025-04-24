@@ -12,7 +12,7 @@ import com.examly.springapp.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api")
-public class AuthContoller {
+public class AuthController {
 
     @Autowired
     UserServiceImpl service;

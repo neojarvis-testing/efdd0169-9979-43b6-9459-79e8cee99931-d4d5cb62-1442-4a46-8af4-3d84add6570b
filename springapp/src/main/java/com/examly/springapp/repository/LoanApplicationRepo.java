@@ -18,5 +18,3 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication, Long
 List<LoanApplication> getLoanApplicationByApplicationId(Long userId);
     
 } 
-
-
