@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.LoanApplication;
-import com.examly.springapp.model.User;
 import com.examly.springapp.repository.LoanApplicationRepo;
 import com.examly.springapp.repository.UserRepo;
 @Service
