@@ -17,7 +17,7 @@ public class FeedbackController {
     private FeedbackServiceImpl feedbackService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity <Feedback> addFeedback(@RequestBody Feedback feedback, @PathVariable Long userId) {
+    public ResponseEntity <Feedback> createFeedback(@RequestBody Feedback feedback, @PathVariable Long userId) {
         Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
         return ResponseEntity.status(201).body(createdFeedback); // 201 Created
     }
