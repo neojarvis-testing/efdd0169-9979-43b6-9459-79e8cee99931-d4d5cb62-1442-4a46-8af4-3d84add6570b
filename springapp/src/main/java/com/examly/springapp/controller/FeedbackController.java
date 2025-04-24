@@ -25,31 +25,26 @@ public class FeedbackController {
     @GetMapping("/{id}")
     public ResponseEntity <Feedback> getFeedbackById(@PathVariable Long id) {
         Feedback feedback = feedbackService.getFeedbackById(id);
-        if (feedback != null) {
+        if (feedback != null) 
             return ResponseEntity.status(200).body(feedback); // 200 OK
-        } else {
-            return ResponseEntity.status(404).body("Feedback not found for ID: " + id); // 404 Not Found
-        }
+         
     }
 
     @GetMapping
     public ResponseEntity <List<Feedback>> getAllFeedbacks() {
         List <Feedback> feedbackList = feedbackService.getAllFeedbacks();
-        if (!feedbackList.isEmpty()) {
+        if (!feedbackList.isEmpty()) 
             return ResponseEntity.status(200).body(feedbackList); // 200 OK
-        } else {
-            return ResponseEntity.status(404).body("No feedbacks available"); // 404 Not Found
-        }
+       
+        
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity <Feedback> deleteFeedback(@PathVariable Long id) {
         boolean isDeleted = feedbackService.deleteFeedback(id);
         if (isDeleted) {
-            return ResponseEntity.status(200).body("Feedback with ID: " + id + " deleted successfully"); // 200 OK
-        } else {
-            return ResponseEntity.status(404).body("Feedback not found for ID: " + id); // 404 Not Found
-        }
+            return ResponseEntity.status(200).body(null); // 200 OK
+        } 
     }
 
     @GetMapping("/user/{userId}")
@@ -57,8 +52,7 @@ public class FeedbackController {
         List<Feedback> feedbackList = feedbackService.getFeedbacksByUserId(userId);
         if (!feedbackList.isEmpty()) {
             return ResponseEntity.status(200).body(feedbackList); // 200 OK
-        } else {
-            return ResponseEntity.status(404).body("No feedbacks found for user ID: " + userId); // 404 Not Found
         }
+        return ResponseEntity.status(404).body(null); 
     }
 }
