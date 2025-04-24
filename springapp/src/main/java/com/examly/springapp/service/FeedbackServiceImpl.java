@@ -34,7 +34,8 @@ public class FeedbackServiceImpl implements FeedbackService{
     }
 
     @Override
-    public List<Feedback> getAllFeedbacks() {
+    // public List<Feedback> getAllFeedbacks() {
+    public List<Feedback> getFeedbackAll() {
         return feedbackRepo.findAll();
     }
 
