@@ -1,7 +1,9 @@
 package com.examly.springapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+//import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.User;
@@ -12,14 +14,14 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserRepo userRepo;
-    PasswordEncoder passwordEncoder;
+    // PasswordEncoder passwordEncoder;
 
     @Override
     public User createUser(User user) {
         if (userRepo.findByEmail(user.getEmail()) != null) {
            // throw new UserAlreadyExistException("User with this email already exists!!");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
 
@@ -36,5 +38,4 @@ public class UserServiceImpl implements UserService{
        
     }
     
-
 }

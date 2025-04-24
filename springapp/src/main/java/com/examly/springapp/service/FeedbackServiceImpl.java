@@ -12,7 +12,7 @@ import com.examly.springapp.repository.UserRepo;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService{
- @Autowired
+    @Autowired
     private FeedbackRepo feedbackRepo;
     
     @Autowired
