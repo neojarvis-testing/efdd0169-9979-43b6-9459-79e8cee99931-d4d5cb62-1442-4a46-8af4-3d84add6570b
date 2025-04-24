@@ -7,5 +7,5 @@ import com.examly.springapp.model.Feedback;
 
 @Repository
 public interface FeedbackRepo extends JpaRepository<Feedback,Long>{
-    
+
 }
