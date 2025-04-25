@@ -23,15 +23,28 @@ public class LoanServiceImpl implements LoanService {
         this.loanRepository = loanRepository;
     }
 
-    // Method to add a new loan
+    /**
+     * Method to add a new loan.
+     * @param loan The loan object to be added.
+     * @return The saved loan object.
+     */
     @Override
     public Loan addLoan(Loan loan) {
-        return loanRepository.save(loan);
+        Loan savedLoan = loanRepository.save(loan);
+        logger.info("Loan successfully added with ID: {}", savedLoan.getLoanId());
+        return savedLoan;
     }
 
-    // Method to get a loan by its ID
+
+    /**
+     * Method to get a loan by its ID.
+     * @param loanId The ID of the loan.
+     * @return The loan object if found.
+     * @throws LoanNotFoundException If loan is not found.
+     */
     @Override
     public Loan getLoanById(Long loanId) {
+        logger.info("Fetching loan with ID: {}", loanId);
         return loanRepository.findById(loanId)
                 .orElseThrow(() -> {
                     logger.error("Loan not found with ID: {}", loanId);
@@ -39,18 +52,34 @@ public class LoanServiceImpl implements LoanService {
                 });
     }
 
-    // Method to get all loans
+    /**
+     * Method to get all loans.
+     * @return List of all loans.
+     */
     @Override
     public List<Loan> getAllLoans() {
-        return loanRepository.findAll();
+        logger.info("Fetching all loans...");
+        List<Loan> loans = loanRepository.findAll();
+        logger.info("Total loans found: {}", loans.size());
+        return loans;
+
     }
 
-    // Method to update an existing loan
+    /**
+     * Method to update an existing loan.
+     * @param loanId The ID of the loan to be updated.
+     * @param updatedLoan The loan object containing updated details.
+     * @return The updated loan object.
+     * @throws LoanNotFoundException If loan is not found.
+     */
     @Override
     public Loan updateLoan(Long loanId, Loan updatedLoan) {
+        logger.info("Attempting to update loan with ID: {}", loanId);
         if (loanRepository.existsById(loanId)) {
             updatedLoan.setLoanId(loanId);
-            return loanRepository.save(updatedLoan);
+            Loan savedLoan = loanRepository.save(updatedLoan);
+            logger.info("Loan successfully updated with ID: {}", savedLoan.getLoanId());
+            return savedLoan;
         } else {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
@@ -58,12 +87,19 @@ public class LoanServiceImpl implements LoanService {
 
     }
 
-    // Method to delete a loan by its ID
+    /**
+     * Method to delete a loan by its ID.
+     * @param loanId The ID of the loan to be deleted.
+     * @return The deleted loan object.
+     * @throws LoanNotFoundException If loan is not found.
+     */
     @Override
     public Loan deleteLoan(Long loanId) {
+        logger.info("Attempting to delete loan with ID: {}", loanId);
         Optional<Loan> loan = loanRepository.findById(loanId);
         if (loan.isPresent()) {
             loanRepository.deleteById(loanId);
+            logger.info("Loan successfully deleted with ID: {}", loanId);
             return loan.get();
         } else {
             logger.error("Loan not found with ID: {}", loanId);

@@ -14,11 +14,13 @@ import com.examly.springapp.repository.UserRepo;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService{
-    @Autowired
-    private FeedbackRepo feedbackRepo;
+    private final FeedbackRepo feedbackRepo;
     
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
+     public FeedbackServiceImpl(FeedbackRepo feedbackRepo,UserRepo userRepo) {
+        this.feedbackRepo=feedbackRepo;
+        this.userRepo=userRepo;
+     }
 
     @Override
     public Feedback createFeedback(Feedback feedback, Long userId) {
