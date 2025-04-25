@@ -54,6 +54,8 @@ public class LoanServiceImpl implements LoanService {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }
+        return null; // replace with exception
+
     }
 
     // Method to delete a loan by its ID
