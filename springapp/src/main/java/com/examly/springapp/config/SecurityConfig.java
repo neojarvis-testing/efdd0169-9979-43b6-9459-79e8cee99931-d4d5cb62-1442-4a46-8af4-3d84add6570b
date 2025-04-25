@@ -58,7 +58,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     .anyRequest().authenticated())
     .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
     .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-    
+
     return http.build();
 }
 }
