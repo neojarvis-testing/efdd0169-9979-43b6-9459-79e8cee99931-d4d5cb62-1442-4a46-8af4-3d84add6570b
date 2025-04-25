@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exceptions.LoanNotFoundException;
 import com.examly.springapp.model.Loan;
 import com.examly.springapp.repository.LoanRepo;
 
@@ -54,7 +55,6 @@ public class LoanServiceImpl implements LoanService {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }
-        return null; // replace with exception
 
     }
 
