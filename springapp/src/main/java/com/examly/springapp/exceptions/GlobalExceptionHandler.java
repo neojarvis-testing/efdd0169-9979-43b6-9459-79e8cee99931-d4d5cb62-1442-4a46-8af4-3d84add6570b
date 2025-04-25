@@ -22,21 +22,34 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(FeedbackNotFoundException.class)
     public ResponseEntity<String> handleFeedbackNotFoundException(FeedbackNotFoundException e){
-        return ResponseEntity.status(401).body(e.getMessage());
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
     @ExceptionHandler(LoanNotFoundException.class)
     public ResponseEntity<String> handleLoanNotFoundException(LoanNotFoundException e){
-        return ResponseEntity.status(401).body(e.getMessage());
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
-    // Handle LoanServiceException
-    // @ExceptionHandler(LoanServiceException.class)
-    // public ResponseEntity<ErrorResponse> handleLoanServiceException(LoanServiceException ex, WebRequest request) {
-    //     // logger.error("LoanServiceException: {}", ex.getMessage());
-    //     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
-    //     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFound(UserNotFoundException e){
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
+  
+    @ExceptionHandler(FeedbackListEmptyException.class)
+    public ResponseEntity<String> handleFeedbackListEmptyException(Exception e) {
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
 
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<String> handleInvalidInputException(InvalidInputException ex) {
+        return ResponseEntity.status(409).body(ex.getMessage());
+    }
+
+
+    @ExceptionHandler(LoanApplicationNotFoundException.class)
+    public ResponseEntity<String> handleLoanApplicationNotFoundException(LoanApplicationNotFoundException ex) {
+        return ResponseEntity.status(409).body(ex.getMessage());
+    }
 
 }
+

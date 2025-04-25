@@ -16,8 +16,11 @@ import com.examly.springapp.service.UserServiceImpl;
 @RequestMapping("/api")
 public class AuthController {
 
-    @Autowired
-    UserServiceImpl service;
+    private final UserServiceImpl service;
+    public AuthController(UserServiceImpl service){
+             this.service=service;
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user){
