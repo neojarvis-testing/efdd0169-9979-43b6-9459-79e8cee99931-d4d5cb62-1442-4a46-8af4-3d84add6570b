@@ -1,8 +1,14 @@
 package com.examly.springapp.exceptions;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -49,6 +55,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(LoanApplicationNotFoundException.class)
     public ResponseEntity<String> handleLoanApplicationNotFoundException(LoanApplicationNotFoundException ex) {
         return ResponseEntity.status(409).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {
+        List<FieldError> errors = e.getBindingResult().getFieldErrors();
+        Map<String, String> map = new HashMap<>();
+        for(FieldError err: errors){
+            map.put(err.getField(), err.getDefaultMessage());
+        }
+        return ResponseEntity.status(400).body(map.toString());
     }
 
 }

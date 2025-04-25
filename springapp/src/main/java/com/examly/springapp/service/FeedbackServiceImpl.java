@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.FeedbackListEmptyException;
 import com.examly.springapp.exceptions.FeedbackNotFoundException;
+import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.FeedbackRepo;
@@ -26,7 +27,7 @@ public class FeedbackServiceImpl implements FeedbackService{
     public Feedback createFeedback(Feedback feedback, Long userId) {
         User user = userRepo.findById(userId).orElse(null);
         if (user == null) {
-          // throw new UserNotFoundException("User with ID: " + userId + " not found");
+          throw new UserNotFoundException("User with ID: " + userId + " not found");
         }
         feedback.setUser(user);
         return feedbackRepo.save(feedback);
@@ -64,7 +65,7 @@ public class FeedbackServiceImpl implements FeedbackService{
     public List<Feedback> getFeedbacksByUserId(Long userId) {
         User user=userRepo.findById(userId).orElse(null);
         if(user==null){
-           // throw new UserNotFoundException("User with ID: " + userId + " not found");
+            throw new UserNotFoundException("User with ID: " + userId + " not found");
         }
         return feedbackRepo.findByUser(userId);
     }
