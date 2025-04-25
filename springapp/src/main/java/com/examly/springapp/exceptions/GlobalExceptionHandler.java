@@ -22,12 +22,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(FeedbackNotFoundException.class)
     public ResponseEntity<String> handleFeedbackNotFoundException(FeedbackNotFoundException e){
-        return ResponseEntity.status(401).body(e.getMessage());
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
     @ExceptionHandler(LoanNotFoundException.class)
     public ResponseEntity<String> handleLoanNotFoundException(LoanNotFoundException e){
         return ResponseEntity.status(401).body(e.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFoundException(Exception e) {
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
+
+    @ExceptionHandler(FeedbackListEmptyException.class)
+    public ResponseEntity<String> handleFeedbackListEmptyException(Exception e) {
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
     // Handle LoanServiceException
