@@ -56,19 +56,6 @@ public class LoanApplicationController {
         return ResponseEntity.status(200).body(list);   // Return 200 OK status with the list of loan applications
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<LoanApplication>> getLoanAplicationByUserId(@PathVariable Long userId){
-        List<LoanApplication> list = loanApplicationService.getLoanApplicationByUserId(userId);
-        return ResponseEntity.status(200).body(list);
-    }
-
-    @PutMapping("/{loanApplicationId}")
-    public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable long loanApplicationId, @RequestBody LoanApplication updatedLoanApplication){
-        updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId, updatedLoanApplication);
-        return ResponseEntity.status(200).body(updatedLoanApplication);
-
-    }
-
     // Endpoint to get loan applications by user ID
     @GetMapping("/api/loanapplication/user/{userId}")
     public ResponseEntity<List<LoanApplication>> getLoanApplicationByUserId(@PathVariable Long userId) {

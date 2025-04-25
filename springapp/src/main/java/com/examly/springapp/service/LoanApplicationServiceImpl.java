@@ -25,14 +25,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         this.userRepo=userRepo;
     }
     
-
-
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
 
         Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
         User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
         if(loan==null || user == null){
-           // throw new UserNotFoundException("User or Loan doesn't Exists");
+            throw new UserNotFoundException("User or Loan Already Exists!!");
         }
         loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Applied");
@@ -48,15 +46,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
     public List<LoanApplication> getAllLoanAplications() {
         return loanApplicationRepo.findAll();
     }
-
-    // public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
-    //     LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-    //     if(loanApplication == null){
-    //         return null;
-    //     }    
-    //     updatedLoanApplication.setLoanApplicationId(loanApplicationId);
-    //     return loanApplicationRepo.save(updatedLoanApplication);
-    // }
 
     public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
         LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
@@ -82,7 +71,5 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
     public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
         return loanApplicationRepo.getLoanApplicationByApplicationId(userId);
     }
-
-
 
 }
