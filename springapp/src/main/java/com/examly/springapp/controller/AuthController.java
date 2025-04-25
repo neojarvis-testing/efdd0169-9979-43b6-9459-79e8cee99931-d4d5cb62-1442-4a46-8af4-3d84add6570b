@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.LoginResponse;
 import com.examly.springapp.model.User;
@@ -20,13 +22,13 @@ public class AuthController {
     UserServiceImpl service;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
         user=service.createUser(user);
         return ResponseEntity.status(201).body(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginDTO loginDTO){
         LoginResponse loginResponse=service.loginUser(loginDTO);
         if(loginResponse!=null){
             return ResponseEntity.status(200).body(loginResponse);

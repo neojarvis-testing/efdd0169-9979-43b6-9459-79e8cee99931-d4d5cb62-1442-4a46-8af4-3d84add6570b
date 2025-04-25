@@ -9,6 +9,8 @@ import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.FeedbackDTO;
 import com.examly.springapp.service.FeedbackServiceImpl;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -29,7 +31,7 @@ public class FeedbackController {
     // }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<FeedbackDTO> createFeedback(@RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
+    public ResponseEntity<FeedbackDTO> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
         Feedback feedback = convertToEntity(feedbackDTO);
         Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
         FeedbackDTO createdFeedbackDTO = convertToDTO(createdFeedback);

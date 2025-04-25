@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 import com.examly.springapp.model.Loan;
 import com.examly.springapp.service.LoanServiceImpl;
 
@@ -31,7 +33,7 @@ public class LoanController {
 
     // Endpoint to add a new loan
     @PostMapping
-    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan) {
+    public ResponseEntity<Loan> addLoan(@Valid @RequestBody Loan loan) {
         Loan createdLoan = loanService.addLoan(loan);
         if (createdLoan != null)
             return ResponseEntity.status(201).body(createdLoan); // Return 201 Created if successful
@@ -57,7 +59,7 @@ public class LoanController {
 
     // Endpoint to edit an existing loan
     @PutMapping("/{loanId}")
-    public ResponseEntity<Loan> editLoan(@PathVariable Long loanId, @RequestBody Loan loanDetails) {
+    public ResponseEntity<Loan> editLoan(@PathVariable Long loanId, @Valid @RequestBody Loan loanDetails) {
         Loan updatedLoan = loanService.updateLoan(loanId, loanDetails);
         if (updatedLoan != null)
             return ResponseEntity.status(200).body(updatedLoan); // Return 200 OK if update is successful
