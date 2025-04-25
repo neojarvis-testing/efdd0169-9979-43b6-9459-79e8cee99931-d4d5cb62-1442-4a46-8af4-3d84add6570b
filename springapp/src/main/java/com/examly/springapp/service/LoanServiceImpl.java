@@ -23,11 +23,7 @@ public class LoanServiceImpl implements LoanService {
         this.loanRepository = loanRepository;
     }
 
-    /**
-     * Method to add a new loan.
-     * @param loan The loan object to be added.
-     * @return The saved loan object.
-     */
+    // Method to add a new loan.
     @Override
     public Loan addLoan(Loan loan) {
         Loan savedLoan = loanRepository.save(loan);
@@ -36,12 +32,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
 
-    /**
-     * Method to get a loan by its ID.
-     * @param loanId The ID of the loan.
-     * @return The loan object if found.
-     * @throws LoanNotFoundException If loan is not found.
-     */
+    // Method to get a loan by its ID.
     @Override
     public Loan getLoanById(Long loanId) {
         logger.info("Fetching loan with ID: {}", loanId);
@@ -52,26 +43,16 @@ public class LoanServiceImpl implements LoanService {
                 });
     }
 
-    /**
-     * Method to get all loans.
-     * @return List of all loans.
-     */
+    // Method to get all loans.
     @Override
     public List<Loan> getAllLoans() {
         logger.info("Fetching all loans...");
         List<Loan> loans = loanRepository.findAll();
         logger.info("Total loans found: {}", loans.size());
         return loans;
-
     }
 
-    /**
-     * Method to update an existing loan.
-     * @param loanId The ID of the loan to be updated.
-     * @param updatedLoan The loan object containing updated details.
-     * @return The updated loan object.
-     * @throws LoanNotFoundException If loan is not found.
-     */
+    // Method to update an existing loan.
     @Override
     public Loan updateLoan(Long loanId, Loan updatedLoan) {
         logger.info("Attempting to update loan with ID: {}", loanId);
@@ -84,15 +65,9 @@ public class LoanServiceImpl implements LoanService {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }
-
     }
 
-    /**
-     * Method to delete a loan by its ID.
-     * @param loanId The ID of the loan to be deleted.
-     * @return The deleted loan object.
-     * @throws LoanNotFoundException If loan is not found.
-     */
+    // Method to delete a loan by its ID.
     @Override
     public Loan deleteLoan(Long loanId) {
         logger.info("Attempting to delete loan with ID: {}", loanId);
