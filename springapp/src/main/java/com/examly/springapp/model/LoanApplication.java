@@ -17,7 +17,7 @@ public class LoanApplication {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long loanApplicationId;
     private LocalDate submissionDate;
-    private int loanStatus;
+    private String loanStatus;
     private String farmLocation;
     private String farmerAddress;
     private double farmSizeInAcres;
@@ -42,10 +42,10 @@ public class LoanApplication {
     public void setSubmissionDate(LocalDate submissionDate) {
         this.submissionDate = submissionDate;
     }
-    public int getLoanStatus() {
+    public String getLoanStatus() {
         return loanStatus;
     }
-    public void setLoanStatus(int loanStatus) {
+    public void setLoanStatus(String loanStatus) {
         this.loanStatus = loanStatus;
     }
     public String getFarmLocation() {
@@ -92,8 +92,7 @@ public class LoanApplication {
     }
     public LoanApplication() {
     }
-
-    public LoanApplication(Long loanApplicationId, LocalDate submissionDate, int loanStatus, String farmLocation,
+    public LoanApplication(Long loanApplicationId, LocalDate submissionDate, String loanStatus, String farmLocation,
             String farmerAddress, double farmSizeInAcres, String farmpurpose, String file, User user, Loan loan) {
         this.loanApplicationId = loanApplicationId;
         this.submissionDate = submissionDate;
@@ -106,6 +105,8 @@ public class LoanApplication {
         this.user = user;
         this.loan = loan;
     }
+    
+    
     
     
 
