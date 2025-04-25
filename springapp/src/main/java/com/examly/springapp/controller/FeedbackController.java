@@ -1,7 +1,7 @@
 
 package com.examly.springapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
@@ -14,9 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {
+    private final FeedbackServiceImpl feedbackService;
 
-    @Autowired
-    private FeedbackServiceImpl feedbackService;
+    public FeedbackController(FeedbackServiceImpl feedbackService) {
+        this.feedbackService = feedbackService;
+    }
+
 
     // @PostMapping("/{userId}")
     // public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback
@@ -53,6 +56,7 @@ public class FeedbackController {
         List<FeedbackDTO> feedbackDTOList = feedbackList.stream().map(this::convertToDTO).collect(Collectors.toList());
         return ResponseEntity.status(200).body(feedbackDTOList); // 200 OK
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteFeedback(@PathVariable Long id) {
