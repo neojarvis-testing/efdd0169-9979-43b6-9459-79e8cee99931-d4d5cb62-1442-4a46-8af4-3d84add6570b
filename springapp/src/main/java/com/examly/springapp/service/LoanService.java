@@ -16,4 +16,8 @@ public interface LoanService {
 
     Loan deleteLoan(Long loanId);
 
+    // Map<String, Object> getMonthlyLoanData();
+
+    // Map<String, Integer> getLoanStatus();
+
 }
