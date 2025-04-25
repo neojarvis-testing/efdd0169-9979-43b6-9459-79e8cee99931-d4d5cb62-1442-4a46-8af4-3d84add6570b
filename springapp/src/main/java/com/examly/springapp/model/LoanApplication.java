@@ -17,7 +17,7 @@ public class LoanApplication {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long loanApplicationId;
     private LocalDate submissionDate;
-    private int loanStatus;
+    private int loanStatus;  //make string
     private String farmLocation;
     private String farmerAddress;
     private double farmSizeInAcres;

@@ -1,5 +1,7 @@
 package com.examly.springapp.service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
     UserRepo userRepo;
 
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
+        loanApplication.setSubmissionDate(LocalDate.now());
+        loanApplication.setLoanStatus(1);
         return loanApplicationRepo.save(loanApplication);
         
     }
@@ -51,6 +55,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
 
     public List<LoanApplication> getLoanAplicationByUserId(Long userId) {
         return loanApplicationRepo.getLoanApplicationByApplicationId(userId);
+    }
+
+    @Override
+    public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLoanApplicationByUserId'");
     }
 
 }
