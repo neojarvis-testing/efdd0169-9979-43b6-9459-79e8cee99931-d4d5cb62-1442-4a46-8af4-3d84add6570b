@@ -2,7 +2,6 @@ package com.examly.springapp.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.FeedbackListEmptyException;
@@ -32,7 +31,7 @@ public class FeedbackServiceImpl implements FeedbackService{
         feedback.setUser(user);
         return feedbackRepo.save(feedback);
     }
-
+  
     @Override
     public Feedback getFeedbackById(Long id) {
         Feedback f= feedbackRepo.findById(id).orElse(null);
