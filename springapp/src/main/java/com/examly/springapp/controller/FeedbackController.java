@@ -59,7 +59,7 @@ public class FeedbackController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFeedback(@PathVariable Long id) {
+    public ResponseEntity<?> deleteFeedback(@PathVariable Long id){
         boolean isDeleted = feedbackService.deleteFeedback(id);
         if (isDeleted) {
             return ResponseEntity.status(200).body("Deleted Succesfully");
