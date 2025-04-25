@@ -10,5 +10,4 @@ public interface FeedbackService {
     public List<Feedback> getAllFeedbacks();
     public boolean deleteFeedback(Long id);
     public List<Feedback> getFeedbacksByUserId(Long userId);
-
 }
