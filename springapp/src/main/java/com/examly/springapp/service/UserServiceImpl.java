@@ -23,14 +23,12 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepo urepo) {
+    public UserServiceImpl(UserRepo urepo,PasswordEncoder passwordEncoder) {
         this.userRepo = urepo;
+        this.passwordEncoder=passwordEncoder;
     }
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
     /**
      * Registers a new user in the system.
      * @param user The User object containing details such as email and password.
