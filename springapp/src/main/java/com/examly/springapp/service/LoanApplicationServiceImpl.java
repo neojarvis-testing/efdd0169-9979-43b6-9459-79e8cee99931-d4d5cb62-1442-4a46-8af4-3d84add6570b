@@ -28,6 +28,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
 
 
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
+
         Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
         User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
         if(loan==null || user == null){
@@ -48,14 +49,27 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         return loanApplicationRepo.findAll();
     }
 
+    // public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
+    //     LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+    //     if(loanApplication == null){
+    //         return null;
+    //     }    
+    //     updatedLoanApplication.setLoanApplicationId(loanApplicationId);
+    //     return loanApplicationRepo.save(updatedLoanApplication);
+    // }
+
     public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
-        LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-        if(loanApplication == null){
+        LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+        if (existingLoanApplication == null) {
+            System.out.println("Loan application with ID " + loanApplicationId + " not found.");
             return null;
-        }    
+        }
         updatedLoanApplication.setLoanApplicationId(loanApplicationId);
-        return loanApplicationRepo.save(updatedLoanApplication);
+        LoanApplication savedLoanApplication = loanApplicationRepo.save(updatedLoanApplication);
+        System.out.println("Updated loan application: " + savedLoanApplication);
+        return savedLoanApplication;
     }
+    
 
     public boolean deleteLoanApplication(long loanApplicationId) {
         LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
@@ -65,9 +79,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         loanApplicationRepo.delete(loanApplication);
         return true;
     }
-    @Override
     public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
         return loanApplicationRepo.getLoanApplicationByApplicationId(userId);
     }
+
+
 
 }

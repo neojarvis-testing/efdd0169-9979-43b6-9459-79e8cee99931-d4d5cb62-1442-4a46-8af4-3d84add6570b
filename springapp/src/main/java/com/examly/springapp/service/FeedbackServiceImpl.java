@@ -50,10 +50,11 @@ public class FeedbackServiceImpl implements FeedbackService{
 
     @Override
     public List<Feedback> getFeedbacksByUserId(Long userId) {
-        // return feedbackRepo.findByUserId(userId);
-        
-         return feedbackRepo.findAll();
-        
+        User user=userRepo.findById(userId).orElse(null);
+        if(user==null){
+            return null;
+        }
+        return feedbackRepo.findByUser(userId);
     }
 
 }
