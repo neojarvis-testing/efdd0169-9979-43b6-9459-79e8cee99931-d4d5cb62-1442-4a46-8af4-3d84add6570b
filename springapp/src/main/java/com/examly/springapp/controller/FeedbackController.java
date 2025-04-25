@@ -31,7 +31,7 @@ public class FeedbackController {
     // }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<FeedbackDTO> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
+    public ResponseEntity<FeedbackDTO> createFeedback( @Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
         Feedback feedback = convertToEntity(feedbackDTO);
         Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
         FeedbackDTO createdFeedbackDTO = convertToDTO(createdFeedback);
@@ -61,7 +61,7 @@ public class FeedbackController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFeedback(@PathVariable Long id) {
+    public ResponseEntity<?> deleteFeedback(@PathVariable Long id){
         boolean isDeleted = feedbackService.deleteFeedback(id);
         if (isDeleted) {
             return ResponseEntity.status(200).body("Deleted Succesfully");

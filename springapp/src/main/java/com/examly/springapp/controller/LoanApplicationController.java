@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -18,7 +19,9 @@ import com.examly.springapp.model.LoanApplication;
 import com.examly.springapp.service.LoanApplicationServiceImpl;
 
 @RestController
+@RequestMapping("/api/loanapplication")
 public class LoanApplicationController {
+
 
     private final LoanApplicationServiceImpl loanApplicationService;
 
@@ -30,9 +33,11 @@ public class LoanApplicationController {
     // Endpoint to add a new loan application
     @PostMapping("/api/loanapplication")
     public ResponseEntity<LoanApplication> addLoanApplication(@Valid @RequestBody LoanApplication loanApplication) {
+
         loanApplication = loanApplicationService.addLoanApplication(loanApplication);
         return ResponseEntity.status(201).body(loanApplication);    // Return 201 Created status
     }
+
 
     // Endpoint to get a loan application by its ID
     @GetMapping("/api/loanapplication/{loanApplicationId}")
@@ -48,6 +53,7 @@ public class LoanApplicationController {
     // Endpoint to get all loan applications
     @GetMapping("/api/loanapplication")
     public ResponseEntity<List<LoanApplication>> getAllLoanAplications() {
+
         List<LoanApplication> list = loanApplicationService.getAllLoanAplications();
         return ResponseEntity.status(200).body(list);   // Return 200 OK status with the list of loan applications
     }
@@ -72,6 +78,7 @@ public class LoanApplicationController {
     // Endpoint to delete a loan application by its ID
     @DeleteMapping("/api/loanapplication/{loanApplicationId}")
     public ResponseEntity<?> deleteLoanApplication(@PathVariable long loanApplicationId) {
+
         boolean loanApplication = loanApplicationService.deleteLoanApplication(loanApplicationId);
         return ResponseEntity.status(200).body(loanApplication);    // Return 200 OK status with the result of the deletion
     }

@@ -1,13 +1,14 @@
 package com.examly.springapp.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.examly.springapp.model.LoginDTO;
-import com.examly.springapp.model.LoginResponse;
-import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserDTO;
 
 public interface UserService {
 
-    User createUser(User user);
-    // User loginUser(User user);
-    LoginResponse loginUser(LoginDTO loginDTO);
+    UserDTO createUser(UserDTO userDTO);
+    LoginDTO loginUser(LoginDTO loginDTO);
+    // UserDetails loadUserByUsername(String email);
 
 }
