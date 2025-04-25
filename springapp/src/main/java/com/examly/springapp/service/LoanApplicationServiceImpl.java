@@ -1,26 +1,41 @@
 package com.examly.springapp.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exceptions.UserNotFoundException;
+import com.examly.springapp.model.Loan;
 import com.examly.springapp.model.LoanApplication;
+import com.examly.springapp.model.User;
 import com.examly.springapp.repository.LoanApplicationRepo;
+import com.examly.springapp.repository.LoanRepo;
 import com.examly.springapp.repository.UserRepo;
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService{
     
     private final LoanApplicationRepo loanApplicationRepo;
-    public LoanApplicationServiceImpl(LoanApplicationRepo loanApplicationRepo){
+    private final LoanRepo loanRepo;
+    private final UserRepo userRepo;
+
+    public LoanApplicationServiceImpl(LoanApplicationRepo loanApplicationRepo,LoanRepo loanRepo,UserRepo userRepo){
         this.loanApplicationRepo=loanApplicationRepo;
+        this.loanRepo=loanRepo;
+        this.userRepo=userRepo;
     }
+    
+
 
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
+
+        Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
+        User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+        if(loan==null || user == null){
+           // throw new UserNotFoundException("User or Loan doesn't Exists");
+        }
         loanApplication.setSubmissionDate(LocalDate.now());
-        loanApplication.setLoanStatus(1);
+        loanApplication.setLoanStatus("Applied");
         return loanApplicationRepo.save(loanApplication);
         
     }
@@ -64,7 +79,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         loanApplicationRepo.delete(loanApplication);
         return true;
     }
-
     public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
         return loanApplicationRepo.getLoanApplicationByApplicationId(userId);
     }
