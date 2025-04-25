@@ -23,7 +23,7 @@ public class LoanController {
     private final LoanServiceImpl loanService;
 
     // Constructor-based injection
-    public Controller(LoanServiceImpl loanService) {
+    public LoanController(LoanServiceImpl loanService) {
         this.loanService = loanService;
     }
 
