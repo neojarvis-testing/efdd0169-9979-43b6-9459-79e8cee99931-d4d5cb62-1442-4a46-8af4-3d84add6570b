@@ -33,20 +33,8 @@ public class UserServiceImpl implements UserService {
         this.userRepo = urepo;
         this.passwordEncoder=passwordEncoder;
     }
-<<<<<<< HEAD
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     // Registers a new user in the system.
-=======
-    /**
-     * Registers a new user in the system.
-     * @param user The User object containing details such as email and password.
-     * @return The saved User object with an encoded password.
-     * @throws UserAlreadyExistsException If a user with the same email already exists.
-     */
->>>>>>> d7417fafa2fc3522a7c161096108401980283a7f
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = Usermapper.mapToUser(userDTO);
@@ -72,12 +60,7 @@ public class UserServiceImpl implements UserService {
         if(passwordEncoder.matches(loginDTO.getPassword(),(existingUser.getPassword()))){
             return Usermapper.mapToLoginDTO(existingUser);
         }
-<<<<<<< HEAD
         logger.error("Login failed - Incorrect email or password for email: {}", loginDTO.getEmail());
         throw new IncorrectEmailOrPassword("Incorrect email or Password");
-=======
-        throw new IncorrectEmailOrPassword("Incorrect email or Password"); // exception is not found
-
->>>>>>> d7417fafa2fc3522a7c161096108401980283a7f
     }
 }
