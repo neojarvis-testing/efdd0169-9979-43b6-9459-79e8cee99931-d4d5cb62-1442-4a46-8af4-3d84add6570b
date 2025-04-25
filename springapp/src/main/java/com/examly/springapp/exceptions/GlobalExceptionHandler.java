@@ -1,8 +1,14 @@
 package com.examly.springapp.exceptions;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -22,21 +28,44 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(FeedbackNotFoundException.class)
     public ResponseEntity<String> handleFeedbackNotFoundException(FeedbackNotFoundException e){
-        return ResponseEntity.status(401).body(e.getMessage());
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
     @ExceptionHandler(LoanNotFoundException.class)
     public ResponseEntity<String> handleLoanNotFoundException(LoanNotFoundException e){
-        return ResponseEntity.status(401).body(e.getMessage());
+        return ResponseEntity.status(409).body(e.getMessage());
     }
 
-    // Handle LoanServiceException
-    // @ExceptionHandler(LoanServiceException.class)
-    // public ResponseEntity<ErrorResponse> handleLoanServiceException(LoanServiceException ex, WebRequest request) {
-    //     // logger.error("LoanServiceException: {}", ex.getMessage());
-    //     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
-    //     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFound(UserNotFoundException e){
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
+  
+    @ExceptionHandler(FeedbackListEmptyException.class)
+    public ResponseEntity<String> handleFeedbackListEmptyException(Exception e) {
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
 
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<String> handleInvalidInputException(InvalidInputException ex) {
+        return ResponseEntity.status(409).body(ex.getMessage());
+    }
+
+
+    @ExceptionHandler(LoanApplicationNotFoundException.class)
+    public ResponseEntity<String> handleLoanApplicationNotFoundException(LoanApplicationNotFoundException ex) {
+        return ResponseEntity.status(409).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {
+        List<FieldError> errors = e.getBindingResult().getFieldErrors();
+        Map<String, String> map = new HashMap<>();
+        for(FieldError err: errors){
+            map.put(err.getField(), err.getDefaultMessage());
+        }
+        return ResponseEntity.status(400).body(map.toString());
+    }
 
 }
+

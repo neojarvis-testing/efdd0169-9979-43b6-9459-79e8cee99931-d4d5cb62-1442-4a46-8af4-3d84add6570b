@@ -3,8 +3,8 @@ package com.examly.springapp.model;
 import jakarta.validation.constraints.NotBlank;
 
 public class FeedbackDTO {
+
 	private Long feedbackId;
-	
 	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
 

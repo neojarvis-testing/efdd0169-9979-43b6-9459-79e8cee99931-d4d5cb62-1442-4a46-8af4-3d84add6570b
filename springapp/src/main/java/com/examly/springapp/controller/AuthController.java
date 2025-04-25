@@ -8,28 +8,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.LoginDTO;
-import com.examly.springapp.model.LoginResponse;
-import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.service.UserServiceImpl;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
 public class AuthController {
 
-    @Autowired
-    UserServiceImpl service;
+    private final UserServiceImpl service;
+    public AuthController(UserServiceImpl service){
+             this.service=service;
+    }
+
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        user=service.createUser(user);
-        return ResponseEntity.status(201).body(user);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO){
+        userDTO=service.createUser(userDTO);
+        return ResponseEntity.status(201).body(userDTO);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginDTO loginDTO){
-        LoginResponse loginResponse=service.loginUser(loginDTO);
-        if(loginResponse!=null){
-            return ResponseEntity.status(200).body(loginResponse);
+    public ResponseEntity<LoginDTO> loginUser(@Valid @RequestBody LoginDTO loginDTO){
+         loginDTO=service.loginUser(loginDTO);
+        if(loginDTO!=null){
+            return ResponseEntity.status(200).body(loginDTO);
         }
         return ResponseEntity.status(401).body(null);
     }
