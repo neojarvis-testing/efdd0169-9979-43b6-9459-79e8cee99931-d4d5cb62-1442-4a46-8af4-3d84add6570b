@@ -34,14 +34,27 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         return loanApplicationRepo.findAll();
     }
 
+    // public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
+    //     LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+    //     if(loanApplication == null){
+    //         return null;
+    //     }    
+    //     updatedLoanApplication.setLoanApplicationId(loanApplicationId);
+    //     return loanApplicationRepo.save(updatedLoanApplication);
+    // }
+
     public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
-        LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-        if(loanApplication == null){
+        LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+        if (existingLoanApplication == null) {
+            System.out.println("Loan application with ID " + loanApplicationId + " not found.");
             return null;
-        }    
+        }
         updatedLoanApplication.setLoanApplicationId(loanApplicationId);
-        return loanApplicationRepo.save(updatedLoanApplication);
+        LoanApplication savedLoanApplication = loanApplicationRepo.save(updatedLoanApplication);
+        System.out.println("Updated loan application: " + savedLoanApplication);
+        return savedLoanApplication;
     }
+    
 
     public boolean deleteLoanApplication(long loanApplicationId) {
         LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
@@ -52,14 +65,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
         return true;
     }
 
-    public List<LoanApplication> getLoanAplicationByUserId(Long userId) {
+    public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
         return loanApplicationRepo.getLoanApplicationByApplicationId(userId);
     }
 
-    @Override
-    public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLoanApplicationByUserId'");
-    }
+
 
 }
