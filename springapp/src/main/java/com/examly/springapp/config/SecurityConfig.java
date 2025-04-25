@@ -1,5 +1,5 @@
 package com.examly.springapp.config;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,23 +12,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
- 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
- 
+
 @Autowired
 JwtAuthenticationEntryPoint entryPoint;
- 
+
 @Autowired
 UserDetailsService userDetailsService;
- 
+
 @Autowired
 PasswordEncoder encoder;
- 
+
 @Autowired
 JwtAuthenticationFilter filter;
- 
+
 @Autowired
 public void configure(AuthenticationManagerBuilder authority)throws Exception{
     authority.userDetailsService(userDetailsService).passwordEncoder(encoder);
@@ -58,7 +58,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     .anyRequest().authenticated())
     .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
     .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-   
+
     return http.build();
 }
 }
