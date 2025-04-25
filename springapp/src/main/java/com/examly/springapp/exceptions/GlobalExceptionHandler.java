@@ -34,11 +34,17 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleUserNotFound(UserNotFoundException e){
         return ResponseEntity.status(409).body(e.getMessage());
     }
+  
+    @ExceptionHandler(FeedbackListEmptyException.class)
+    public ResponseEntity<String> handleFeedbackListEmptyException(Exception e) {
+        return ResponseEntity.status(409).body(e.getMessage());
+    }
 
     @ExceptionHandler(InvalidInputException.class)
     public ResponseEntity<String> handleInvalidInputException(InvalidInputException ex) {
         return ResponseEntity.status(409).body(ex.getMessage());
     }
+
 
     @ExceptionHandler(LoanApplicationNotFoundException.class)
     public ResponseEntity<String> handleLoanApplicationNotFoundException(LoanApplicationNotFoundException ex) {
