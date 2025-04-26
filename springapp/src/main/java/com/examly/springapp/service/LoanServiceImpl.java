@@ -36,8 +36,8 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanDTO addLoan(LoanDTO loanDTO){
         Loan loan = Loanmapper.mapToLoan(loanDTO);
-        loanRepository.save(loan);
-        return Loanmapper.mapToLoanDTO(loan);
+        Loan saved= loanRepository.save(loan);
+        return Loanmapper.mapToLoanDTO(saved);
     }
 
     // Method to get a loan by its ID.
@@ -61,20 +61,43 @@ public class LoanServiceImpl implements LoanService {
     }
 
     // Method to update an existing loan.
-    @Override
-    public Loan updateLoan(Long loanId, Loan updatedLoan) {
+   @Override
+    public LoanDTO updateLoan(Long loanId, LoanDTO loanDTO) {
         logger.info("Attempting to update loan with ID: {}", loanId);
-        if (loanRepository.existsById(loanId)) {
-            updatedLoan.setLoanId(loanId);
-            Loan savedLoan = loanRepository.save(updatedLoan);
+        Loan loan=loanRepository.findById(loanId).orElse(null);
+        if (loan!=null) {
+            loan.setLoanId(loanId);
+            //loan = Loanmapper.mapToLoan(loanDTO);
+            loan.setLoanType(loanDTO.getLoanType());
+        loan.setDescription(loanDTO.getDescription());
+        loan.setInterestRate(loanDTO.getInterestRate());
+        loan.setMaximumAmount(loanDTO.getMaximumAmount());
+        loan.setRepaymentTenure(loanDTO.getRepaymentTenure());
+        loan.setDocumentsRequired(loanDTO.getDocumentsRequired());
+        loan.setEligibility(loanDTO.getEligibility());
+            Loan savedLoan = loanRepository.save(loan);
             logger.info("Loan successfully updated with ID: {}", savedLoan.getLoanId());
-            return savedLoan;
+            return Loanmapper.mapToLoanDTO(savedLoan);
         } 
         else {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }
     }
+    // @Override
+    // public Loan updateLoan(Long loanId, Loan updatedLoan) {
+    //     logger.info("Attempting to update loan with ID: {}", loanId);
+    //     if (loanRepository.existsById(loanId)) {
+    //         updatedLoan.setLoanId(loanId);
+    //         Loan savedLoan = loanRepository.save(updatedLoan);
+    //         logger.info("Loan successfully updated with ID: {}", savedLoan.getLoanId());
+    //         return savedLoan;
+    //     } 
+    //     else {
+    //         logger.error("Loan not found with ID: {}", loanId);
+    //         throw new LoanNotFoundException("Loan not found with ID: " + loanId);
+    //     }
+    // }
 
     // Method to delete a loan by its ID.
     @Override

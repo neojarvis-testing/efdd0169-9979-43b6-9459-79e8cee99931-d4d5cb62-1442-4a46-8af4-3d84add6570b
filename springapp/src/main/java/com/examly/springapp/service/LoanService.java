@@ -13,7 +13,7 @@ public interface LoanService {
 
     List<Loan> getAllLoans();
 
-    Loan updateLoan(Long loanId, Loan updatedLoan);
+    LoanDTO updateLoan(Long loanId, LoanDTO loanDTO);
 
     Loan deleteLoan(Long loanId);
 

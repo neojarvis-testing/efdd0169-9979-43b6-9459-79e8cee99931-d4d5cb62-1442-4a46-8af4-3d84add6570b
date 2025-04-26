@@ -60,8 +60,8 @@ public class LoanController {
 
     // Endpoint to edit an existing loan
     @PutMapping("/{loanId}")
-    public ResponseEntity<Loan> editLoan(@PathVariable Long loanId, @Valid @RequestBody Loan loanDetails) {
-        Loan updatedLoan = loanService.updateLoan(loanId, loanDetails);
+    public ResponseEntity<LoanDTO> editLoan(@PathVariable Long loanId, @Valid @RequestBody LoanDTO loanDTO) {
+        LoanDTO updatedLoan = loanService.updateLoan(loanId, loanDTO);
         if (updatedLoan != null)
             return ResponseEntity.status(200).body(updatedLoan); // Return 200 OK if update is successful
         return ResponseEntity.status(404).body(null); // Return 404 Not Found if loan is not found

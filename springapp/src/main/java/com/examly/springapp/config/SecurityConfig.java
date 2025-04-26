@@ -46,7 +46,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
      http.cors(cors->cors.disable())
     .csrf(csrf->csrf.disable())
     .authorizeHttpRequests(auth->auth
-    .requestMatchers("/api/register","/api/login").permitAll()
+    .requestMatchers("/api/register","/api/login,/api/loan").permitAll()
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER")
     .requestMatchers(HttpMethod.GET,"/api/loan/{loanId}","/api/loanapplication").hasRole("ADMIN")
     .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}","/api/loanapplication/{loanapplicationId}").hasRole("ADMIN")
@@ -55,6 +55,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     .requestMatchers(HttpMethod.POST,"/api/loanapplication","/api/feedback/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/user/{userId}","/api/feedback/user/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.DELETE,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasRole("USER")
+    // .anyRequest().authenticated())
     .anyRequest().permitAll())
     .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
     .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
