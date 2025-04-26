@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 import com.examly.springapp.model.LoanApplication;
 import com.examly.springapp.service.LoanApplicationServiceImpl;
 
@@ -30,7 +32,7 @@ public class LoanApplicationController {
 
     // Endpoint to add a new loan application
     @PostMapping("/api/loanapplication")
-    public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) {
+    public ResponseEntity<LoanApplication> addLoanApplication(@Valid @RequestBody LoanApplication loanApplication) {
 
         loanApplication = loanApplicationService.addLoanApplication(loanApplication);
         return ResponseEntity.status(201).body(loanApplication);    // Return 201 Created status
@@ -66,7 +68,7 @@ public class LoanApplicationController {
     // Endpoint to update a loan application by its ID
     @PutMapping("/api/loanapplication/{loanApplicationId}")
     public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable long loanApplicationId,
-            @RequestBody LoanApplication updatedLoanApplication) {
+            @Valid @RequestBody LoanApplication updatedLoanApplication) {
         updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId,
                 updatedLoanApplication);
         return ResponseEntity.status(200).body(updatedLoanApplication); // Return 200 OK status with the updated loan application

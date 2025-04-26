@@ -20,7 +20,6 @@ public class SwaggerConfig {
                     .version("1.0.0")
                     .contact(new Contact()
                         .name("Demo API Support")
-                        // .email("arumugamg21068@gmail.com")
                         .email("abc@gmail.com")
                         .url("#"))
                     .description("Farmer friendly loans"))
