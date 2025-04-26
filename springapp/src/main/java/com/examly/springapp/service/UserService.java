@@ -9,6 +9,6 @@ public interface UserService {
 
     UserDTO createUser(UserDTO userDTO);
     LoginDTO loginUser(LoginDTO loginDTO);
-    // UserDetails loadUserByUsername(String email);
+    UserDetails loadUserByUsername(String email);
 
 }

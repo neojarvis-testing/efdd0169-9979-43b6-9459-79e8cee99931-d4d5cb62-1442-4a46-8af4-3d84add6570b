@@ -3,16 +3,17 @@ package com.examly.springapp.service;
 import java.util.List;
 
 import com.examly.springapp.model.Loan;
+import com.examly.springapp.model.LoanDTO;
 
 public interface LoanService {
 
-    Loan addLoan(Loan loan);
+    LoanDTO addLoan(LoanDTO loanDTO);
 
     Loan getLoanById(Long loanId);
 
     List<Loan> getAllLoans();
 
-    Loan updateLoan(Long loanId, Loan updatedLoan);
+    LoanDTO updateLoan(Long loanId, LoanDTO loanDTO);
 
     Loan deleteLoan(Long loanId);
 
