@@ -27,7 +27,7 @@ public class FeedbackServiceImpl implements FeedbackService{
     public Feedback createFeedback(Feedback feedback, Long userId) {
         User user = userRepo.findById(userId).orElse(null);
         if (user == null) {
-          throw new UserNotFoundException("User with ID: " + userId + " not found");
+            throw new UserNotFoundException("User with ID: " + userId + " not found");
         }
         feedback.setUser(user);
         return feedbackRepo.save(feedback);

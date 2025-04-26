@@ -19,7 +19,7 @@ public class SwaggerConfig {
                     .title("FARM AID")
                     .version("1.0.0")
                     .contact(new Contact()
-                        .name("Demo API Support")
+                        .name("Contact Us")
                         .email("abc@gmail.com")
                         .url("#"))
                     .description("Farmer friendly loans"))
