@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User existingUser =userRepo.findByEmail(userDTO.getEmail());
         if(existingUser != null){
-            throw new UserNotFoundException("User already exists.");
+            throw new UserAlreadyExistsException("User already exists.");
         }
         User saved = userRepo.save(user);
         return Usermapper.mapToUserDTO(saved);
