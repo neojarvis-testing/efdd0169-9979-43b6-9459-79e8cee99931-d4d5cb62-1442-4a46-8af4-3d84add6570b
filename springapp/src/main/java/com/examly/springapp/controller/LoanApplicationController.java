@@ -78,7 +78,6 @@ public class LoanApplicationController {
     // Endpoint to delete a loan application by its ID
     @DeleteMapping("/api/loanapplication/{loanApplicationId}")
     public ResponseEntity<?> deleteLoanApplication(@PathVariable long loanApplicationId) {
-
         boolean loanApplication = loanApplicationService.deleteLoanApplication(loanApplicationId);
         return ResponseEntity.status(200).body(loanApplication);    // Return 200 OK status with the result of the deletion
     }
