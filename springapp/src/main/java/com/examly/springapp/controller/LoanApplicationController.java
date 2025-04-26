@@ -31,7 +31,7 @@ public class LoanApplicationController {
     }
 
     // Endpoint to add a new loan application
-    @PostMapping("/api/loanapplication")
+    @PostMapping
     public ResponseEntity<LoanApplication> addLoanApplication(@Valid @RequestBody LoanApplication loanApplication) {
 
         loanApplication = loanApplicationService.addLoanApplication(loanApplication);
@@ -40,7 +40,7 @@ public class LoanApplicationController {
 
 
     // Endpoint to get a loan application by its ID
-    @GetMapping("/api/loanapplication/{loanApplicationId}")
+    @GetMapping("/{loanApplicationId}")
     public ResponseEntity<LoanApplication> getLoanApplicationByApplicationId(@PathVariable Long loanApplicationId) {
         LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(loanApplicationId);
         if (loanApplication != null) {
@@ -51,7 +51,7 @@ public class LoanApplicationController {
     }
 
     // Endpoint to get all loan applications
-    @GetMapping("/api/loanapplication")
+    @GetMapping
     public ResponseEntity<List<LoanApplication>> getAllLoanAplications() {
 
         List<LoanApplication> list = loanApplicationService.getAllLoanAplications();
@@ -59,14 +59,14 @@ public class LoanApplicationController {
     }
 
     // Endpoint to get loan applications by user ID
-    @GetMapping("/api/loanapplication/user/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<LoanApplication>> getLoanApplicationByUserId(@PathVariable Long userId) {
         List<LoanApplication> list = loanApplicationService.getLoanApplicationByUserId(userId);
         return ResponseEntity.status(200).body(list);   // Return 200 OK status with the list of loan applications for the user
     }
 
     // Endpoint to update a loan application by its ID
-    @PutMapping("/api/loanapplication/{loanApplicationId}")
+    @PutMapping("/{loanApplicationId}")
     public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable long loanApplicationId,
             @Valid @RequestBody LoanApplication updatedLoanApplication) {
         updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId,
@@ -76,7 +76,7 @@ public class LoanApplicationController {
     }
 
     // Endpoint to delete a loan application by its ID
-    @DeleteMapping("/api/loanapplication/{loanApplicationId}")
+    @DeleteMapping("/{loanApplicationId}")
     public ResponseEntity<?> deleteLoanApplication(@PathVariable long loanApplicationId) {
 
         boolean loanApplication = loanApplicationService.deleteLoanApplication(loanApplicationId);
