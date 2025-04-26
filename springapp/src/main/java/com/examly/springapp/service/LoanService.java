@@ -3,10 +3,11 @@ package com.examly.springapp.service;
 import java.util.List;
 
 import com.examly.springapp.model.Loan;
+import com.examly.springapp.model.LoanDTO;
 
 public interface LoanService {
 
-    Loan addLoan(Loan loan);
+    LoanDTO addLoan(LoanDTO loanDTO);
 
     Loan getLoanById(Long loanId);
 

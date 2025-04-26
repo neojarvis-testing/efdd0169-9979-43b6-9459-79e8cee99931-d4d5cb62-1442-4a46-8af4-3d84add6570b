@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import com.examly.springapp.model.Loan;
+import com.examly.springapp.model.LoanDTO;
 import com.examly.springapp.service.LoanServiceImpl;
 
 @RestController
@@ -33,8 +34,8 @@ public class LoanController {
 
     // Endpoint to add a new loan
     @PostMapping
-    public ResponseEntity<Loan> addLoan(@Valid @RequestBody Loan loan) {
-        Loan createdLoan = loanService.addLoan(loan);
+    public ResponseEntity<LoanDTO> addLoan(@Valid @RequestBody LoanDTO loanDTO) {
+        LoanDTO createdLoan = loanService.addLoan(loanDTO);
         if (createdLoan != null)
             return ResponseEntity.status(201).body(createdLoan); // Return 201 Created if successful
         return ResponseEntity.status(400).body(null); // Return 400 Bad Request if failed

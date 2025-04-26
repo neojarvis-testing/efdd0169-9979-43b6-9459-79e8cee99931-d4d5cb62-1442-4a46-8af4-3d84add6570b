@@ -23,7 +23,8 @@ public class Usermapper {
         user.setUserRole(userDTO.getUserRole());
         user.setPassword(userDTO.getPassword());
     return user;
-    }  
+    } 
+     
     public static LoginDTO mapToLoginDTO(User user){
         String token="token";
         LoginDTO loginDTO = new LoginDTO();

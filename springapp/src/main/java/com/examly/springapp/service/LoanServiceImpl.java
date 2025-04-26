@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.LoanNotFoundException;
 import com.examly.springapp.model.Loan;
+import com.examly.springapp.model.LoanDTO;
 import com.examly.springapp.repository.LoanRepo;
+import com.examly.springapp.utility.Loanmapper;
 
 @Service
 public class LoanServiceImpl implements LoanService {
@@ -24,13 +26,19 @@ public class LoanServiceImpl implements LoanService {
     }
 
     // Method to add a new loan.
-    @Override
-    public Loan addLoan(Loan loan) {
-        Loan savedLoan = loanRepository.save(loan);
-        logger.info("Loan successfully added with ID: {}", savedLoan.getLoanId());
-        return savedLoan;
-    }
+    
+    // public Loan addLoan(Loan loan) {
+    //     Loan savedLoan = loanRepository.save(loan);
+    //     logger.info("Loan successfully added with ID: {}", savedLoan.getLoanId());
+    //     return savedLoan;
+    // }
 
+    @Override
+    public LoanDTO addLoan(LoanDTO loanDTO){
+        Loan loan = Loanmapper.mapToLoan(loanDTO);
+        loanRepository.save(loan);
+        return Loanmapper.mapToLoanDTO(loan);
+    }
 
     // Method to get a loan by its ID.
     @Override
@@ -61,7 +69,8 @@ public class LoanServiceImpl implements LoanService {
             Loan savedLoan = loanRepository.save(updatedLoan);
             logger.info("Loan successfully updated with ID: {}", savedLoan.getLoanId());
             return savedLoan;
-        } else {
+        } 
+        else {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }

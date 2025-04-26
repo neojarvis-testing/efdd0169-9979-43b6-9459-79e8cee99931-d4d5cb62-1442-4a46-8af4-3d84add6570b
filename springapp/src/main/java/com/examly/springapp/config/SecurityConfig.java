@@ -55,7 +55,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     .requestMatchers(HttpMethod.POST,"/api/loanapplication","/api/feedback/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/user/{userId}","/api/feedback/user/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.DELETE,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasRole("USER")
-    .anyRequest().authenticated())
+    .anyRequest().permitAll())
     .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
     .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
