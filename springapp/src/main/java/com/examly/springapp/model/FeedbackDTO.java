@@ -10,7 +10,6 @@ public class FeedbackDTO {
 	private Long feedbackId;
 	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
-	@NotBlank(message="Feedback date is mandatory")
 	private LocalDate date;
 	public Long getFeedbackId() {
 		return feedbackId;
