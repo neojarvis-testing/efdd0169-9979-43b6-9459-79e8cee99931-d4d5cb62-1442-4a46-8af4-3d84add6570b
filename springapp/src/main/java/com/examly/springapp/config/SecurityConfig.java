@@ -46,7 +46,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
      http.cors(cors->cors.disable())
     .csrf(csrf->csrf.disable())
     .authorizeHttpRequests(auth->auth
-    .requestMatchers("/api/register","/api/login").permitAll()
+    .requestMatchers("/api/register","/api/login,/api/loan").permitAll()
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER")
     .requestMatchers(HttpMethod.GET,"/api/loan/{loanId}","/api/loanapplication").hasRole("ADMIN")
     .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}","/api/loanapplication/{loanapplicationId}").hasRole("ADMIN")
@@ -59,7 +59,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     .anyRequest().permitAll())
     .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
     .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-    
+
     return http.build();
 }
 }
