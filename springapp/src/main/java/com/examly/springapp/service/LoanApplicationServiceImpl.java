@@ -37,18 +37,18 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
     
-    public LoanApplication addLoanApplication(LoanApplication loanApplication) {
+    // public LoanApplication addLoanApplication(LoanApplication loanApplication) {
 
-        Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
-        User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
-        if(loan==null || user == null){
-            throw new UserNotFoundException("User or Loan Already Exists!!");
-        }
-        loanApplication.setSubmissionDate(LocalDate.now());
-        loanApplication.setLoanStatus("Applied");
-        return loanApplicationRepo.save(loanApplication);
+    //     Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
+    //     User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+    //     if(loan==null || user == null){
+    //         throw new UserNotFoundException("User or Loan Already Exists!!");
+    //     }
+    //     loanApplication.setSubmissionDate(LocalDate.now());
+    //     loanApplication.setLoanStatus("Applied");
+    //     return loanApplicationRepo.save(loanApplication);
 
-    }
+    // }
 
     public LoanApplicationDTO addLoanApplication(LoanApplicationDTO loanApplicationDTO) {
         LoanApplication loanApplication=LoanApplicationMappers.mapToLoanApplication(loanApplicationDTO);
