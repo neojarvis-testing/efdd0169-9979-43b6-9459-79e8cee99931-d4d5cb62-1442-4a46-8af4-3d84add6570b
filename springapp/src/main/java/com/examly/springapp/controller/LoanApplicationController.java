@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import com.examly.springapp.model.LoanApplication;
+import com.examly.springapp.model.LoanApplicationDTO;
 import com.examly.springapp.service.LoanApplicationServiceImpl;
 
 @RestController
@@ -67,10 +68,10 @@ public class LoanApplicationController {
 
     // Endpoint to update a loan application by its ID
     @PutMapping("/{loanApplicationId}")
-    public ResponseEntity<LoanApplication> updateLoanApplication(@PathVariable long loanApplicationId,
-            @Valid @RequestBody LoanApplication updatedLoanApplication) {
-        updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId,
-                updatedLoanApplication);
+    public ResponseEntity<LoanApplicationDTO> updateLoanApplication(@PathVariable long loanApplicationId,
+            @Valid @RequestBody LoanApplicationDTO loanApplicationDTO) {
+        LoanApplicationDTO updatedLoanApplication = loanApplicationService.updateLoanApplication(loanApplicationId,
+        loanApplicationDTO);
         return ResponseEntity.status(200).body(updatedLoanApplication); // Return 200 OK status with the updated loan application
 
     }

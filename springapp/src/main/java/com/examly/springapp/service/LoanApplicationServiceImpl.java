@@ -13,10 +13,12 @@ import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.Loan;
 
 import com.examly.springapp.model.LoanApplication;
+import com.examly.springapp.model.LoanApplicationDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.LoanApplicationRepo;
 import com.examly.springapp.repository.LoanRepo;
 import com.examly.springapp.repository.UserRepo;
+import com.examly.springapp.utility.LoanApplicationMappers;
 
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService {
@@ -45,6 +47,20 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Applied");
         return loanApplicationRepo.save(loanApplication);
+
+    }
+
+    public LoanApplicationDTO addLoanApplication(LoanApplicationDTO loanApplicationDTO) {
+        LoanApplication loanApplication=LoanApplicationMappers.mapToLoanApplication(loanApplicationDTO);
+        Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
+        User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+        if(loan==null || user == null){
+            throw new UserNotFoundException("User or Loan Already Exists!!");
+        }
+        loanApplication.setSubmissionDate(LocalDate.now());
+        loanApplication.setLoanStatus("Applied");
+        LoanApplication saved=loanApplicationRepo.save(loanApplication);
+        return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
 
     }
 
@@ -91,15 +107,35 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
 
-    public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
+    public LoanApplicationDTO updateLoanApplication(long loanApplicationId, LoanApplicationDTO loanApplicationDTO) {
 
-        LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-                if(existingLoanApplication==null){
-                    throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
+        LoanApplication loan = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+                if(loan!=null){
+                    loan.setLoanApplicationId(loanApplicationId);
+                    loan.setFarmLocation(loanApplicationDTO.getFarmLocation());
+                    loan.setFarmSizeInAcres(loanApplicationDTO.getFarmSizeInAcres());
+                    loan.setFarmerAddress(loanApplicationDTO.getFarmerAddress());
+                    loan.setFile(loanApplicationDTO.getFile());
+                    loan.setLoanStatus(loanApplicationDTO.getLoanStatus());
+                    loan.setFarmpurpose(loanApplicationDTO.getFarmpurpose());
+                    loan.setLoan(loanApplicationDTO.getLoan());
+                    loan.setUser(loanApplicationDTO.getUser());
+                    LoanApplication saved=loanApplicationRepo.save(loan);
+                    return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
+                    
                 }
-        updatedLoanApplication.setLoanApplicationId(loanApplicationId);
-        return loanApplicationRepo.save(updatedLoanApplication);
+                throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
     }
+
+    // public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
+
+    //     LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
+    //             if(existingLoanApplication==null){
+    //                 throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
+    //             }
+    //     updatedLoanApplication.setLoanApplicationId(loanApplicationId);
+    //     return loanApplicationRepo.save(updatedLoanApplication);
+    // }
 
     /**
      * Deletes a loan application by its ID.
