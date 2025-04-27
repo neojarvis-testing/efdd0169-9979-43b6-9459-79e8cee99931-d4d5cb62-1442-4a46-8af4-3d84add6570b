@@ -1,8 +1,8 @@
 package com.examly.springapp.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.FeedbackListEmptyException;
@@ -30,9 +30,10 @@ public class FeedbackServiceImpl implements FeedbackService{
           throw new UserNotFoundException("User with ID: " + userId + " not found");
         }
         feedback.setUser(user);
+        feedback.setDate(LocalDate.now());
         return feedbackRepo.save(feedback);
     }
-
+  
     @Override
     public Feedback getFeedbackById(Long id) {
         Feedback f= feedbackRepo.findById(id).orElse(null);

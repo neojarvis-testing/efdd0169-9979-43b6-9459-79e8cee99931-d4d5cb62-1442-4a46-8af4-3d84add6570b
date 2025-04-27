@@ -2,7 +2,6 @@ package com.examly.springapp.controller;
 
 import java.util.List;
 
-
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import com.examly.springapp.model.Loan;
+import com.examly.springapp.model.LoanDTO;
 import com.examly.springapp.service.LoanServiceImpl;
 
 @RestController
@@ -33,12 +33,11 @@ public class LoanController {
 
     // Endpoint to add a new loan
     @PostMapping
-    public ResponseEntity<Loan> addLoan(@Valid @RequestBody Loan loan) {
-        Loan createdLoan = loanService.addLoan(loan);
+    public ResponseEntity<LoanDTO> addLoan(@Valid @RequestBody LoanDTO loanDTO) {
+        LoanDTO createdLoan = loanService.addLoan(loanDTO);
         if (createdLoan != null)
             return ResponseEntity.status(201).body(createdLoan); // Return 201 Created if successful
         return ResponseEntity.status(400).body(null); // Return 400 Bad Request if failed
-        // return ResponseEntity.status(400).body(new ErrorResponse("Invalid request"));
     }
 
     // Endpoint to view a loan by its ID
@@ -59,8 +58,8 @@ public class LoanController {
 
     // Endpoint to edit an existing loan
     @PutMapping("/{loanId}")
-    public ResponseEntity<Loan> editLoan(@PathVariable Long loanId, @Valid @RequestBody Loan loanDetails) {
-        Loan updatedLoan = loanService.updateLoan(loanId, loanDetails);
+    public ResponseEntity<LoanDTO> editLoan(@PathVariable Long loanId, @Valid @RequestBody LoanDTO loanDTO) {
+        LoanDTO updatedLoan = loanService.updateLoan(loanId, loanDTO);
         if (updatedLoan != null)
             return ResponseEntity.status(200).body(updatedLoan); // Return 200 OK if update is successful
         return ResponseEntity.status(404).body(null); // Return 404 Not Found if loan is not found

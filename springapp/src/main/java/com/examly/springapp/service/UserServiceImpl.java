@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         logger.warn("User not found for email: {}", email);
         throw new UserNotFoundException("User not found for the email: " + email);
     }
-
+    
     // Retrieve all users
     @Override
     public List<UserDTO> getAllUsers() {
