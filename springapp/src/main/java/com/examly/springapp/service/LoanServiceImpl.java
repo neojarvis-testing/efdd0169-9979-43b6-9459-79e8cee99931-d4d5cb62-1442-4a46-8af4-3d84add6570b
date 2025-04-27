@@ -31,7 +31,6 @@ public class LoanServiceImpl implements LoanService {
         return savedLoan;
     }
 
-
     // Method to get a loan by its ID.
     @Override
     public Loan getLoanById(Long loanId) {

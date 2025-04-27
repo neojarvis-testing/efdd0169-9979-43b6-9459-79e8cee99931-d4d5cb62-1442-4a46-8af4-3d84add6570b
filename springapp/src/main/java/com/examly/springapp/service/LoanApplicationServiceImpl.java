@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.examly.springapp.exceptions.LoanApplicationNotFoundException;
+import com.examly.springapp.exceptions.LoanNotFoundException;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,19 +30,23 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     private final LoanRepo loanRepo;
     private final UserRepo userRepo;
 
-    public LoanApplicationServiceImpl(LoanApplicationRepo loanApplicationRepo,LoanRepo loanRepo,UserRepo userRepo){
-        this.loanApplicationRepo=loanApplicationRepo;
-        this.loanRepo=loanRepo;
-        this.userRepo=userRepo;
+    public LoanApplicationServiceImpl(LoanApplicationRepo loanApplicationRepo, LoanRepo loanRepo, UserRepo userRepo) {
+        this.loanApplicationRepo = loanApplicationRepo;
+        this.loanRepo = loanRepo;
+        this.userRepo = userRepo;
 
     }
-    
+
     public LoanApplication addLoanApplication(LoanApplication loanApplication) {
 
         Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
-        User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
-        if(loan==null || user == null){
-            throw new UserNotFoundException("User or Loan Already Exists!!");
+        User user = userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+        if (user == null) {
+            throw new UserNotFoundException("User Not Found!!");
+        }
+
+        if (loan == null) {
+            throw new LoanNotFoundException("Loan Not Found!!");
         }
         loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Applied");
@@ -48,24 +54,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
 
-    /**
-     * Retrieves a loan application by its ID.
-     * Logs the process of retrieving the loan application, including handling
-     * not-found errors.
-     * Throws a ResourceNotFoundException if the loan application does not exist.
-     *
-     * @param loanApplicationId The unique ID of the loan application to retrieve.
-     * @return The loan application object if found.
-     * @throws ResourceNotFoundException if no loan application is found for the
-     *                                   given ID.
-     */
-
+    // Retrieves a loan application by its ID.
     public LoanApplication getLoanApplicationById(long loanApplicationId) {
         logger.info("Fetching loan application with ID {}", loanApplicationId);
         return loanApplicationRepo.findById(loanApplicationId)
                 .orElseThrow(() -> {
                     logger.error("Loan application with ID {} not found", loanApplicationId);
-                    throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
+                    throw new LoanApplicationNotFoundException(
+                            "Loan application with ID " + loanApplicationId + " not found.");
                 });
     }
 
@@ -94,9 +90,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
 
         LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-                if(existingLoanApplication==null){
-                    throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
-                }
+        if (existingLoanApplication == null) {
+            throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
+        }
         updatedLoanApplication.setLoanApplicationId(loanApplicationId);
         return loanApplicationRepo.save(updatedLoanApplication);
     }
@@ -112,24 +108,26 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
      */
     public boolean deleteLoanApplication(long loanApplicationId) {
         LoanApplication loanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
-        if(loanApplication==null){
+        if (loanApplication == null) {
             return false;
         }
         loanApplicationRepo.delete(loanApplication);
         return true;
     }
 
-
     /**
-    * Retrieves loan applications associated with a specific user ID.
-    * Logs the process of fetching loan applications and handles cases where no applications are found.
-    * Throws a LoanApplicationNotFoundException if no loan applications are available for the specified user ID.
-    *
-    * @param userId The unique ID of the user whose loan applications are to be fetched.
-    * @return A list of loan applications linked to the given user ID.
-    * @throws LoanApplicationNotFoundException if no loan applications are found for the user ID.
-    */
-
+     * Retrieves loan applications associated with a specific user ID.
+     * Logs the process of fetching loan applications and handles cases where no
+     * applications are found.
+     * Throws a LoanApplicationNotFoundException if no loan applications are
+     * available for the specified user ID.
+     *
+     * @param userId The unique ID of the user whose loan applications are to be
+     *               fetched.
+     * @return A list of loan applications linked to the given user ID.
+     * @throws LoanApplicationNotFoundException if no loan applications are found
+     *                                          for the user ID.
+     */
 
     public List<LoanApplication> getLoanApplicationByUserId(Long userId) {
         logger.info("Fetching loan applications for user with ID {}", userId);
