@@ -64,4 +64,3 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
     return http.build(); // Builds and returns the security filter chain
 }
 }
-

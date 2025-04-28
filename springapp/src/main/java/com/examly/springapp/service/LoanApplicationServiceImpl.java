@@ -83,6 +83,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
    //updated Loan Application by ID
+   
     public LoanApplicationDTO updateLoanApplication(long loanApplicationId, LoanApplicationDTO loanApplicationDTO) {
 
         LoanApplication loan = loanApplicationRepo.findById(loanApplicationId).orElse(null);
