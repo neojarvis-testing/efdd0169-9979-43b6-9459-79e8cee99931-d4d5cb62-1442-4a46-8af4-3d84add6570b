@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
     SignupComponent,
     HomePageComponent
   ],
+    
   imports: [
     BrowserModule,
     AppRoutingModule,
