@@ -90,6 +90,7 @@ public class LoanApplication {
     public void setLoan(Loan loan) {
         this.loan = loan;
     }
+    //Constructors
     public LoanApplication() {
     }
     public LoanApplication(Long loanApplicationId, LocalDate submissionDate, String loanStatus, String farmLocation,
