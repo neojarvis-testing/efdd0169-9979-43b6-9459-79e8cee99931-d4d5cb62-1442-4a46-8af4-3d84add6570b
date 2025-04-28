@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.examly.springapp.exceptions.LoanApplicationNotFoundException;
-import com.examly.springapp.exceptions.LoanNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,10 +38,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
 
-
-
-
-    public LoanApplication addLoanApplication(LoanApplication loanApplication) {
+   //adds a loan application
+    public LoanApplicationDTO addLoanApplication(LoanApplicationDTO loanApplicationDTO) {
+        LoanApplication loanApplication=LoanApplicationMappers.mapToLoanApplication(loanApplicationDTO);
         Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
         User user = userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
     
@@ -54,8 +52,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         loanApplication.setUser(user);
         loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Applied");
-    
-        return loanApplicationRepo.save(loanApplication);
+        LoanApplication saved=loanApplicationRepo.save(loanApplication);    
+        return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
     }
 
 
@@ -84,7 +82,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         return loanApplications;
 
     }
-
+   //updated Loan Application by ID
     public LoanApplicationDTO updateLoanApplication(long loanApplicationId, LoanApplicationDTO loanApplicationDTO) {
 
         LoanApplication loan = loanApplicationRepo.findById(loanApplicationId).orElse(null);
