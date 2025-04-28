@@ -8,9 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 public class FeedbackDTO {
 
 	private Long feedbackId;
-	// @NotBlank(message="Feedback text is mandatory")
+	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
-	// @NotBlank(message="Feedback date is mandatory")
 	private LocalDate date;
 	public Long getFeedbackId() {
 		return feedbackId;
@@ -30,6 +29,5 @@ public class FeedbackDTO {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-    
-	
+    	
 }

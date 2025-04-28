@@ -7,7 +7,7 @@ import com.examly.springapp.model.LoanApplicationDTO;
 
 public interface LoanApplicationService {
 
-    public LoanApplication addLoanApplication(LoanApplication loanApplication);
+    public LoanApplicationDTO addLoanApplication(LoanApplicationDTO loanApplicationDTO);
 
     public List<LoanApplication> getLoanApplicationByUserId(Long userId);
 
