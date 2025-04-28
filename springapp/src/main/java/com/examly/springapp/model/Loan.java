@@ -19,6 +19,22 @@ public class Loan {
     private String eligibility;
     private String documentsRequired;
 
+    //constructors
+    public Loan() {
+    }
+
+    public Loan(Long loanId, String loanType, String description, double interestRate, double maximumAmount,
+            int repaymentTenure, String eligibility, String documentsRequired) {
+        this.loanId = loanId;
+        this.loanType = loanType;
+        this.description = description;
+        this.interestRate = interestRate;
+        this.maximumAmount = maximumAmount;
+        this.repaymentTenure = repaymentTenure;
+        this.eligibility = eligibility;
+        this.documentsRequired = documentsRequired;
+    }
+
     // Getters and Setters
     public Long getLoanId() {
         return loanId;

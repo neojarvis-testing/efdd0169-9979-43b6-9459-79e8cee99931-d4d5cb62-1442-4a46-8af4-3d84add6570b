@@ -14,8 +14,7 @@ public class Usermapper {
         userDTO.setPassword(user.getPassword());
         return userDTO;
     }  
-    
-    
+     
     public static User mapToUser(UserDTO userDTO) {
         User user = new User();
         user.setEmail(userDTO.getEmail());
@@ -24,7 +23,8 @@ public class Usermapper {
         user.setUserRole(userDTO.getUserRole());
         user.setPassword(userDTO.getPassword());
     return user;
-    }  
+    } 
+     
     public static LoginDTO mapToLoginDTO(User user){
         String token="token";
         LoginDTO loginDTO = new LoginDTO();

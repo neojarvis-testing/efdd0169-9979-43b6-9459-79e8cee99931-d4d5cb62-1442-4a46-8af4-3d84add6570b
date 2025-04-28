@@ -13,46 +13,41 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import com.examly.springapp.config.JwtUtils;
-import com.examly.springapp.model.LoginDTO;
-import com.examly.springapp.model.LoginRequestDTO;
 import com.examly.springapp.model.TokenDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
-import com.examly.springapp.service.UserService;
 import com.examly.springapp.service.UserServiceImpl;
 import org.springframework.security.core.Authentication;
-import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/api")
-public class AuthController {
+@RestController // Declares this class as a REST controller
+@RequestMapping("/api") // Sets the base URL for API endpoints
+public class AuthController { // Handles authentication and user registration requests
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager; // Manages authentication requests
     @Autowired
-    JwtUtils jwtUtlis;
+    JwtUtils jwtUtlis; // Utility class for JWT token generation
 
-    private final UserServiceImpl service;
+    private final UserServiceImpl service; // User service instance for handling user operations
 
-    public AuthController(UserServiceImpl service) {
+    public AuthController(UserServiceImpl service) { // Constructor to initialize UserServiceImpl
         this.service = service;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
-        userDTO = service.createUser(userDTO);
-        return ResponseEntity.status(201).body(userDTO);
-    }
+    @PostMapping("/register") // Maps user registration requests
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) { // Registers a new user
+        userDTO = service.createUser(userDTO); // Calls service to create a user
+        return ResponseEntity.status(201).body(userDTO); // Returns created user details with 201 status
+    } 
 
-
-    @PostMapping("/login")
-    public ResponseEntity<TokenDTO> loginUser(@RequestBody User user) {
+    @PostMapping("/login") // Maps user login requests
+    public ResponseEntity<TokenDTO> loginUser(@RequestBody User user) { // Authenticates user and returns JWT token
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtlis.genrateToken(authentication);
-        TokenDTO tokenDTO = service.makeTokenDto(user, token);
-        return ResponseEntity.status(200).body(tokenDTO);
+                .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())); // Authenticates user credentials
+        SecurityContextHolder.getContext().setAuthentication(authentication); // Stores authentication in security context
+        String token = jwtUtlis.genrateToken(authentication); // Generates JWT token
+        TokenDTO tokenDTO = service.makeTokenDto(user, token);  // Creates token response DTO
+        return ResponseEntity.status(200).body(tokenDTO);  // Returns token with 200 status
     }
 
 }

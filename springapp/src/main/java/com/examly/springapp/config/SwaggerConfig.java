@@ -12,6 +12,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
  
 @Configuration
 public class SwaggerConfig {
+
+    // Bean that configures the OpenAPI object for Swagger documentation
     @Bean
     public OpenAPI openAPI(){
         return new OpenAPI()
@@ -28,10 +30,12 @@ public class SwaggerConfig {
                 .components(new Components()
                     .addSecuritySchemes("Bearer Authentication", createAPIKeyScheme()));
     }
- 
+    // Method to create and configure the "Bearer Authentication" security scheme
     private SecurityScheme createAPIKeyScheme(){
-        return new SecurityScheme().type(SecurityScheme.Type.HTTP)
-            .bearerFormat("JWT")
-            .scheme("bearer");
+        return new SecurityScheme()
+            .type(SecurityScheme.Type.HTTP) // Specifies HTTP authentication mechanism
+            .bearerFormat("JWT") // Specifies the format of the authentication token (JWT)
+            .scheme("bearer"); // Specifies HTTP authentication mechanism
     }
 }
+

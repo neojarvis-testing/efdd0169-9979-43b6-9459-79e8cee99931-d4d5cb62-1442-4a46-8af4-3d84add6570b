@@ -13,85 +13,75 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/feedback")
-public class FeedbackController {
-    private final FeedbackServiceImpl feedbackService;
+@RestController // Marks class as a RESTful controller
+@RequestMapping("/api/feedback") // Defines base URL mapping for feedback-related endpoints
+public class FeedbackController { // Controller to handle feedback operations
+    private final FeedbackServiceImpl feedbackService; // Service instance for feedback management
 
-    public FeedbackController(FeedbackServiceImpl feedbackService) {
+    public FeedbackController(FeedbackServiceImpl feedbackService) { // Constructor to initialize FeedbackService
         this.feedbackService = feedbackService;
     }
 
-
-    // @PostMapping("/{userId}")
-    // public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback
-    // feedback, @PathVariable Long userId) {
-    // Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
-    // return ResponseEntity.status(201).body(createdFeedback); // 201 Created
-    // }
-
-    @PostMapping("/{userId}")
-    public ResponseEntity<FeedbackDTO> createFeedback( @Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
-        Feedback feedback = convertToEntity(feedbackDTO);
-        Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
-        FeedbackDTO createdFeedbackDTO = convertToDTO(createdFeedback);
+    @PostMapping("/{userId}") // Maps request for creating feedback 
+    public ResponseEntity<FeedbackDTO> createFeedback( @Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) { // Creates feedback for a user
+        Feedback feedback = convertToEntity(feedbackDTO); // Converts DTO to entity
+        Feedback createdFeedback = feedbackService.createFeedback(feedback, userId); // Calls service to save feedback
+        FeedbackDTO createdFeedbackDTO = convertToDTO(createdFeedback); // Converts saved feedback to DTO
         return ResponseEntity.status(201).body(createdFeedbackDTO); // 201 Created
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long id) {
-    //     Feedback feedback = feedbackService.getFeedbackById(id);
-    //     return ResponseEntity.status(200).body(feedback); // 200 OK
-
-    // }
-    @GetMapping("/{id}")
-    public ResponseEntity<FeedbackDTO> getFeedbackById(@PathVariable Long id) {
-        Feedback feedback = feedbackService.getFeedbackById(id);
-        FeedbackDTO feedbackDTO=convertToDTO(feedback);
-        return ResponseEntity.status(200).body(feedbackDTO); // 200 OK
+    @GetMapping("/{id}") // Maps request for retrieving feedback by ID
+    public ResponseEntity<FeedbackDTO> getFeedbackById(@PathVariable Long id) { // Retrieves feedback by ID
+        Feedback feedback = feedbackService.getFeedbackById(id); // Calls service to get feedback
+        FeedbackDTO feedbackDTO=convertToDTO(feedback); // Calls service to save feedback
+        return ResponseEntity.status(200).body(feedbackDTO); // Returns feedback with 200 status
 
     }
 
-    @GetMapping
-    public ResponseEntity<List<FeedbackDTO>> getAllFeedbacks() {
-        List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
-        List<FeedbackDTO> feedbackDTOList = feedbackList.stream().map(this::convertToDTO).collect(Collectors.toList());
-        return ResponseEntity.status(200).body(feedbackDTOList); // 200 OK
+    @GetMapping // Maps request for retrieving all feedbacks
+    public ResponseEntity<List<FeedbackDTO>> getAllFeedbacks() { // Retrieves all feedback entries
+        List<Feedback> feedbackList = feedbackService.getAllFeedbacks(); // Calls service to get all feedback
+        List<FeedbackDTO> feedbackDTOList = feedbackList.stream().map(this::convertToDTO).collect(Collectors.toList()); // Converts list to DTOs
+        return ResponseEntity.status(200).body(feedbackDTOList); // Returns created feedback with 201 status
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFeedback(@PathVariable Long id){
-        boolean isDeleted = feedbackService.deleteFeedback(id);
+ 
+    @DeleteMapping("/{id}") // Maps request for deleting feedback by ID
+    public ResponseEntity<?> deleteFeedback(@PathVariable Long id){ // Deletes feedback by ID
+        boolean isDeleted = feedbackService.deleteFeedback(id); // Calls service to delete feedback
         if (isDeleted) {
-            return ResponseEntity.status(200).body("Deleted Succesfully");
-        } // 200 OK
-        return ResponseEntity.status(404).body("Cannot Deleted");
-
-    }
-
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<FeedbackDTO>> getFeedbacksByUserId(@PathVariable Long userId) {
-        List<Feedback> feedbackList = feedbackService.getFeedbacksByUserId(userId);
-        if (!feedbackList.isEmpty()) {
-            List<FeedbackDTO> feedbackDTOList=feedbackList.stream().map(this::convertToDTO).collect(Collectors.toList());
-            return ResponseEntity.status(200).body(feedbackDTOList); // 200 OK
+            return ResponseEntity.status(200).body("Deleted Succesfully"); // Returns success response
         }
-        return ResponseEntity.status(404).body(null);
+        return ResponseEntity.status(404).body("Cannot Deleted"); // Returns error if deletion fails
+
     }
 
-    private FeedbackDTO convertToDTO(Feedback feedback) {
-        FeedbackDTO feedbackDTO = new FeedbackDTO();
-        feedbackDTO.setFeedbackId(feedback.getFeedbackId());
-        feedbackDTO.setFeedbackText(feedback.getFeedbackText());
-        return feedbackDTO;
+    @GetMapping("/user/{userId}") // Maps request for retrieving feedbacks by user ID
+    public ResponseEntity<List<FeedbackDTO>> getFeedbacksByUserId(@PathVariable Long userId) { // Gets feedbacks for a user
+        List<Feedback> feedbackList = feedbackService.getFeedbacksByUserId(userId); // Calls service to get feedbacks
+        if (!feedbackList.isEmpty()) {
+            List<FeedbackDTO> feedbackDTOList=feedbackList.stream().map(this::convertToDTO).collect(Collectors.toList()); // Converts list to DTOs
+            return ResponseEntity.status(200).body(feedbackDTOList); // Returns list with 200 status
+        }
+        return ResponseEntity.status(404).body(null); // Returns 404 if no feedbacks found
     }
 
-    private Feedback convertToEntity(FeedbackDTO feedbackDTO) {
-        Feedback feedback = new Feedback();
-        feedback.setFeedbackId(feedbackDTO.getFeedbackId());
-        feedback.setFeedbackText(feedbackDTO.getFeedbackText());
-        return feedback;
+    private FeedbackDTO convertToDTO(Feedback feedback) { // Converts Feedback entity to FeedbackDTO
+        FeedbackDTO feedbackDTO = new FeedbackDTO(); // Creates a new DTO instance
+        feedbackDTO.setFeedbackId(feedback.getFeedbackId()); // Sets feedback ID
+        feedbackDTO.setFeedbackText(feedback.getFeedbackText()); // Sets feedback text
+        return feedbackDTO; // Returns the DTO
+    }
+
+    private Feedback convertToEntity(FeedbackDTO feedbackDTO) { // Converts FeedbackDTO to Feedback entity
+        Feedback feedback = new Feedback(); // Creates a new Feedback instance
+        feedback.setFeedbackId(feedbackDTO.getFeedbackId()); // Sets feedback ID
+        feedback.setFeedbackText(feedbackDTO.getFeedbackText()); // Sets feedback text
+        return feedback; // Returns the entity
     }
 
 }
+
+
+
+

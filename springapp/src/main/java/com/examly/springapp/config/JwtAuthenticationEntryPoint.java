@@ -10,13 +10,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+@Component   //registers this class as a spring component
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint { //implements authentication failure handling
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN,"Unauthorized");
+            response.sendError(HttpServletResponse.SC_FORBIDDEN,"Unauthorized"); //Sends 403 forbidden error
     }
     
 

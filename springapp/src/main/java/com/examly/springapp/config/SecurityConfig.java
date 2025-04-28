@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
 @Autowired
-JwtAuthenticationEntryPoint entryPoint;
+JwtAuthenticationEntryPoint entryPoint; // Custom entry point for handling unauthorized access
 
 @Autowired
 UserDetailsService userDetailsService;
@@ -30,6 +30,8 @@ PasswordEncoder encoder;
 JwtAuthenticationFilter filter;
 
 @Autowired
+
+// Method to configure the AuthenticationManager with user details and password encoder
 public void configure(AuthenticationManagerBuilder authority)throws Exception{
     authority.userDetailsService(userDetailsService).passwordEncoder(encoder);
 }
@@ -44,22 +46,21 @@ public AuthenticationManager authenticationManager(HttpSecurity http) throws Exc
 @Bean
 public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
      http.cors(cors->cors.disable())
-    .csrf(csrf->csrf.disable())
-    .authorizeHttpRequests(auth->auth
-    .requestMatchers("/api/register","/api/login,/api/loan").permitAll()
-    .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER")
+    .csrf(csrf->csrf.disable()) // Disables CSRF protection (not needed for token-based authentication)
+    .authorizeHttpRequests(auth->auth  // Defines access rules for specific endpoints
+    .requestMatchers("/api/register","/api/login,/api/loan").permitAll() // Allows public access to these endpoints
+    .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER") // Accessible by both ADMIN and USER roles
     .requestMatchers(HttpMethod.GET,"/api/loan/{loanId}","/api/loanapplication").hasRole("ADMIN")
     .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}","/api/loanapplication/{loanapplicationId}").hasRole("ADMIN")
-    .requestMatchers(HttpMethod.POST,"/api/loan").hasRole("ADMIN")
+    .requestMatchers(HttpMethod.POST,"/api/loan").hasRole("ADMIN") 
     .requestMatchers(HttpMethod.DELETE,"/api/loan/{loanId}").hasRole("ADMIN")
     .requestMatchers(HttpMethod.POST,"/api/loanapplication","/api/feedback/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/user/{userId}","/api/feedback/user/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.DELETE,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasRole("USER")
     // .anyRequest().authenticated())
-    .anyRequest().permitAll())
-    .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
-    .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-
-    return http.build();
+    .anyRequest().permitAll()) // Allows unrestricted access to all other requests
+    .exceptionHandling(exception -> exception.authenticationEntryPoint(entryPoint)) // Specifies custom entry point for unauthorized access
+    .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class); // Adds custom JWT filter before standard authentication filter
+    return http.build(); // Builds and returns the security filter chain
 }
 }
