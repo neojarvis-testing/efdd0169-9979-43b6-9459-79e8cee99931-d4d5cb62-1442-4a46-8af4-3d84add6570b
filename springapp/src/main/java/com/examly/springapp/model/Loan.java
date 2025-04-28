@@ -35,7 +35,6 @@ public class Loan {
         this.documentsRequired = documentsRequired;
     }
 
-
     // Getters and Setters
     public Long getLoanId() {
         return loanId;
