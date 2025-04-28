@@ -2,7 +2,6 @@ package com.examly.springapp.controller;
 
 import java.util.List;
 
-
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
@@ -39,7 +38,6 @@ public class LoanController {
         if (createdLoan != null)
             return ResponseEntity.status(201).body(createdLoan); // Return 201 Created if successful
         return ResponseEntity.status(400).body(null); // Return 400 Bad Request if failed
-        // return ResponseEntity.status(400).body(new ErrorResponse("Invalid request"));
     }
 
     // Endpoint to view a loan by its ID
