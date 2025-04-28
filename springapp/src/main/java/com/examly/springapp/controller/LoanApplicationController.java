@@ -33,10 +33,9 @@ public class LoanApplicationController {
 
     // Endpoint to add a new loan application
     @PostMapping
-    public ResponseEntity<LoanApplication> addLoanApplication(@Valid @RequestBody LoanApplication loanApplication) {
-
-        loanApplication = loanApplicationService.addLoanApplication(loanApplication);
-        return ResponseEntity.status(201).body(loanApplication);    // Return 201 Created status
+    public ResponseEntity<LoanApplicationDTO> addLoanApplication(@Valid @RequestBody LoanApplicationDTO loanApplicationDTO) {
+        loanApplicationDTO = loanApplicationService.addLoanApplication(loanApplicationDTO);
+        return ResponseEntity.status(201).body(loanApplicationDTO);    // Return 201 Created status
     }
 
 

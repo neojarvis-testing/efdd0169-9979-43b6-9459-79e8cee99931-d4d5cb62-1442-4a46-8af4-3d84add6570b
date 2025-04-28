@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.examly.springapp.model.Feedback;
-import com.examly.springapp.model.User;
 
 @Repository
 public interface FeedbackRepo extends JpaRepository<Feedback,Long>{

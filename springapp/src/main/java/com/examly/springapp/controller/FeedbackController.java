@@ -22,14 +22,6 @@ public class FeedbackController {
         this.feedbackService = feedbackService;
     }
 
-
-    // @PostMapping("/{userId}")
-    // public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback
-    // feedback, @PathVariable Long userId) {
-    // Feedback createdFeedback = feedbackService.createFeedback(feedback, userId);
-    // return ResponseEntity.status(201).body(createdFeedback); // 201 Created
-    // }
-
     @PostMapping("/{userId}")
     public ResponseEntity<FeedbackDTO> createFeedback( @Valid @RequestBody FeedbackDTO feedbackDTO, @PathVariable Long userId) {
         Feedback feedback = convertToEntity(feedbackDTO);
@@ -38,12 +30,6 @@ public class FeedbackController {
         return ResponseEntity.status(201).body(createdFeedbackDTO); // 201 Created
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long id) {
-    //     Feedback feedback = feedbackService.getFeedbackById(id);
-    //     return ResponseEntity.status(200).body(feedback); // 200 OK
-
-    // }
     @GetMapping("/{id}")
     public ResponseEntity<FeedbackDTO> getFeedbackById(@PathVariable Long id) {
         Feedback feedback = feedbackService.getFeedbackById(id);

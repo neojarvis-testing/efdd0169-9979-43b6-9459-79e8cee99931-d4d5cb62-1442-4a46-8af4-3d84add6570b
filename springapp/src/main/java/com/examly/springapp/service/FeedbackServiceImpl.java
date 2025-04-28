@@ -1,5 +1,6 @@
 package com.examly.springapp.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class FeedbackServiceImpl implements FeedbackService{
           throw new UserNotFoundException("User with ID: " + userId + " not found");
         }
         feedback.setUser(user);
+        feedback.setDate(LocalDate.now());
         return feedbackRepo.save(feedback);
     }
   
