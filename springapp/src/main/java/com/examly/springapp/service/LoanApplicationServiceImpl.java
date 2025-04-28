@@ -34,19 +34,23 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         this.userRepo=userRepo;
 
     }
-    
-    public LoanApplication addLoanApplication(LoanApplication loanApplication) {
 
+    public LoanApplication addLoanApplication(LoanApplication loanApplication) {
         Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
-        User user=userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
-        if(loan==null || user == null){
-            throw new UserNotFoundException("User or Loan Already Exists!!");
+        User user = userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+    
+        if (loan == null || user == null) {
+            throw new UserNotFoundException("User or Loan does not exist!!");
         }
+    
+        loanApplication.setLoan(loan);
+        loanApplication.setUser(user);
         loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Applied");
+    
         return loanApplicationRepo.save(loanApplication);
-
     }
+    
 
     /**
      * Retrieves a loan application by its ID.

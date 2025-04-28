@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.examly.springapp.model.LoginDTO;
+import com.examly.springapp.model.LoginRequestDTO;
 import com.examly.springapp.model.TokenDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
