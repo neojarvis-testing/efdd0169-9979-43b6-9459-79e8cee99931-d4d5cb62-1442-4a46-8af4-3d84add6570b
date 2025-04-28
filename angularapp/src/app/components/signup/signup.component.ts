@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
     if (error && error.status) {
       if (error.status === 401) {
         this.errorMessage = 'User with this email already exists!!';
-        this.router.navigate(['/api/register']);
+        this.router.navigate(['/register']);
       } else if (error.status === 400) {
         if (error.error && error.error.message === 'User with this email already exists!!') {
           this.errorMessage = 'User with this email already exists!';
@@ -87,18 +87,18 @@ export class SignupComponent implements OnInit {
 
   closeErrorModal() {
     this.showErrorModal = false;
-    this.router.navigate(['/api/register']).then(() => {
+    this.router.navigate(['/register']).then(() => {
         window.location.reload();
     });
 }
 
   login() {
-    this.router.navigate(['/api/login']);
+    this.router.navigate(['/login']);
   }
 
   closeModal() {
     this.showSuccessModal = false;
-    this.router.navigate(['/api/login']);
+    this.router.navigate(['/login']);
   }
 
 
