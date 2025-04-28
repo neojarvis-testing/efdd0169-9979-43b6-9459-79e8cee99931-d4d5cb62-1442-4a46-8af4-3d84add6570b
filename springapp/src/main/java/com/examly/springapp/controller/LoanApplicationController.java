@@ -35,7 +35,7 @@ public class LoanApplicationController {
     @PostMapping
     public ResponseEntity<LoanApplicationDTO> addLoanApplication(@Valid @RequestBody LoanApplicationDTO loanApplicationDTO) {
         loanApplicationDTO = loanApplicationService.addLoanApplication(loanApplicationDTO);
-        return ResponseEntity.status(201).body(loanApplicationDTO);    // Return 201 Created status
+        return ResponseEntity.status(201).body(loanApplicationDTO);   // Return 201 Created status
     }
 
 
