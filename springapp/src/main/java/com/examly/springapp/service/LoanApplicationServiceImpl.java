@@ -126,7 +126,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                 }
                 throw new LoanApplicationNotFoundException("Loan application with ID " + loanApplicationId + " not found.");
     }
-
+    /**
     // public LoanApplication updateLoanApplication(long loanApplicationId, LoanApplication updatedLoanApplication) {
 
     //     LoanApplication existingLoanApplication = loanApplicationRepo.findById(loanApplicationId).orElse(null);
@@ -137,7 +137,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     //     return loanApplicationRepo.save(updatedLoanApplication);
     // }
 
-    /**
+    
      * Deletes a loan application by its ID.
      * Logs each step of the deletion process, including success and failure cases.
      * Throws a ResourceNotFoundException if the loan application does not exist.
