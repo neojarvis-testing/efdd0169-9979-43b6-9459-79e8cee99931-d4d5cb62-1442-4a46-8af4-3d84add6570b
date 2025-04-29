@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiUrl } from '../constants/apiUrl';
 import { Loan } from '../models/loan.model';
 import { LoanApplication } from '../models/loanapplication.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiUrl } from '../constants/apiUrl';
  
 @Injectable({
   providedIn: 'root'
