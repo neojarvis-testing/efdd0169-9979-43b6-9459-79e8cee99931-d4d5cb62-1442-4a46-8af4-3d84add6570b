@@ -1,1 +1,59 @@
 <p>createloan works!</p>
+        <form [formGroup]="loanform" (ngSubmit)="onSubmit()">
+            <div class="col-md-6 mb-3">
+              <label for="loanType" class="form-label">Loan Type:</label>
+              <input type="text" id="loanType" formControlName="loanType" class="form-control" [ngClass]="{'is-invalid': f.loanType.invalid && (f.loanType.dirty || f.loanType.touched)}">
+              <div *ngIf="f.loanType.invalid && (f.loanType.dirty || f.loanType.touched)" class="invalid-feedback">
+                Loan Type is required.
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="description" class="form-label">Description:</label>
+              <input type="text" id="description" formControlName="description" class="form-control" [ngClass]="{'is-invalid': f.description.invalid && (f.description.dirty || f.description.touched)}">
+              <div *ngIf="f.description.invalid && (f.description.dirty || f.description.touched)" class="invalid-feedback">
+                Description is required.
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="interestRate" class="form-label">Interest Rate: </label>
+              <input type="number" id="interestRate" formControlName="interestRate" class="form-control" [ngClass]="{'is-invalid': f.interestRate.invalid && (f.interestRate.dirty || f.interestRate.touched)}">
+              <div *ngIf="f.interestRate.invalid && (f.interestRate.dirty || f.interestRate.touched)" class="invalid-feedback">
+                Interest Rate is required.
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="maximumAmount" class="form-label">Maximum Amount: </label>
+              <input type="number" id="maximumAmount" formControlName="maximumAmount" class="form-control" [ngClass]="{'is-invalid': f.maximumAmount.invalid && (f.maximumAmount.dirty || f.maximumAmount.touched)}">
+              <div *ngIf="f.maximumAmount.invalid && (f.maximumAmount.dirty || f.maximumAmount.touched)" class="invalid-feedback">
+                Maximum Amount is required.
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="repaymentTenure" class="form-label">Repayment Tenure:</label>
+              <input type="number" id="repaymentTenure" formControlName="repaymentTenure" class="form-control" [ngClass]="{'is-invalid': f.repaymentTenure.invalid && (f.repaymentTenure.dirty || f.repaymentTenure.touched)}">
+              <div *ngIf="f.repaymentTenure.invalid && (f.repaymentTenure.dirty || f.repaymentTenure.touched)" class="invalid-feedback">
+                Repayment Tenure is required.
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="eligibility" class="form-label">Eligibility:</label>
+              <input type="text" id="eligibility" formControlName="eligibility" class="form-control" [ngClass]="{'is-invalid': f.eligibility.invalid && (f.eligibility.dirty || f.eligibility.touched)}">
+              <div *ngIf="f.eligibility.invalid && (f.eligibility.dirty || f.eligibility.touched)" class="invalid-feedback">
+                Eligibility is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="documentsRequired" class="form-label">Documents Required:</label>
+              <input type="text" id="documentsRequired" formControlName="documentsRequired" class="form-control" [ngClass]="{'is-invalid': f.documentsRequired.invalid && (f.documentsRequired.dirty || f.documentsRequired.touched)}">
+              <div *ngIf="f.documentsRequired.invalid && (f.documentsRequired.dirty || f.documentsRequired.touched)" class="invalid-feedback">
+                documentsRequired is required.
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success px-4 py-2">Submit</button>
+<form>

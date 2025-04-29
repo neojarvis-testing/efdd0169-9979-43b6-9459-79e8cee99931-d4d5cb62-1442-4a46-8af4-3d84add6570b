@@ -12,4 +12,17 @@ export class ErrorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  
+errorMessage: string | null = null;
+
+  showError(message: string) {
+    this.errorMessage = message;
+  }
+
+  clearError() {
+    this.errorMessage = null;
+  }
+
+
 }
