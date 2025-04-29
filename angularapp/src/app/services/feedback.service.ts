@@ -16,8 +16,8 @@ export class FeedbackService {
     console.log('url:'+this.baseUrl)
   }
 
-  sendFeedback(feedback:Feedback):Observable<Feedback>{
-    return this.http.post<Feedback>(`${this.baseUrl}/feedback`,feedback);
+  sendFeedback(feedback:Feedback,userId:number):Observable<Feedback>{
+    return this.http.post<Feedback>(`${this.baseUrl}/feedback/${userId}`,feedback);
   }
   getAllFeedbacksByUserId(userId:number):Observable<Feedback[]>{
     return this.http.get<Feedback[]>(`${this.baseUrl}/feedback/user/${userId}`);
