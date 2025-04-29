@@ -29,6 +29,7 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanDTO addLoan(LoanDTO loanDTO) {
         Loan loan = Loanmapper.mapToLoan(loanDTO);
+        loan.setAvail(true);
         Loan saved = loanRepository.save(loan);
         return Loanmapper.mapToLoanDTO(saved);
     }
@@ -82,9 +83,12 @@ public class LoanServiceImpl implements LoanService {
         logger.info("Attempting to delete loan with ID: {}", loanId);
         Optional<Loan> loan = loanRepository.findById(loanId);
         if (loan.isPresent()) {
-            loanRepository.deleteById(loanId);
+           // loanRepository.deleteById(loanId);
+           Loan existingLoan = loan.get();
+           existingLoan.setAvail(false);
+           existingLoan= loanRepository.save(existingLoan);
             logger.info("Loan successfully deleted with ID: {}", loanId);
-            return loan.get();
+            return existingLoan;
         } else {
             logger.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
