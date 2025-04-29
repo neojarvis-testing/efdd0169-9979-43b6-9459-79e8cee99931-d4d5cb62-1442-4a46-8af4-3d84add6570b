@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
-import { ApiUrl } from '../constants/api_url';
+import { ApiUrl } from '../constants/apiUrl';
 
 @Injectable({
   providedIn: 'root'

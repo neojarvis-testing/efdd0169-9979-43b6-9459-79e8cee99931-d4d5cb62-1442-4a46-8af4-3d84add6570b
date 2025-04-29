@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
     console.log(this.service.baseUrl)
     this.service.login(this.login).subscribe((data) => {
       this.login = data
-      alert('LOgin Success')
+      alert('Login Success')
+      this.router.navigate['/']
     },
- 
       (error) => {
         console.log(error)
         this.errorMsg = 'Incorrect email or password. Please try again.'
