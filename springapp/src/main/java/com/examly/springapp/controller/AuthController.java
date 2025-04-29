@@ -19,7 +19,7 @@ import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.service.UserServiceImpl;
 import org.springframework.security.core.Authentication;
 
-@RestController  // Declares this class as a REST controller
+@RestController // Declares this class as a REST controller
 public class AuthController { // Handles authentication and user registration requests
 
     @Autowired
