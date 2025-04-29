@@ -11,6 +11,7 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
+import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,8 @@ const routes: Routes = [
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
+  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
+  {path:'userviewloan', component: UserviewloanComponent }
   {path:'navbar', component:NavbarComponent}
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent}
 ];
