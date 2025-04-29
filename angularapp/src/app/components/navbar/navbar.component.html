@@ -1,3 +1,200 @@
-<nav>
-    <a routerLink="/login">Login</a>
+<!-- <div class="nav">
+  <h4>🌿 Farm Aid</h4>
+  <div class="box">
+    <a routerLink="/register" *ngIf="!authService.isUserLoggedIn()">Register</a>
+    <a routerLink="/login" *ngIf="!authService.isUserLoggedIn()">Login</a>
+
+    <a class="user" *ngIf="authService.isUserLoggedIn()">{{authService.getUsername() | titlecase }} /
+      {{authService.getRole()}}</a>
+    <a routerLink="/" *ngIf="authService.isUserLoggedIn()">Home</a>
+
+    <div class="dropdown" *ngIf="authService.isUserLoggedIn()">
+      <a class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">Loan</a>
+      <ul class="dropdown-menu">
+        <li>
+          <p *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/adminAddFood">Loan Requested</p>
+        </li>
+        <li>
+          <p *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/adminViewFood">Feedbacks</p>
+        </li>
+      </ul>
+    </div>
+
+    <a routerLink="/userAddOrder" *ngIf="authService.isUser()">userAddOrder</a>
+    <a routerLink="/userViewOrders" *ngIf="authService.isUser()">My Orders</a>
+
+    <a routerLink="/adminViewOrders" *ngIf="authService.isAdmin()">Order Details</a>
+
+    <div class="dropdown" *ngIf="authService.isUserLoggedIn()">
+      <a class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">Feedback</a>
+      <ul class="dropdown-menu">
+        <li>
+          <p *ngIf="authService.isUser()" class="dropdown-item" routerLink="/userAddFeedback">Loan</p>
+        </li>
+        <li>
+          <p *ngIf="authService.isUser()" class="dropdown-item" routerLink="/userViewFeedback">Feedback</p>
+        </li>
+      </ul>
+    </div>
+
+    <a routerLink="/adminViewFeedback" *ngIf="authService.isAdmin()">Feedbacks</a>
+    <a routerLink="/adminOrdersChart" *ngIf="authService.isAdmin()">Orders Chart</a>
+
+    <a class="logout" (click)="logout()" *ngIf="authService.isUserLoggedIn()"><b> Logout</b> </a>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">🌿 Farm Aid</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="!authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="!authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link user">{{authService.getRole()}}</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="loanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Loan
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="loanDropdown">
+            <li *ngIf="authService.isAdmin()">
+              <a class="dropdown-item" routerLink="/adminAddFood">Add Loan</a>
+            </li>
+            <li *ngIf="authService.isAdmin()">
+              <a class="dropdown-item" routerLink="/adminViewFood">View Loan</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="authService.isUser()">
+          <a class="nav-link dropdown-toggle" href="#" id="feedbackDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Feedback
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="feedbackDropdown">
+            <li *ngIf="authService.isUser()">
+              <a class="dropdown-item" routerLink="/userAddFeedback">Loan</a>
+            </li>
+            <li *ngIf="authService.isUser()">
+              <a class="dropdown-item" routerLink="/userViewFeedback">Feedback</a>
+            </li>
+            <li *ngIf="authService.isUser()">
+              <a class="dropdown-item" routerLink="/userViewFeedback">Feedback</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin()">
+          <a class="nav-link" routerLink="/adminViewFeedback">Loan Requested</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin()">
+          <a class="nav-link" routerLink="/adminOrdersChart">Feedbacks</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link logout btn btn-danger" (click)="logout()"><b>Logout</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">🌿 Farm Aid</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="!authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="!authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn() && authService.isAdmin()">
+          <a class="nav-link user">{{authService.getUserRole()}}</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="authService.isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="adminLoanDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Loan
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="adminLoanDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/addloan">Add Loan</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/viewloan">View Loan</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin()">
+          <a class="nav-link" routerLink="/requestedloan">Loan Requested</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin()">
+          <a class="nav-link" routerLink="/viewfeedback">Feedbacks</a>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="authService.isUser()">
+          <a class="nav-link dropdown-toggle" href="#" id="loanDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Loan
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="loanDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/userViewLoans">View Loans</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/userAppliedLoans">Applied Loans</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="authService.isUser()">
+          <a class="nav-link dropdown-toggle" href="#" id="feedbackDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Feedback
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="feedbackDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/userAddFeedback">Post Feedback</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/userViewFeedback">My Feedback</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUserLoggedIn()">
+          <a class="nav-link logout btn btn-danger" (click)="logout()"><b>Logout</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
