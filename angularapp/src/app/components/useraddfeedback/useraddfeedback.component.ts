@@ -49,7 +49,7 @@ export class UseraddfeedbackComponent implements OnInit {
     this.feedbackService.sendFeedback(feedback, this.userId).subscribe(
       response => {
         this.feedbackForm.reset(); // Clear the form
-        this.showPopup = true; // Show success popup
+        alert("Successfully Added!")// Show success popup
       },
       error => {
         console.error('Error adding feedback:', error); // Log error for debugging

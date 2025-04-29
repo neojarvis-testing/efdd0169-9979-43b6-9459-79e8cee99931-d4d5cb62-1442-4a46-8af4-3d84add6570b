@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController // Marks class as a RESTful controller
-@RequestMapping("/api/feedback") // Defines base URL mapping for feedback-related endpoints
+@RequestMapping("/feedback") // Defines base URL mapping for feedback-related endpoints
 public class FeedbackController { // Controller to handle feedback operations
     private final FeedbackServiceImpl feedbackService; // Service instance for feedback management
 

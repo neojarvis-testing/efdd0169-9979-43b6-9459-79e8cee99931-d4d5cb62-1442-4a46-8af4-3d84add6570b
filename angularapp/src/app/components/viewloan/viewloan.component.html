@@ -1,10 +1,35 @@
 <div>
-    <h2>Loans</h2>
-    <ul>
-      <li *ngFor="let loan of loans">
-        {{ loan.name }} - {{ loan.amount }}
-        <button (click)="deleteLoan(loan.id)">Delete</button>
-      </li>
-    </ul>
-  </div>
-  
+  <h2>Loans Details</h2>
+  <input type="text" placeholder="Search by Loan Type" [(ngModel)]="searchTerm" (input)="filterLoans()" />
+  <table border="1">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Loan Type</th>
+        <th>Maximum Amount</th>
+        <th>Interest Rate</th>
+        <th>Repayment Tenure</th>
+        <th>Eligibility Criteria</th>
+        <th>Documents Required</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of filteredLoans; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ loan.loanType }}</td>
+        <td>{{ loan.maximumAmount | currency:'INR' }}</td>
+        <td>{{ loan.interestRate }}%</td>
+        <td>{{ loan.repaymentTenure }} months</td>
+        <td>{{ loan.eligibility }}</td>
+        <td>{{ loan.documentsRequired }}</td>
+        <td>{{ loan.description }}</td>
+        <td>
+          <button (click)="editLoan(loan.loanId)" class="btn btn-success">Edit</button>
+          <button (click)="deleteLoan(loan.loanId)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
