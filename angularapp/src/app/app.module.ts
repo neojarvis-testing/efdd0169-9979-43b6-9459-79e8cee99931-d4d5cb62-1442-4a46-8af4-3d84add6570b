@@ -12,7 +12,6 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
-import { HttpClientModule } from '@angular/common/http';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { AuthguardComponent } from './components/authguard/authguard.component';
@@ -24,7 +23,6 @@ import { UserappliedloanComponent } from './components/userappliedloan/userappli
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
-import { HttpClientModule } from '@angular/common/http';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 
 
