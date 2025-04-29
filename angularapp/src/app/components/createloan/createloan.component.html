@@ -1,4 +1,7 @@
 <p>createloan works!</p>
+<div class="card-header bg-primary text-white">
+  <h2 class="mb-0">{{ editMode ? 'Edit Loan' : 'Add Loan' }}</h2>
+</div>
         <form [formGroup]="loanform" (ngSubmit)="onSubmit()">
             <div class="col-md-6 mb-3">
               <label for="loanType" class="form-label">Loan Type:</label>
@@ -54,6 +57,9 @@
                 documentsRequired is required.
               </div>
             </div>
-
-            <button type="submit" class="btn btn-success px-4 py-2">Submit</button>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-success px-4 py-2">
+                {{ editMode ? 'Update Loan' : 'Add Loan' }}
+              </button>
+            </div>
 <form>

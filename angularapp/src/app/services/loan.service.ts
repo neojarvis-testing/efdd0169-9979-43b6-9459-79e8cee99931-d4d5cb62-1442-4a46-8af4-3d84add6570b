@@ -34,8 +34,8 @@ export class LoanService {
     return this.http.post(`${this.baseUrl}/loan`, requestObject);
   }
 
-  updateLoan(id: number, requestObject: Loan): Observable<any> {
-    return this.http.put(`${this.baseUrl}/loan/${id}`, requestObject);
+  updateLoan(id: number, loan:Loan): Observable<any> {
+    return this.http.put(`${this.baseUrl}/loan/${id}`, loan);
   }
 
   getAppliedLoans(userId: number): Observable<any> {
