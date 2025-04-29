@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +11,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ViewloanComponent } from './components/viewloan/viewloan.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     NavbarComponent,
     SignupComponent,
-    HomePageComponent
+    HomePageComponent,
+    ViewloanComponent
   ],
     
   imports: [
@@ -28,7 +29,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
