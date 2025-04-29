@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'home',component:HomePageComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
-  {path:'addloanapplication', component:LoanformComponent}
+  {path:'addloanapplication', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
   {path:'adminnav', component:AdminnavComponent},
