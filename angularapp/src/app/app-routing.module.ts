@@ -19,6 +19,8 @@ const routes: Routes = [
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent}
+  { path: 'viewloan', component: ViewloanComponent },
+
 ];
 
 @NgModule({
