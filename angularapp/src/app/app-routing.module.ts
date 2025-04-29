@@ -9,6 +9,9 @@ import { CreateloanComponent } from './components/createloan/createloan.componen
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
+import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
@@ -17,9 +20,14 @@ const routes: Routes = [
   {path:'addloanapplication', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
+  {path:'addloan/:id', component:CreateloanComponent},
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
-  {path:'requestedloan', component:RequestedloanComponent}
+  {path:'requestedloan', component:RequestedloanComponent},
+  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
+  {path:'userviewloan', component: UserviewloanComponent },
+  {path:'navbar', component:NavbarComponent},
+  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent}
 ];
 
 @NgModule({
