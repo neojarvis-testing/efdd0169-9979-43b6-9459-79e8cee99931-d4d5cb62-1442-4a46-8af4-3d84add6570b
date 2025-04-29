@@ -1,0 +1,264 @@
+/* Existing Styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  /* Ensure the body is scrollable */
+}
+
+.background-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('angularapp/src/assets/images/background.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(100px);
+  z-index: -1;
+}
+
+.signup-container {
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  padding: 20px;
+  margin: 60px 0;
+  /* Add margin to the top and bottom */
+  z-index: 1;
+  animation: fadeIn 2s ease-in-out, slideIn 2s ease-out;
+}
+
+.signup-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.text-center {
+  color: #16423C;
+  font-size: 24px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #16423C;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+  align-items: center;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #16423C;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #6A9C89;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.75em;
+  margin-top: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #16423C;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+p a {
+  color: #16423C;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+
+@media (max-width: 600px) {
+  .signup-container {
+    width: 100%;
+    /* Adjust to full width for smaller screens */
+  }
+
+  .signup-box {
+    width: 100%;
+    padding: 15px;
+  }
+
+  button {
+    padding: 12px;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Styles for the overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Styles for the popup */
+.popup {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Styles for the popup content */
+.popup-content {
+  text-align: center;
+}
+
+/* Styles for the error message text */
+.error-text {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Styles for the button */
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-top: 40px;
+  background-color: rgb(116, 201, 11, 0.6);  
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-size: cover;
+  min-height: 60px;
+  min-width: 100vh;
+}
+
+.footer .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer .left a {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #000;
+  margin-left: 20px;
+}
+
+.footer .right img {
+  width: 300px;
+  margin-left: 40vh;
+}
+
+.footer .copyright {
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.back-to-top {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(194, 232, 138, 0.958);
+  border-radius: 50%;
+}

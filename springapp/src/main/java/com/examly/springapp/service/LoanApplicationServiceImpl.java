@@ -55,6 +55,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         LoanApplication saved=loanApplicationRepo.save(loanApplication);    
         return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
     }
+    
 
 
     // Retrieves a loan application by its ID.
