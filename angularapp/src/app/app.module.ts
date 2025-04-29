@@ -12,6 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { HttpClientModule } from '@angular/common/http';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
