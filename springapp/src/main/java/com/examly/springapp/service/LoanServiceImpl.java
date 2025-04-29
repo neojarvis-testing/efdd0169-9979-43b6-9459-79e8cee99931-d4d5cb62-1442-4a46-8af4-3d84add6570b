@@ -83,10 +83,10 @@ public class LoanServiceImpl implements LoanService {
         logger.info("Attempting to delete loan with ID: {}", loanId);
         Optional<Loan> loan = loanRepository.findById(loanId);
         if (loan.isPresent()) {
-           // loanRepository.deleteById(loanId);
-           Loan existingLoan = loan.get();
-           existingLoan.setAvail(false);
-           existingLoan= loanRepository.save(existingLoan);
+            Loan existingLoan = loan.get();
+            existingLoan.setAvail(false);
+            existingLoan= loanRepository.save(existingLoan);
+            loanRepository.deleteById(loanId);
             logger.info("Loan successfully deleted with ID: {}", loanId);
             return existingLoan;
         } else {

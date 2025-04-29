@@ -54,9 +54,12 @@ export class ViewloanComponent implements OnInit, OnDestroy {
   }
 
   deleteLoan(id: number): void {
+    console.log("1")
     this.subscription.add(
       this.loanService.deleteLoan(id).subscribe(() => {
+        console.log("2")
         this.getAllLoans();
+        console.log("3")
       }, error => {
         this.errorMessage = 'Failed to delete loan. Please try again later.';
         console.error('Error deleting loan:', error);
