@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmAid Login</title>
+    <link rel="stylesheet" href="login.component.css">
+</head>
+<body>
+    <app-navbar></app-navbar>
+
+    <div class="background-blur"></div>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="image-container">
+            </div>
+            <div class="form-container">
+                <h2 class="text-center">Login</h2>
+                <form (ngSubmit)="onSubmit()">
+                    <div class="form-group" [ngClass]="{'has-error': email.invalid && (email.dirty || email.touched)}">
+                        <input type="email" id="email" [(ngModel)]="loginData.email" name="email" class="form-control box-input"
+                               pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required #email="ngModel" placeholder=" ">
+                        <label for="email">Email<span class="required-asterisk">*</span></label>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="small-text">
+                            <div *ngIf="email.errors?.required" class="error-message small-text"><span class="required-asterisk">*</span>Email is required</div>
+                            <div *ngIf="email.errors?.pattern" class="error-message small-text"><span class="required-asterisk">*</span>Please enter a valid email</div>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': password.invalid && (password.touched || password.dirty)}">
+                        <input [type]="passwordVisible ? 'text' : 'password'" id="password" [(ngModel)]="loginData.password"
+                               name="password" class="form-control box-input" required minlength="6"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}" #password="ngModel" placeholder=" ">
+                        <label for="password">Password<span class="required-asterisk">*</span></label>
+                        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="small-text">
+                            <div *ngIf="password.errors?.required" class="error-message small-text"><span class="required-asterisk">*</span>Password is required</div>
+                            <div *ngIf="password.errors?.minlength" class="error-message small-text">Must be at least 6 characters long</div>
+                            <div *ngIf="password.errors?.pattern" class="error-message small-text">Must contain at least 1 uppercase, lowercase, special char, digit</div>
+                        </div>
+                    </div>
+                    <div class="show-password-container">
+                        <input type="checkbox" id="show-password" (change)="togglePasswordVisibility()" />
+                        <label for="show-password">Show Password</label>
+                    </div>
+                    <div *ngIf="loginFailed" class="small-text error-message"><span class="required-asterisk">*</span>Invalid email or password</div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form><br>
+                <div class="signup-container">
+                    Don't have an account? <a [routerLink]="['/register']">SignUp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

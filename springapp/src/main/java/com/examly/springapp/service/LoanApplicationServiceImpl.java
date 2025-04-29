@@ -55,6 +55,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         LoanApplication saved=loanApplicationRepo.save(loanApplication);    
         return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
     }
+    
 
 
     // Retrieves a loan application by its ID.
@@ -83,6 +84,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     }
    //updated Loan Application by ID
+   
     public LoanApplicationDTO updateLoanApplication(long loanApplicationId, LoanApplicationDTO loanApplicationDTO) {
 
         LoanApplication loan = loanApplicationRepo.findById(loanApplicationId).orElse(null);

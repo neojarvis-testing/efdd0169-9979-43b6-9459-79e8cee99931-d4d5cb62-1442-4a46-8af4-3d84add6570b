@@ -48,7 +48,7 @@ public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
      http.cors(cors->cors.disable())
     .csrf(csrf->csrf.disable()) // Disables CSRF protection (not needed for token-based authentication)
     .authorizeHttpRequests(auth->auth  // Defines access rules for specific endpoints
-    .requestMatchers("/api/register","/api/login,/api/loan").permitAll() // Allows public access to these endpoints
+    .requestMatchers("/api/register","/api/login","/api/loan","/api/feedback").permitAll() // Allows public access to these endpoints
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER") // Accessible by both ADMIN and USER roles
     .requestMatchers(HttpMethod.GET,"/api/loan/{loanId}","/api/loanapplication").hasRole("ADMIN")
     .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}","/api/loanapplication/{loanapplicationId}").hasRole("ADMIN")
