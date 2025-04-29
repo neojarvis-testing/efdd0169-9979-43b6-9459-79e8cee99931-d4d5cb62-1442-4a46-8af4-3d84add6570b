@@ -18,7 +18,7 @@ import com.examly.springapp.model.LoanDTO;
 import com.examly.springapp.service.LoanServiceImpl;
 
 @RestController
-@RequestMapping("/api/loan")
+@RequestMapping("/loan")
 public class LoanController {
 
     private final LoanServiceImpl loanService;

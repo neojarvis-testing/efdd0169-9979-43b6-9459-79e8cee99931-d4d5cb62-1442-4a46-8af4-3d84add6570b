@@ -20,7 +20,6 @@ import com.examly.springapp.service.UserServiceImpl;
 import org.springframework.security.core.Authentication;
 
 @RestController // Declares this class as a REST controller
-@RequestMapping("/api") // Sets the base URL for API endpoints
 public class AuthController { // Handles authentication and user registration requests
 
     @Autowired
