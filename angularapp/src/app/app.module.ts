@@ -21,13 +21,14 @@ import { RouterModule } from '@angular/router';
     SignupComponent,
     HomePageComponent
   ],
+    
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

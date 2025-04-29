@@ -60,6 +60,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
@@ -157,3 +158,4 @@ export class AuthService {
     return sessionStorage.getItem(USER_ROLE);
   }
 }
+
