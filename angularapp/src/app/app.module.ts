@@ -11,7 +11,19 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
+import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
+import { AuthguardComponent } from './components/authguard/authguard.component';
+import { CreateloanComponent } from './components/createloan/createloan.component';
+import { LoanformComponent } from './components/loanform/loanform.component';
+import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
+import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
+import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
+import { UsernavComponent } from './components/usernav/usernav.component';
+import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminnavComponent } from './components/adminnav/adminnav.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +33,19 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     SignupComponent,
     HomePageComponent,
-    ViewloanComponent
+    ViewloanComponent,
+    AdmineditloanComponent,
+    AdminviewfeedbackComponent,
+    AuthguardComponent,
+    CreateloanComponent,
+    LoanformComponent,
+    RequestedloanComponent,
+    UseraddfeedbackComponent,
+    UserappliedloanComponent,
+    UsernavComponent,
+    UserviewfeedbackComponent,
+    UserviewloanComponent,
+    AdminnavComponent
   ],
     
   imports: [

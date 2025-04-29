@@ -24,7 +24,6 @@ export class ViewloanComponent implements OnInit {
     });
   }
 
-
   deleteLoan(id: number): void {
     this.loanService.deleteLoan(id).subscribe(() => {
       this.getAllLoans();
