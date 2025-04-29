@@ -23,6 +23,7 @@ import { UserappliedloanComponent } from './components/userappliedloan/userappli
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
