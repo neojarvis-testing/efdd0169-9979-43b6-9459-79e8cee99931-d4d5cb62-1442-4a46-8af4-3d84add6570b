@@ -11,6 +11,7 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
+import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 
 
 const routes: Routes = [
@@ -25,8 +26,10 @@ const routes: Routes = [
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
-  {path:'userviewloan', component: UserviewloanComponent }
-
+  {path:'userviewloan', component: UserviewloanComponent },
+  {path:'userviewfeedback', component: UserviewfeedbackComponent }
+       
+  
 ];
 
 @NgModule({
