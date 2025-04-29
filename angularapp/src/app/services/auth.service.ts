@@ -85,11 +85,13 @@ export const USER_ROLE = 'userRole';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl: string = ApiUrl.apiUrl;
+  baseUrl: string =''
   username: string = '';
   userRole: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.baseUrl=ApiUrl.apiUrl;
+  }
 
   // Login
   login(email: string, password: string): Observable<any> {
