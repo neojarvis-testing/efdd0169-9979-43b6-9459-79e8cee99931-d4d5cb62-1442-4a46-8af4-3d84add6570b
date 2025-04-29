@@ -17,28 +17,32 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService,private errorService:ErrorService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler) {
-
-    let token = this.authService.getAuthenticatedToken();
-    let email = this.authService.getAuthenticatedEmail();
-    if (token && email) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: token
-        }
-      });
+    if(request.url.includes("/login") || request.url.includes("/register")){
+      return next.handle(request);
     }
 
+    let token = this.authService.getAuthenticatedToken();
+    console.log(token)
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    
+    return next.handle(request);
+    }
+    return next.handle(request)
+    //this.errorService.clearError();
 
-    this.errorService.clearError();
-
-    console.log(JSON.stringify(request));
-    return next.handle(request).pipe(
-        catchError((error: HttpErrorResponse) => {
-    console.error('HTTP Error:', error);
-          this.errorService.showError(error.message);
-          return throwError(error);
-        })
-    );
+  //   console.log(JSON.stringify(request));
+  //   return next.handle(request).pipe(
+  //       catchError((error: HttpErrorResponse) => {
+  //   console.error('HTTP Error:', error);
+  //         this.errorService.showError(error.message);
+  //         return throwError(error);
+  //       })
+  //   );
   }
 
 

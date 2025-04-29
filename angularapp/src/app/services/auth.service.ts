@@ -41,7 +41,7 @@ export class AuthService {
         sessionStorage.setItem(AUTHENTICATED_EMAIL, email);
         sessionStorage.setItem(USERNAME, data.username);
         sessionStorage.setItem(USER_ROLE, data.userRole);
-        sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+        sessionStorage.setItem(TOKEN, data.token);
         this.username = data.username;
         this.userRole = data.userRole;
         return data;

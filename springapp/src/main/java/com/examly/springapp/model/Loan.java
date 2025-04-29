@@ -18,7 +18,7 @@ public class Loan {
     private int repaymentTenure;
     private String eligibility;
     private String documentsRequired;
-
+    private boolean avail;
     //constructors
     public Loan() {
     }
@@ -84,5 +84,14 @@ public class Loan {
     public void setDocumentsRequired(String documentsRequired) {
         this.documentsRequired = documentsRequired;
     }
+
+    public boolean getAvail() {
+        return avail;
+    }
+    public void setAvail(boolean avail) {
+        this.avail = avail;
+    }
     
+    
+
 }

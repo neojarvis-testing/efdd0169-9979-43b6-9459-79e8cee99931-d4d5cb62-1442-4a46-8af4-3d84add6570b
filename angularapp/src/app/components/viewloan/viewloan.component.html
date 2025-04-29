@@ -1,7 +1,7 @@
 <div>
   <h2>Loans Details</h2>
-  <input type="text" id="searchBar" placeholder="Search...">
-  <table>
+  <input type="text" placeholder="Search by Loan Type" [(ngModel)]="searchTerm" (input)="filterLoans()" />
+  <table border="1">
     <thead>
       <tr>
         <th>S.No</th>
@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let loan of loans; let i = index">
+      <tr *ngFor="let loan of filteredLoans; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ loan.loanType }}</td>
         <td>{{ loan.maximumAmount | currency:'INR' }}</td>
