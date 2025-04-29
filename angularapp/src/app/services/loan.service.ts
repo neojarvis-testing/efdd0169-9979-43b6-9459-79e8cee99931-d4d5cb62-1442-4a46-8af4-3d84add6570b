@@ -47,7 +47,7 @@ export class LoanService {
   }
 
   addLoanApplication(formData: FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/loanapplication`, formData);
+    return this.http.post(`${this.baseUrl}/loanapplication`, formData);
   }
 
   getAllLoanApplications(): Observable<any> {
