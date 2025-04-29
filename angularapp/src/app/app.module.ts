@@ -27,6 +27,7 @@ import { UserviewloanComponent } from './components/userviewloan/userviewloan.co
 import { HttpClientModule } from '@angular/common/http';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
