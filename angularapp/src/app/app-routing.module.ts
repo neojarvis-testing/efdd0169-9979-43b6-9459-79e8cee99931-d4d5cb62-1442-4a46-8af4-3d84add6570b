@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'addloan', component:CreateloanComponent},
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
-  {path:'requestedloan', component:RequestedloanComponent}
+  {path:'requestedloan', component:RequestedloanComponent},
   { path: 'viewloan', component: ViewloanComponent },
 
 ];
