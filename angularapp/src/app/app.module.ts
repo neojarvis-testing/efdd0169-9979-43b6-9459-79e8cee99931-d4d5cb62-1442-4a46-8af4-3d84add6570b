@@ -9,8 +9,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,15 +20,17 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     NavbarComponent,
     SignupComponent,
-    HomePageComponent
+    HomePageComponent,
+    ViewloanComponent
   ],
+    
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    RouterModule,
     HttpClientModule,
-    RouterModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

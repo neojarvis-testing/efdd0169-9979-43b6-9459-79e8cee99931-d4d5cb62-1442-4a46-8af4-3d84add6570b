@@ -1,1 +1,134 @@
-<p>signup works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmAid Signup</title>
+    <link rel="stylesheet" href="signup.component.css">
+</head>
+<body>
+    <!-- Include Navbar Component -->
+    <app-navbar></app-navbar>
+
+    <div class="background-blur"></div>
+    <div class="signup-container">
+        <div class="signup-box">
+            <h2 class="text-center">Signup</h2>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input id="username" formControlName="username" class="form-control" required>
+                    <div *ngIf="signupForm.get('username')?.invalid && (signupForm.get('username')?.touched || signupForm.get('username')?.dirty)"
+                        class="error-message">
+                        <div *ngIf="signupForm.get('username')?.errors?.required">Username is required</div>
+                        <div *ngIf="signupForm.get('username')?.errors?.minlength">Username must have at least 3
+                            characters</div>
+                        <div *ngIf="signupForm.get('username')?.errors?.maxlength">Username should not exceed 20
+                            characters</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input id="email" type="email" formControlName="email" class="form-control" required>
+                    <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)"
+                        class="error-message">
+                        <div *ngIf="signupForm.get('email')?.errors?.required">Email is required</div>
+                        <div *ngIf="signupForm.get('email')?.errors?.pattern">Please enter a valid email</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile:</label>
+                    <input id="mobileNumber" type="text" formControlName="mobileNumber" class="form-control" required>
+                    <div *ngIf="signupForm.get('mobileNumber')?.invalid && (signupForm.get('mobileNumber')?.touched || signupForm.get('mobileNumber')?.dirty)"
+                        class="error-message">
+                        <div *ngIf="signupForm.get('mobileNumber')?.errors?.required">Mobile number is required</div>
+                        <div *ngIf="signupForm.get('mobileNumber')?.errors?.pattern">Mobile number must start with a
+                            digit in the range 6-9 and contain only digits</div>
+                        <div *ngIf="signupForm.get('mobileNumber')?.errors?.maxlength">Mobile number should contain
+                            exactly 10 digits</div>
+                        <div *ngIf="signupForm.get('mobileNumber')?.errors?.minlength">Mobile number should contain
+                            exactly 10 digits</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" formControlName="password" class="form-control" required>
+                    <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)"
+                        class="error-message">
+                        <div *ngIf="signupForm.get('password')?.errors?.required">Password is required</div>
+                        <div *ngIf="signupForm.get('password')?.errors?.minlength">Password must be at least 6
+                            characters long</div>
+                        <div *ngIf="signupForm.get('password')?.errors?.pattern">Password must contain at least 1
+                            uppercase letter, 1 lowercase letter, 1 special character, and 1 digit</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control"
+                        required>
+                    <div *ngIf="signupForm.get('confirmPassword')?.invalid && (signupForm.get('confirmPassword')?.touched || signupForm.get('confirmPassword')?.dirty)"
+                        class="error-message">
+                        Confirm Password is required
+                    </div>
+                    <div *ngIf="signupForm.get('confirmPassword')?.dirty && signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value"
+                        class="error-message">
+                        Passwords must match
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userRole">User Role:</label>
+                    <select id="userRole" formControlName="userRole" class="form-control" required>
+                        <option value=""></option>
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <div *ngIf="signupForm.get('userRole')?.invalid && (signupForm.get('userRole')?.touched || signupForm.get('userRole')?.dirty)"
+                        class="error-message">
+                        User Role is required
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Signup</button>
+            </form><br>
+            <p>Already have an account? <a (click)="login()">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Error Popup -->
+    
+    <!-- <app-error *ngIf="errorMessage" [errorMessage]="errorMessage" (close)="closeErrorModal()"></app-error> -->
+    <div *ngIf="errorMessage" class="popup-overlay">
+      <div class="popup">
+          <div class="popup-content">
+              <p>{{ errorMessage }}</p>
+              <button class="btn btn-secondary" (click)="closeErrorModal()">OK</button>
+          </div>
+      </div>
+  </div>
+
+    <!-- Success Popup -->
+    <div *ngIf="showSuccessModal" class="popup-overlay" (click)="closeModal()"></div>
+    <div *ngIf="showSuccessModal" class="popup">
+        <div class="popup-content">
+            <p>User Registration Successful!</p>
+            <button class="btn btn-secondary" (click)="closeModal()">OK</button>
+        </div>
+    </div>
+
+   
+</body>
+
+ <!-- Footer -->
+ <footer class="footer">
+    <div class="left">
+        <a routerLink="/api/about">About Us</a>
+        <a routerLink="/api/contact">Contact Us</a>
+    </div>
+</footer>
+</html>

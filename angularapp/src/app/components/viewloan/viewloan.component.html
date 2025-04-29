@@ -1,0 +1,10 @@
+<div>
+    <h2>Loans</h2>
+    <ul>
+      <li *ngFor="let loan of loans">
+        {{ loan.name }} - {{ loan.amount }}
+        <button (click)="deleteLoan(loan.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

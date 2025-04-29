@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/models/login.model';
-import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,25 +9,42 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  login:Login={email:"", password:""}
-  errorMsg: string = ''
-  constructor(private service: AuthService, private router: Router) { }
- 
   ngOnInit(): void {
- 
   }
- 
-  loginUser() {
-    console.log(this.login)
-    console.log(this.service.baseUrl)
-    this.service.login(this.login).subscribe((data) => {
-      this.login = data
-      alert('Login Success')
-      this.router.navigate['/']
-    },
-      (error) => {
-        console.log(error)
-        this.errorMsg = 'Incorrect email or password. Please try again.'
-      });
+  loginData = {
+    email: '',
+    password: ''
+  };
+  loginFailed: boolean = false;
+  passwordVisible: boolean = false; // Added this property
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  onSubmit() {
+    this.authService.login(this.loginData.email, this.loginData.password).subscribe(
+      response => {
+        console.log('Login successful', response);
+        this.loginFailed = false;
+        // Handle success, store token, navigate to another page, etc.
+        if (response.userRole == 'USER') {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      },
+      error => {
+        console.error('Login failed', error);
+        this.loginFailed = true;
+      }
+    );
   }
+
+  signUp() {
+    this.router.navigate(['/register']);
+  }
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
 }
