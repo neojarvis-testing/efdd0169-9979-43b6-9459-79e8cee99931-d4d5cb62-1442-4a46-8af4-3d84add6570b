@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
-import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { CreateloanComponent } from './components/createloan/createloan.component';
@@ -25,6 +24,8 @@ import { UserappliedloanComponent } from './components/userappliedloan/userappli
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AdminnavComponent } from './components/adminnav/adminnav.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { UserviewloanComponent } from './components/userviewloan/userviewloan.co
     HomePageComponent,
     ViewloanComponent,
     AdmineditloanComponent,
-    AdminnavComponent,
     AdminviewfeedbackComponent,
     AuthguardComponent,
     CreateloanComponent,
@@ -46,7 +46,8 @@ import { UserviewloanComponent } from './components/userviewloan/userviewloan.co
     UserappliedloanComponent,
     UsernavComponent,
     UserviewfeedbackComponent,
-    UserviewloanComponent
+    UserviewloanComponent,
+    AdminnavComponent
   ],
     
   imports: [
