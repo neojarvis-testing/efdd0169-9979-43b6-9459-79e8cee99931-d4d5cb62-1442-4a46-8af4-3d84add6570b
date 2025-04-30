@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UseraddfeedbackComponent implements OnInit {
   feedbackForm: FormGroup;
   showPopup: boolean = false;
-  userId!: number; // Ensure userId is initialized dynamically
+  userId: number =+sessionStorage.getItem('userId'); // Ensure userId is initialized dynamically
 
   constructor(
     private fb: FormBuilder,
@@ -26,11 +26,7 @@ export class UseraddfeedbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Dynamically retrieve userId from route parameters
-    this.route.params.subscribe(params => {
-      this.userId = +params['userId']; // Convert to number
-      console.log('Retrieved userId:', this.userId); // Debug log
-    });
+
   }
 
   onSubmit(): void {
@@ -50,6 +46,7 @@ export class UseraddfeedbackComponent implements OnInit {
       response => {
         this.feedbackForm.reset(); // Clear the form
         alert("Successfully Added!")// Show success popup
+        this.router.navigate(['/useraddfeedback']);
       },
       error => {
         console.error('Error adding feedback:', error); // Log error for debugging
