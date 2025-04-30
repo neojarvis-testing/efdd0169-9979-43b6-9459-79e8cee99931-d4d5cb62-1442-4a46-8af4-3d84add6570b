@@ -2,6 +2,7 @@ package com.examly.springapp.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class LoanApplication {
     private double farmSizeInAcres;
     private String farmpurpose;
     @Lob
+    @Column(length = 1000000000)
     private String file;
     @ManyToOne
     @JoinColumn(name="userId")
