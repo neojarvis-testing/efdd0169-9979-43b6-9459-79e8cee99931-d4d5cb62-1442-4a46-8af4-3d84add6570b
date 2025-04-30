@@ -1,55 +1,44 @@
-<form [formGroup]="loanApplicationForm" (ngSubmit)="onSubmit()" >
-<!-- <div class="col-md-6 mb-3">
-    <label for="submissionDate" class="form-label">Submission Date :</label>
-    <input type="text" id="submissionDate" formControlName="submissionDate" class="form-control">
-    <div *ngIf="f.submissionDate.invalid && (f.submissionDate.dirty || f.submissionDate.touched)" class="invalid-feedback">
-                Submission Date is Required.
-    </div>
-    </div>
+<form [formGroup]="loanApplicationForm" (ngSubmit)="onSubmit()">
 
-<div class="col-md-6 mb-3">
-    <label for="loanStatus" class="form-label">Loan Status :</label>
-    <input type="number" id="loanStatus" formControlName="loanStatus" class="form-control">
-    <div *ngIf="f.loanStatus.invalid && (f.loanStatus.dirty || f.loanStatus.touched)" class="invalid-feedback">
-                Loan Status is Required.
-    </div>
-    </div> -->
-<div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
         <label for="farmLocation" class="form-label">Farm Location :</label>
         <input type="text" id="farmLocation" formControlName="farmLocation" class="form-control">
-        <div *ngIf="f.farmLocation.invalid && (f.farmLocation.dirty || f.farmLocation.touched)" class="invalid-feedback">
-                    Farm Location is Required.
+        <div *ngIf="f.farmLocation.invalid && (f.farmLocation.dirty || f.farmLocation.touched)"
+            class="invalid-feedback">
+            Farm Location is Required.
         </div>
-        </div> 
-<div class="col-md-6 mb-3">
+    </div>
+    <div class="col-md-6 mb-3">
         <label for="farmerAddress" class="form-label">Farmer Address :</label>
         <input type="text" id="farmerAddress" formControlName="farmerAddress" class="form-control">
-        <div *ngIf="f.farmerAddress.invalid && (f.farmerAddress.dirty || f.farmerAddress.touched)" class="invalid-feedback">
-                        Farmer Address is Required.
+        <div *ngIf="f.farmerAddress.invalid && (f.farmerAddress.dirty || f.farmerAddress.touched)"
+            class="invalid-feedback">
+            Farmer Address is Required.
         </div>
-        </div>
-<div class="col-md-6 mb-3">
+    </div>
+    <div class="col-md-6 mb-3">
         <label for="farmSizeInAcres" class="form-label">Farm Size in Acres :</label>
         <input type="number" id="farmSizeInAcres" formControlName="farmSizeInAcres" class="form-control">
-        <div *ngIf="f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched)" class="invalid-feedback">
-                              Farm Size in Acres is Required.
-            </div>
-            </div>    
-<div class="col-md-6 mb-3">
-    <label for="farmPurpose" class="form-label">Farm Purpose :</label>
-    <input type="text" id="farmPurpose" formControlName="farmPurpose" class="form-control">
+        <div *ngIf="f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched)"
+            class="invalid-feedback">
+            Farm Size in Acres is Required.
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="farmPurpose" class="form-label">Farm Purpose :</label>
+        <input type="text" id="farmPurpose" formControlName="farmPurpose" class="form-control">
         <div *ngIf="f.farmPurpose.invalid && (f.farmPurpose.dirty || f.farmPurpose.touched)" class="invalid-feedback">
-                                    Farm Purpose is Required.
-                    </div>
-</div> 
+            Farm Purpose is Required.
+        </div>
+    </div>
 
-<div class="col-md-6 mb-3">
-    <label for="file" class="form-label">File :</label>
-    <input type="text" id="file" formControlName="file" class="form-control">
+    <div class="col-md-6 mb-3">
+        <label for="file" class="form-label">File :</label>
+        <input type="text" id="file" formControlName="file" class="form-control">
         <div *ngIf="f.file.invalid && (f.file.dirty || f.file.touched)" class="invalid-feedback">
-                                    File is Required.
-                    </div>
-</div> 
-<button type="submit">Submit </button>
+            File is Required.
+        </div>
+    </div>
+    <button type="submit">Submit </button>
 
 </form>
