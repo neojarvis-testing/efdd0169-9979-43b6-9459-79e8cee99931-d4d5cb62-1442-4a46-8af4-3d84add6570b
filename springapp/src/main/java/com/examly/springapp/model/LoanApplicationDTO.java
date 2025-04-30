@@ -14,7 +14,7 @@ public class LoanApplicationDTO {
     private String farmerAddress;
     @NotNull(message="Farm Size Acres must not be blank")
     private double farmSizeInAcres;
-    @NotBlank(message="Purpose must not be blank")
+    //@NotBlank(message="Purpose must not be blank")
     private String farmpurpose;
     private String file;
     private User user;

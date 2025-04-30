@@ -27,8 +27,8 @@ const routes: Routes = [
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
-  {path:'userviewloan', component: UserviewloanComponent }
-  {path:'navbar', component:NavbarComponent}
+  {path:'userviewloan', component: UserviewloanComponent },
+  {path:'navbar', component:NavbarComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent}
 ];
 
