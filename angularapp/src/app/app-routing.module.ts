@@ -12,6 +12,8 @@ import { RequestedloanComponent } from './components/requestedloan/requestedloan
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
+import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
+import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
@@ -26,9 +28,12 @@ const routes: Routes = [
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
-  {path:'userviewloans', component: UserviewloanComponent },
+  {path:'userviewloan', component: UserviewloanComponent },
+  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent },
   {path:'navbar', component:NavbarComponent},
-  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent}
+  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
+  { path: 'loanform/:id', component: LoanformComponent },
+  { path: 'userappliedloan', component: UserappliedloanComponent },
 ];
 
 @NgModule({

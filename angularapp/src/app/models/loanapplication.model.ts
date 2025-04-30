@@ -15,4 +15,6 @@ export interface LoanApplication{
     farmpurpose:string;
     file:string;
     rejectionReason?: string;
+    user?:User,
+    loan?:Loan
 }
