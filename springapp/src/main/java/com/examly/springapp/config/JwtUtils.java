@@ -20,7 +20,7 @@ public class JwtUtils {
           return Jwts.builder()
           .setSubject(userDetails.getUsername())   // Set username as the token subject
           .setIssuedAt(new Date())
-          .setExpiration(new Date(System.currentTimeMillis()+(30*60*1000)))     // Set the token expiration time to 30 minutes from now
+          .setExpiration(new Date(System.currentTimeMillis()+(5*60*60*1000)))     // Set the token expiration time to 30 minutes from now
           .signWith(SignatureAlgorithm.HS256,SECRET_KEY)
           .compact();
 

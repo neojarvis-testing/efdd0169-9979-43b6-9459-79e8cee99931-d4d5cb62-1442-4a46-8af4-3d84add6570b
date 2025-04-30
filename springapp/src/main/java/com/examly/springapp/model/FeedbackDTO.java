@@ -15,4 +15,5 @@ public class FeedbackDTO {
 	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
 	private LocalDate date;
+	private User user;
 }
