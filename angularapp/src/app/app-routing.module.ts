@@ -18,6 +18,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
   {path:'addloanapplication', component:LoanformComponent},
+  {path:'addloanapplication.:id', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
   {path:'addloan/:id', component:CreateloanComponent},
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
-  {path:'userviewloan', component: UserviewloanComponent },
+  {path:'userviewloans', component: UserviewloanComponent },
   {path:'navbar', component:NavbarComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent}
 ];

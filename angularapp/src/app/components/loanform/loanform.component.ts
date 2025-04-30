@@ -13,6 +13,8 @@ import { LoanService } from 'src/app/services/loan.service';
 export class LoanformComponent implements OnInit {
   loanApplicationForm :FormGroup
   loan:LoanApplication[]
+  id:number
+  addMode:boolean=false
   constructor(private service:LoanService, private fb:FormBuilder, private router:Router, private route:ActivatedRoute) {
     this.loanApplicationForm=this.fb.group({
     loanApplicationId:[''],
@@ -28,9 +30,15 @@ export class LoanformComponent implements OnInit {
    }
 
   ngOnInit(): void {
+     this.id=+ this.route.snapshot.paramMap.get('id')
+    console.log(this.id)
+    if(!this.id){
+      this.addMode=false
+    }
   }
   onSubmit():void{
     if(this.loanApplicationForm.valid){
+      if(this.addMode){
       this.service.addLoanApplication(this.loanApplicationForm.value).subscribe((data)=>{
         alert("Loan Application Added Successfully!!!")
       },(error)=>{
@@ -39,6 +47,7 @@ export class LoanformComponent implements OnInit {
     }else{
       alert("Invalid Form input")
     }
+  }
   }
   get f(){
     return this.loanApplicationForm.controls;
