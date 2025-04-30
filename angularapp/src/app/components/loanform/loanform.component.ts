@@ -11,36 +11,40 @@ import { LoanService } from 'src/app/services/loan.service';
 })
 
 export class LoanformComponent implements OnInit {
-  loanApplicationForm :FormGroup
-  loan:LoanApplication[]
-  constructor(private service:LoanService, private fb:FormBuilder, private router:Router, private route:ActivatedRoute) {
-    this.loanApplicationForm=this.fb.group({
-    loanApplicationId:[''],
-    submissionDate:[''],
-    loanStatus:[''],          
-    farmLocation:['',Validators.required], 
-    farmerAddress:['',Validators.required], 
-    farmSizeInAcres:['',Validators.required], 
-    farmPurpose:['',Validators.required], 
-    file:['',Validators.required]
+  loanApplicationForm: FormGroup
+  loan: LoanApplication[]
+  constructor(private service: LoanService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
+    this.loanApplicationForm = this.fb.group({
+      farmLocation: ['', Validators.required],
+      farmerAddress: ['', Validators.required],
+      farmSizeInAcres: [null, Validators.required],
+      farmPurpose: ['', Validators.required],
+      file: ['', Validators.required]
 
     })
-   }
+  }
 
   ngOnInit(): void {
   }
-  onSubmit():void{
-    if(this.loanApplicationForm.valid){
-      this.service.addLoanApplication(this.loanApplicationForm.value).subscribe((data)=>{
-        alert("Loan Application Added Successfully!!!")
-      },(error)=>{
-        console.log("Error: "+JSON.stringify(error))
-      })
-    }else{
-      alert("Invalid Form input")
+
+  onSubmit(): void {
+    if (this.loanApplicationForm.valid) {
+      console.log(this.loanApplicationForm.value); // Log form values
+      this.service.addLoanApplication(this.loanApplicationForm.value).subscribe(
+        (data) => {
+          alert("Loan Application Added Successfully!!!");
+          this.router.navigate(['/userappliedloan']);
+        },
+        (error) => {
+          console.log("Error: " + JSON.stringify(error));
+        }
+      );
+    } else {
+      alert("Invalid Form input");
     }
   }
-  get f(){
+
+  get f() {
     return this.loanApplicationForm.controls;
   }
 

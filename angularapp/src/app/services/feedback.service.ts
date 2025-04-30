@@ -22,9 +22,14 @@ export class FeedbackService {
   getAllFeedbacksByUserId(userId:number):Observable<Feedback[]>{
     return this.http.get<Feedback[]>(`${this.baseUrl}/feedback/user/${userId}`);
   }
-  deleteFeedback(feedbackId:number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/feedback/${feedbackId}`);
+  // deleteFeedback(feedbackId:number): Observable<void> {
+  //   return this.http.delete<void>(`${this.baseUrl}/feedback/${feedbackId}`);
+  // }
+
+  deleteFeedback(feedbackId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/feedback/${feedbackId}`, { responseType: 'text' as 'json' });
   }
+  
   getFeedbacks():Observable<Feedback[]>{
     return this.http.get<Feedback[]>(`${this.baseUrl}/feedback`);
   }
