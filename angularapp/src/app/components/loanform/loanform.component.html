@@ -19,29 +19,17 @@
     <div class="col-md-6 mb-3">
         <label for="farmSizeInAcres" class="form-label">Farm Size in Acres :</label>
         <input type="number" id="farmSizeInAcres" formControlName="farmSizeInAcres" class="form-control">
-        <div *ngIf="f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched)"
-            class="invalid-feedback">
-            Farm Size in Acres is Required.
-        </div>
-    </div>
-    <div class="col-md-6 mb-3">
-        <label for="farmpurpose" class="form-label">Farm Purpose :</label>
-        <input type="text" id="farmpurpose" formControlName="farmpurpose" class="form-control">
+        <div *ngIf="f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched)" class="invalid-feedback">
+                              Farm Size in Acres is Required.
+            </div>
+            </div>    
+<div class="col-md-6 mb-3">
+    <label for="farmpurpose" class="form-label">Farm Purpose :</label>
+    <input type="text" id="farmpurpose" formControlName="farmpurpose" class="form-control">
         <div *ngIf="f.farmpurpose.invalid && (f.farmpurpose.dirty || f.farmpurpose.touched)" class="invalid-feedback">
-            Farm Purpose is Required.
-        </div>
-    </div>
-
-    <!-- <div class="col-md-6 mb-3">
-        <label for="file" class="form-label">File :</label>
-        <input type="text" id="file" formControlName="file" class="form-control">
-        <div *ngIf="f.file.invalid && (f.file.dirty || f.file.touched)" class="invalid-feedback">
-            File is Required.
-        </div>
-    </div> -->
-
-
-
+                                    Farm Purpose is Required.
+                    </div>
+      </div> 
     <div class="col-md-6 mb-3">
         <label for="file" class="form-label">File :</label>
         <input type="file" id="file" name="file" (change)="onFileChange($event)" formControlName="file" class="form-control">
