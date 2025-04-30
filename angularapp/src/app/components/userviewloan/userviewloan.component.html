@@ -1,1 +1,51 @@
-<p>userviewloan works!</p>
+<div class="container">
+    <h2>Available Loans</h2>
+    <hr>
+    <form [formGroup]="form" class="search-filter-container">
+      <div class="search-container">
+        <input type="text" placeholder="Search..." formControlName="search">
+      </div>
+      <div class="filter-container">
+        <label for="loanTypeFilter">Filter by Loan Type:</label>
+        <select id="loanTypeFilter" formControlName="loanType">
+          <option value="all">All</option>
+          <option *ngFor="let type of loanTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+    </form>
+  
+    <div class="table-container">
+      <table border="2" *ngIf="filteredLoans.length > 0">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Loan Type</th>
+            <th>Description</th>
+            <th>Interest Rate (%)</th>
+            <th>Maximum Amount</th>
+            <th>Repayment Tenure (in months)</th>
+            <th>Eligibility</th>
+            <th>Documents Required</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let loan of filteredLoans; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ loan.loanType }}</td>
+            <td>{{ loan.description }}</td>
+            <td>{{ loan.interestRate }}</td>
+            <td>{{ loan.maximumAmount | currency: 'INR' }}</td>
+            <td>{{ loan.repaymentTenure }}</td>
+            <td>{{ loan.eligibility }}</td>
+            <td>{{ loan.documentsRequired }}</td>
+            <td>
+              <button *ngIf="!isApplied(loan.loanId)" (click)="applyLoan(loan.loanId)" class="apply-button">Apply</button>
+              <button *ngIf="isApplied(loan.loanId)" class="applied-button">Applied</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="filteredLoans.length === 0" class="no-records">Oops! No Records Found.</div>
+    </div>
+  </div>
