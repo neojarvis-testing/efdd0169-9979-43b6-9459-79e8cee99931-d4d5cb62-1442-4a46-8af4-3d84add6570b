@@ -29,9 +29,8 @@ const routes: Routes = [
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback', component:UseraddfeedbackComponent},
   {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback', component: UserviewfeedbackComponent },
+ {path:'userviewfeedback/:id', component: UserviewfeedbackComponent },
   {path:'navbar', component:NavbarComponent},
-  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
   { path: 'loanform/:id', component: LoanformComponent },
   {path:'userappliedloans', component:UserappliedloanComponent}
 ];
