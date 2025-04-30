@@ -9,27 +9,26 @@ import { CreateloanComponent } from './components/createloan/createloan.componen
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-
 
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
   {path:'addloanapplication', component:LoanformComponent},
-  {path:'addloanapplication/:id', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
+  {path:'addloan/:id', component:CreateloanComponent},
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
   {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent }
-       
-  
+  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent },
+  {path:'navbar', component:NavbarComponent},
 ];
 
 @NgModule({

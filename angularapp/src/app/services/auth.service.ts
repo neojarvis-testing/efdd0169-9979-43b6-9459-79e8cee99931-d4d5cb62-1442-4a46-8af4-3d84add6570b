@@ -12,7 +12,7 @@ export class AuthenticationBean {
     public token: string,
     public userRole: string,
     public username: string
-  ) {}
+  ) { }
 }
 
 export const AUTHENTICATED_EMAIL = 'authenticatedEmail';
@@ -25,12 +25,12 @@ export const USER_ROLE = 'userRole';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl: string =''
+  baseUrl: string = ''
   username: string = '';
   userRole: string = '';
 
   constructor(private http: HttpClient) {
-    this.baseUrl=ApiUrl.apiUrl;
+    this.baseUrl = ApiUrl.apiUrl;
   }
 
   // Login
@@ -85,11 +85,7 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.removeItem(AUTHENTICATED_EMAIL);
-    sessionStorage.removeItem(TOKEN);
-    sessionStorage.removeItem(USER_ID);
-    sessionStorage.removeItem(USERNAME);
-    sessionStorage.removeItem(USER_ROLE);
+    sessionStorage.clear()
   }
 
   getUserName(): string {
@@ -99,5 +95,15 @@ export class AuthService {
   getUserRole(): string {
     return sessionStorage.getItem(USER_ROLE);
   }
+
+
+  isUser(): boolean {
+    return this.getUserRole() === 'USER';
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
+
 }
 
