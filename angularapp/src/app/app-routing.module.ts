@@ -13,13 +13,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 
-
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
   {path:'addloanapplication', component:LoanformComponent},
-  {path:'addloanapplication/:id', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
   {path:'addloan/:id', component:CreateloanComponent},
