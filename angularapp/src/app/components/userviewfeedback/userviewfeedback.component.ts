@@ -14,7 +14,9 @@ import { Feedback } from 'src/app/models/feedback.model';
 export class UserviewfeedbackComponent implements OnInit {
 
   feedbackList: Feedback[] = []; // List of feedback objects
-  userId:number=+sessionStorage.getItem('userId');
+
+  userId: number =+sessionStorage.getItem('userId'); // Dynamically retrieve user ID from route
+
   errorMessage: string = '';
 
   constructor(
@@ -25,7 +27,10 @@ export class UserviewfeedbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      this.loadFeedbacks();
+
+   // this.userId = +this.route.snapshot.paramMap.get('userId')!; // Retrieve userId from route parameters
+    this.loadFeedbacks();
+
   }
 
   loadFeedbacks() {

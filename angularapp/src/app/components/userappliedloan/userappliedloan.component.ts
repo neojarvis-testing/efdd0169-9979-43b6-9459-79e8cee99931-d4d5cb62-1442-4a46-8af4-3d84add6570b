@@ -17,6 +17,7 @@ export class UserappliedloanComponent implements OnInit {
   showDeletePopup: boolean = false;
   loanToDelete: number | null = null;
   noDataFound: boolean = false;
+  showDialog = false;
 
   constructor(private loanService: LoanService) {}
 
@@ -40,6 +41,11 @@ export class UserappliedloanComponent implements OnInit {
 
   showDetails(loan: LoanApplication): void {
     this.selectedLoan = loan;
+    this.showDialog = true;
+  }
+  onDialogConfirm(): void {
+    this.showDialog = false;
+    this.selectedLoan = null;
   }
 
   closeDetails(): void {
