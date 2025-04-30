@@ -12,6 +12,7 @@ import { LoanService } from 'src/app/services/loan.service';
 })
 
 export class LoanformComponent implements OnInit {
+  
   loanApplicationForm: FormGroup
   loan: LoanApplication[]
   loanId:any
@@ -23,6 +24,7 @@ export class LoanformComponent implements OnInit {
       farmSizeInAcres: [null, Validators.required],
       farmpurpose: ['', Validators.required],
       file: ['', Validators.required]
+
     })
   }
 

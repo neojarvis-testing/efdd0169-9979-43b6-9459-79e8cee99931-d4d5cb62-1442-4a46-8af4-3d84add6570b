@@ -14,6 +14,7 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
 
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
@@ -27,9 +28,9 @@ const routes: Routes = [
   {path:'adminnav', component:AdminnavComponent},
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
-  {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
+  {path:'useraddfeedback', component:UseraddfeedbackComponent},
   {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent },
+  {path:'userviewfeedback', component: UserviewfeedbackComponent },
   {path:'navbar', component:NavbarComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
   { path: 'loanform/:id', component: LoanformComponent },
