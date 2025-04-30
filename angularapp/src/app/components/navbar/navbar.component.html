@@ -48,8 +48,6 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="loanDropdown">
             <li>
-              // check that one
-              <a class="dropdown-item" routerLink="/userviewloans">View Loans</a>
               <a class="dropdown-item" routerLink="/viewloan">View Loans</a>
             </li>
             <li>
@@ -64,7 +62,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="feedbackDropdown">
             <li>
-              <a class="dropdown-item" routerLink="/useraddfeedback">Post Feedback</a>
+              <a class="dropdown-item" [routerLink]="'/useraddfeedback'">Post Feedback</a>
             </li>
             <li>
               <a class="dropdown-item" routerLink="/userviewfeedback">My Feedback</a>
