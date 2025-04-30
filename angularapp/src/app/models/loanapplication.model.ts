@@ -3,7 +3,7 @@ export interface LoanApplication{
     userId?:number;
     loanId?:number;
     submissionDate:string;
-    loanStatus:string;          
+    loanStatus:number;          
     farmLocation:string;
     farmerAddress:string;
     farmSizeInAcres:number;

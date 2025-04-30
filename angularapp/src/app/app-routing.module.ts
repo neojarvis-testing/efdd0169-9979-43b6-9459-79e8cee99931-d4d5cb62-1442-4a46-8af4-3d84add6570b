@@ -27,7 +27,7 @@ const routes: Routes = [
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
   {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback', component: UserviewfeedbackComponent }
+  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent }
        
   
 ];
