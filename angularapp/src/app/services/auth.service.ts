@@ -38,7 +38,7 @@ export class AuthService {
     return this.http.post<AuthenticationBean>(`${this.baseUrl}/login`, { email, password }).pipe(
       map(data => {
         sessionStorage.setItem(USER_ID, "" + data.userId);
-        sessionStorage.setItem(AUTHENTICATED_EMAIL, email);
+        sessionStorage.setItem(AUTHENTICATED_EMAIL,email);
         sessionStorage.setItem(USERNAME, data.username);
         sessionStorage.setItem(USER_ROLE, data.userRole);
         sessionStorage.setItem(TOKEN, data.token);
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   getUserById(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/${userId}`);
+    return this.http.get<any>(`${this.baseUrl}/feedback/user/${userId}`);
   }
 
   getAuthenticatedUserId(): number {

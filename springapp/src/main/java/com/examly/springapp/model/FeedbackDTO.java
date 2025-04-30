@@ -11,6 +11,7 @@ public class FeedbackDTO {
 	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
 	private LocalDate date;
+	private User user;
 	public Long getFeedbackId() {
 		return feedbackId;
 	}
@@ -29,5 +30,12 @@ public class FeedbackDTO {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
     	
 }

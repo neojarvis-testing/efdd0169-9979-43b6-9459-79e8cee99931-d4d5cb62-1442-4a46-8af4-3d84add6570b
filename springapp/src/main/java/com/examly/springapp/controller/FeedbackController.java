@@ -69,7 +69,8 @@ public class FeedbackController { // Controller to handle feedback operations
     private FeedbackDTO convertToDTO(Feedback feedback) { // Converts Feedback entity to FeedbackDTO
         FeedbackDTO feedbackDTO = new FeedbackDTO(); // Creates a new DTO instance
         feedbackDTO.setFeedbackId(feedback.getFeedbackId()); // Sets feedback ID
-        feedbackDTO.setFeedbackText(feedback.getFeedbackText()); // Sets feedback text
+        feedbackDTO.setFeedbackText(feedback.getFeedbackText()); 
+        feedbackDTO.setUser(feedback.getUser());// Sets feedback text
         return feedbackDTO; // Returns the DTO
     }
 
@@ -77,6 +78,7 @@ public class FeedbackController { // Controller to handle feedback operations
         Feedback feedback = new Feedback(); // Creates a new Feedback instance
         feedback.setFeedbackId(feedbackDTO.getFeedbackId()); // Sets feedback ID
         feedback.setFeedbackText(feedbackDTO.getFeedbackText()); // Sets feedback text
+        feedback.setUser(feedbackDTO.getUser());
         return feedback; // Returns the entity
     }
 

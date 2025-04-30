@@ -21,27 +21,34 @@
             <th>Feedback ID</th>
             <th>User ID</th>
             <th>Feedback Text</th>
-            <th>Date</th>
+            <!-- <th>Date</th> -->
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-
           <tr *ngFor="let feedback of feedbacks">
             <td>{{ feedback.feedbackId }}</td>
-            <td>{{ feedback.userId }}</td>
+            <td>{{ feedback.user?.userId }}</td>
             <td>{{ feedback.feedbackText }}</td>
-            <td>{{ feedback.date | date: 'shortDate' }}</td>
+            <!-- <td>{{ feedback.date | date: 'shortDate' }}</td> -->
             <td>
               <button class="show-profile" (click)="showUserDetails(feedback)">
                 Show Profile
               </button>
             </td>
           </tr>
-
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="dialog-overlay" *ngIf="showDialog">
+    <div class="dialog-box">
+      <h3>User Details</h3>
+      <p>Email: {{ user.email }}</p>
+      <p>Username: {{ user.username }}</p>
+      <p>Mobile Number: {{ user.mobileNumber }}</p>
+      <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
+     </div>
   </div>
 
   <!-- Logout Confirmation Modal -->
