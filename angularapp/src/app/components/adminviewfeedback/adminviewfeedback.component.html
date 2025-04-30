@@ -1,1 +1,65 @@
-<p>adminviewfeedback works!</p>
+<div class="container">
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Admin Dashboard</div>
+    <div class="nav-links">
+      <a href="#" (click)="fetchAllFeedbacks()">Admin View Feedback</a>
+      <a href="#" class="logout" (click)="showLogoutConfirmation()">Logout</a>
+    </div>
+  </div>
+
+  <!-- Feedback Section -->
+  <div class="feedback-section">
+    <h2>All Feedbacks</h2>
+    <div *ngIf="feedbacks.length === 0" class="no-data">
+      No data found
+    </div>
+    <div *ngIf="feedbacks.length > 0">
+      <table class="feedback-table">
+        <thead>
+          <tr>
+            <th>Feedback ID</th>
+            <th>User ID</th>
+            <th>Feedback Text</th>
+            <!-- <th>Date</th> -->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feedback of feedbacks">
+            <td>{{ feedback.feedbackId }}</td>
+            <td>{{ feedback.user?.userId }}</td>
+            <td>{{ feedback.feedbackText }}</td>
+            <!-- <td>{{ feedback.date | date: 'shortDate' }}</td> -->
+            <td>
+              <button class="show-profile" (click)="showUserDetails(feedback)">
+                Show Profile
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="dialog-overlay" *ngIf="showDialog">
+    <div class="dialog-box">
+      <h3>User Details</h3>
+      <p>Email: {{ user.email }}</p>
+      <p>Username: {{ user.username }}</p>
+      <p>Mobile Number: {{ user.mobileNumber }}</p>
+      <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
+     </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="modal" *ngIf="showLogoutPopup">
+    <div class="modal-content">
+      <h3>Logout</h3>
+      <p>Are you sure you want to logout?</p>
+      <div class="modal-buttons">
+        <button class="cancel-button" (click)="cancelLogout()">Cancel</button>
+        <button class="confirm-button" (click)="confirmLogout()">Yes, Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,8 +46,8 @@ export class LoanService {
     return this.http.delete(`${this.baseUrl}/loanapplication/${loanId}`);
   }
  
-  addLoanApplication(formData: FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/loanapplication`, formData);
+  addLoanApplication(loanApplication: LoanApplication): Observable<any> {
+    return this.http.post(`${this.baseUrl}/loanapplication`, loanApplication);
   }
  
   getAllLoanApplications(): Observable<any> {

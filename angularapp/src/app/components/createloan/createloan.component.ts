@@ -52,7 +52,7 @@ export class CreateloanComponent implements OnInit {
      else{
       this.service.addLoan(this.loanform.value).subscribe((data)=>{
         alert("ADD Successfull!!")
-        this.router.navigate['/viewloan']
+        this.router.navigate(['/viewloan'])
       },(error)=>{
         console.log("Error: "+JSON.stringify(error))
       })

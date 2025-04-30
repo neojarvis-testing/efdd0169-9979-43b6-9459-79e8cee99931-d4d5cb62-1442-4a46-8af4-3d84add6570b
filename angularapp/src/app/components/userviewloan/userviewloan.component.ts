@@ -64,7 +64,7 @@ export class UserviewloanComponent implements OnInit {
   }
 
   applyLoan(loanId: number) {
-    this.router.navigate(['/api/addloanapplication', loanId]);
+    this.router.navigate(['/addloanapplication', loanId]);
   }
 
   isApplied(loanId: number): boolean {

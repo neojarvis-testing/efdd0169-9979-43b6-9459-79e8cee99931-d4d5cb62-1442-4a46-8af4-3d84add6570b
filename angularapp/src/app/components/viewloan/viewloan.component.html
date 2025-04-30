@@ -26,8 +26,9 @@
         <td>{{ loan.documentsRequired }}</td>
         <td>{{ loan.description }}</td>
         <td>
-          <button (click)="editLoan(loan.loanId)" class="btn btn-success">Edit</button>
-          <button (click)="deleteLoan(loan.loanId)" class="btn btn-danger">Delete</button>
+          <button *ngIf="isAdmin" (click)="editLoan(loan.loanId)" class="btn btn-success">Edit</button>
+          <button *ngIf="isAdmin" (click)="deleteLoan(loan.loanId)" class="btn btn-danger">Delete</button>
+          <button *ngIf="!isAdmin" (click)="applyLoan(loan.loanId)" class="btn btn-info">Apply</button>
         </td>
       </tr>
     </tbody>
