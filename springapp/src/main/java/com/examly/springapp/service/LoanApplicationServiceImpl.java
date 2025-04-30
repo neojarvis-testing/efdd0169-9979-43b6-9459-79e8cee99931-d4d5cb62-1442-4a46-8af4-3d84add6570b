@@ -48,7 +48,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         loanApplication.setLoan(loan);
         loanApplication.setUser(user);
         loanApplication.setSubmissionDate(LocalDate.now());
-        loanApplication.setLoanStatus("Applied");
+        loanApplication.setLoanStatus("Pending");
         LoanApplication saved = loanApplicationRepo.save(loanApplication);
         return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
     }

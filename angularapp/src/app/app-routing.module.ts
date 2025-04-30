@@ -20,6 +20,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
   {path:'addloanapplication', component:LoanformComponent},
+  {path:'addloanapplication.:id', component:LoanformComponent},
   {path:'viewloan',component:ViewloanComponent},
   {path:'addloan', component:CreateloanComponent},
   {path:'addloan/:id', component:CreateloanComponent},

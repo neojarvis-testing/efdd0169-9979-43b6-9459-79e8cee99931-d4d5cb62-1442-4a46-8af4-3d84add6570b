@@ -23,7 +23,6 @@ export class LoanformComponent implements OnInit {
       farmSizeInAcres: [null, Validators.required],
       farmpurpose: ['', Validators.required],
       file: ['', Validators.required]
-
     })
   }
 
