@@ -5,8 +5,6 @@ export interface LoanApplication{
     loanApplicationId?:number;
     userId?:number;
     loanId?:number;
-    loan:Loan
-    user:User
     submissionDate:string;
     loanStatus:string;          
     farmLocation:string;

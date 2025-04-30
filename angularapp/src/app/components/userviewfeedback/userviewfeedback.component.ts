@@ -14,7 +14,7 @@ import { Feedback } from 'src/app/models/feedback.model';
 export class UserviewfeedbackComponent implements OnInit {
 
   feedbackList: Feedback[] = []; // List of feedback objects
-  userId: number = 0; // Dynamically retrieve user ID from route
+  userId:number=+sessionStorage.getItem('userId');
   errorMessage: string = '';
 
   constructor(
@@ -25,8 +25,7 @@ export class UserviewfeedbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = +this.route.snapshot.paramMap.get('userId')!; // Retrieve userId from route parameters
-    this.loadFeedbacks();
+      this.loadFeedbacks();
   }
 
   loadFeedbacks() {
@@ -41,31 +40,6 @@ export class UserviewfeedbackComponent implements OnInit {
       }
     );
   }
-
-  
-
-
-  // deleteFeedback(feedbackId: number) {
-  //   if (confirm('Are you sure you want to delete this feedback?')) { // Confirm delete
-  //     this.feedbackService.deleteFeedback(feedbackId).subscribe(
-  //       () => {
-  //         // Ensure feedback list is updated by filtering out the deleted feedback
-  //         this.feedbackList = this.feedbackList.filter(
-  //           feedback => feedback.feedbackId !== feedbackId
-  //         );
-  //         alert('Feedback deleted successfully.'); // Notify user of success
-  //       },
-  //       (error) => {
-  //         console.error('Error deleting feedback:', error); // Log error for debugging
-  //         this.errorMessage = 'Failed to delete feedback. Please try again later.';
-  //       }
-  //     );
-  //   }
-  // }
-  
-
-
-
 
   deleteFeedback(feedbackId: number) {
     if (confirm('Are you sure you want to delete this feedback?')) { // Confirm delete
