@@ -8,7 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,39 +24,6 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
     private User user;
-    //Constructors
-    public Feedback() {
-    }
-    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user) {
-        this.feedbackId = feedbackId;
-        this.feedbackText = feedbackText;
-        this.date = date;
-        this.user = user;
-    }
-    //Getters and Setters
-    public Long getFeedbackId() {
-        return feedbackId;
-    }
-    public void setFeedbackId(Long feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-    public String getFeedbackText() {
-        return feedbackText;
-    }
-    public void setFeedbackText(String feedbackText) {
-        this.feedbackText = feedbackText;
-    }
-    public LocalDate getDate() {
-        return date;
-    }
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
+  
     
 }

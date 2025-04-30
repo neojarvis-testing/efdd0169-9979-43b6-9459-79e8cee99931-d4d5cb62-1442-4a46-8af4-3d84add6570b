@@ -75,7 +75,7 @@ export class ViewloanComponent implements OnInit, OnDestroy {
     // Implement the logic for applying for a loan
     console.log(`Applying for loan with ID: ${loanId}`);
     // You can navigate to an application form or perform other actions here
-    this.router.navigate(['/applyloan', loanId]);
+    this.router.navigate(['/loanform', loanId]);
   }
 
 

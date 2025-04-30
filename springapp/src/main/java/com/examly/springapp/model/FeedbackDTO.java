@@ -3,39 +3,17 @@ package com.examly.springapp.model;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FeedbackDTO {
-
 	private Long feedbackId;
 	@NotBlank(message="Feedback text is mandatory")
     private String feedbackText;
 	private LocalDate date;
 	private User user;
-	public Long getFeedbackId() {
-		return feedbackId;
-	}
-	public void setFeedbackId(Long feedbackId) {
-		this.feedbackId = feedbackId;
-	}
-	public String getFeedbackText() {
-		return feedbackText;
-	}
-	public void setFeedbackText(String feedbackText) {
-		this.feedbackText = feedbackText;
-	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-    	
 }
