@@ -99,7 +99,8 @@ export class RequestedloanComponent implements OnInit {
   filterByStatus(status: string): void {
     if (status === 'all') {
       this.filteredLoans = [...this.loans];
-    } else {
+    } 
+    else{
       this.filteredLoans = this.loans.filter(loan => loan.loanStatus.toLowerCase() === status.toLowerCase());
     }
     this.noDataFound = this.filteredLoans.length === 0;

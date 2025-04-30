@@ -8,6 +8,7 @@
         <label for="filter">Filter by Status:</label>
         <select #filter (change)="filterByStatus(filter.value)">
           <option value="all">ALL</option>
+          <option value="pending">PENDING</option>
           <option value="rejected">REJECTED</option>
           <option value="approved">APPROVED</option>
         </select>
