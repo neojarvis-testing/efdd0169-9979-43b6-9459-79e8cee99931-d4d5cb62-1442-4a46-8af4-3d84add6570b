@@ -12,6 +12,7 @@ import { RequestedloanComponent } from './components/requestedloan/requestedloan
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
 
 
 const routes: Routes = [
@@ -27,8 +28,8 @@ const routes: Routes = [
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback/:userId', component:UseraddfeedbackComponent},
   {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent }
-       
+  {path:'userviewfeedback/:userId', component: UserviewfeedbackComponent },
+  {path:'userappliedloan', component: UserappliedloanComponent }   
   
 ];
 
