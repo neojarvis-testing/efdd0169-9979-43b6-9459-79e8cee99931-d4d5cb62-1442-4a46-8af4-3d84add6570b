@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
       mobileNumber: ['', [Validators.required, Validators.pattern('^[6-9][0-9]*$'), Validators.minLength(10), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{6,}')]],
       confirmPassword: ['', Validators.required],
-      userRole: ['', Validators.required]
+      userRole: ['USER', Validators.required]
     }, { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
 
