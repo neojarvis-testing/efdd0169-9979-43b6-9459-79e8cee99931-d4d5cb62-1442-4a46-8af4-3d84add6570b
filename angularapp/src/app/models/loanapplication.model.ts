@@ -1,15 +1,19 @@
 import { Loan } from "./loan.model";
+import { User } from "./user.model";
+
 
 export interface LoanApplication{
     loanApplicationId?:number;
     userId?:number;
     loanId?:number;
     submissionDate:string;
-    loanStatus:number;          
+    loanStatus:string;          
     farmLocation:string;
     farmerAddress:string;
     farmSizeInAcres:number;
     farmpurpose:string;
     file:string;
-    loan:Loan
+    user?:User;
+    loan?:Loan;
 }
+

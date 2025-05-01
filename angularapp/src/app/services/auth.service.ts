@@ -12,7 +12,7 @@ export class AuthenticationBean {
     public token: string,
     public userRole: string,
     public username: string
-  ) {}
+  ) { }
 }
 
 export const AUTHENTICATED_EMAIL = 'authenticatedEmail';
@@ -25,12 +25,12 @@ export const USER_ROLE = 'userRole';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl: string =''
+  baseUrl: string = ''
   username: string = '';
   userRole: string = '';
 
   constructor(private http: HttpClient) {
-    this.baseUrl=ApiUrl.apiUrl;
+    this.baseUrl = ApiUrl.apiUrl;
   }
 
   // Login
@@ -38,7 +38,7 @@ export class AuthService {
     return this.http.post<AuthenticationBean>(`${this.baseUrl}/login`, { email, password }).pipe(
       map(data => {
         sessionStorage.setItem(USER_ID, "" + data.userId);
-        sessionStorage.setItem(AUTHENTICATED_EMAIL, email);
+        sessionStorage.setItem(AUTHENTICATED_EMAIL,email);
         sessionStorage.setItem(USERNAME, data.username);
         sessionStorage.setItem(USER_ROLE, data.userRole);
         sessionStorage.setItem(TOKEN, data.token);
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   getUserById(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/${userId}`);
+    return this.http.get<any>(`${this.baseUrl}/feedback/user/${userId}`);
   }
 
   getAuthenticatedUserId(): number {
@@ -85,11 +85,7 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.removeItem(AUTHENTICATED_EMAIL);
-    sessionStorage.removeItem(TOKEN);
-    sessionStorage.removeItem(USER_ID);
-    sessionStorage.removeItem(USERNAME);
-    sessionStorage.removeItem(USER_ROLE);
+    sessionStorage.clear()
   }
 
   getUserName(): string {
@@ -99,5 +95,15 @@ export class AuthService {
   getUserRole(): string {
     return sessionStorage.getItem(USER_ROLE);
   }
+
+
+  isUser(): boolean {
+    return this.getUserRole() === 'USER';
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
+
 }
 

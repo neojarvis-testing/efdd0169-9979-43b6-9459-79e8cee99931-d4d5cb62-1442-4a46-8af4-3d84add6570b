@@ -1,18 +1,23 @@
 <div>
-  <h2>Loans Details</h2>
-  <input type="text" placeholder="Search by Loan Type" [(ngModel)]="searchTerm" (input)="filterLoans()" />
-  <table border="1">
+  <h2 class="center-table">Loans Details</h2>
+  <div class="input-group">
+    <div class="form-outline" data-mdb-input-init>
+      <input id="search-focus" type="search" class="form-control" placeholder="Search by Loan Type"
+        [(ngModel)]="searchTerm" (input)="filterLoans()" />
+    </div>
+  </div>
+  <table class="table table-hover ">
     <thead>
-      <tr>
-        <th>S.No</th>
-        <th>Loan Type</th>
-        <th>Maximum Amount</th>
-        <th>Interest Rate</th>
-        <th>Repayment Tenure</th>
-        <th>Eligibility Criteria</th>
-        <th>Documents Required</th>
-        <th>Description</th>
-        <th>Action</th>
+      <tr class="table-light">
+        <th scope="col">S.No</th>
+        <th scope="col">Loan Type</th>
+        <th scope="col">Maximum Amount</th>
+        <th scope="col">Interest Rate</th>
+        <th scope="col">Repayment Tenure</th>
+        <th scope="col">Eligibility Criteria</th>
+        <th scope="col">Documents Required</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -26,8 +31,9 @@
         <td>{{ loan.documentsRequired }}</td>
         <td>{{ loan.description }}</td>
         <td>
-          <button (click)="editLoan(loan.loanId)" class="btn btn-success">Edit</button>
-          <button (click)="deleteLoan(loan.loanId)" class="btn btn-danger">Delete</button>
+          <button *ngIf="isAdmin" (click)="editLoan(loan.loanId)" type="button" class="btn btn-warning">Edit</button>
+          <button *ngIf="isAdmin" (click)="deleteLoan(loan.loanId)" type="button" class="btn btn-danger">Delete</button>
+          <button *ngIf="!isAdmin" (click)="applyLoan(loan.loanId)" type="button" class="btn btn-success">Apply</button>
         </td>
       </tr>
     </tbody>
