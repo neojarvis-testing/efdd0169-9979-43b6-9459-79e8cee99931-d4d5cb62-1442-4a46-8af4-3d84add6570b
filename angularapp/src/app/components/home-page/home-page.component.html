@@ -8,7 +8,7 @@
                 <p class="lead">Your gateway to fast and secure agricultural support.</p>
             </div>
             <a routerLink="/register"
-                class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite animate__delay-2s">Get
+                class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite animate__delay-2s" *ngIf="!authService.isUserLoggedIn()">Get
                 Started</a>
         </div>
     </section> <!-- Features Section -->
@@ -88,7 +88,7 @@
     <section class="cta py-5 text-center text-white scroll-animate" style="background-color: #004d40">
         <h2 class="mb-3">Are You Ready?</h2>
         <p>Let us help you secure your future and grow your dream farm.</p>
-        <a routerLink="/register" class="btn btn-warning btn-lg animate__animated animate__bounceInUp">Join Now</a>
+        <a routerLink="/register" class="btn btn-warning btn-lg animate__animated animate__bounceInUp" *ngIf="!authService.isUserLoggedIn()">Join Now</a>
     </section>
 </div>
 

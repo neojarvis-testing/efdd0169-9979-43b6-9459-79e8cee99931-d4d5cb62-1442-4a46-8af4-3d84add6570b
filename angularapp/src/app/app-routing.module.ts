@@ -29,11 +29,11 @@ const routes: Routes = [
   {path:'viewfeedback', component:AdminviewfeedbackComponent},
   {path:'requestedloan', component:RequestedloanComponent},
   {path:'useraddfeedback', component:UseraddfeedbackComponent},
-  {path:'userviewloan', component: UserviewloanComponent },
-  {path:'userviewfeedback', component: UserviewfeedbackComponent },
- {path:'userviewfeedback/:id', component: UserviewfeedbackComponent },
+  {path:'userviewloan', component: UserviewloanComponent},
+  {path:'userviewfeedback', component: UserviewfeedbackComponent},
+ {path:'userviewfeedback/:id', component: UserviewfeedbackComponent},
   {path:'navbar', component:NavbarComponent},
-  { path: 'loanform/:id', component: LoanformComponent },
+  { path: 'loanform/:id', component: LoanformComponent},
   {path:'userappliedloans', component:UserappliedloanComponent}
 ];
 
