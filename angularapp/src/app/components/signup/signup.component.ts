@@ -9,15 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
-  ngOnInit(): void {
-    
-  }
-
-
   signupForm: FormGroup;
-  showSuccessModal: boolean = false;
-  showErrorModal: boolean = false;
+  showToastNotification: boolean = false; // To manage the toast visibility
+  showErrorModal: boolean = false; // For error popup/modal
   errorMessage: string = '';
 
   constructor(
@@ -34,6 +28,8 @@ export class SignupComponent implements OnInit {
       userRole: ['USER', Validators.required]
     }, { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
+
+  ngOnInit(): void {}
 
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup) => {
@@ -53,7 +49,11 @@ export class SignupComponent implements OnInit {
       this.authService.register(this.signupForm.value).subscribe(
         response => {
           console.log('Signup successful', response);
-          this.showSuccessModal = true;
+          this.showToastNotification = true; // Show the toast notification
+          setTimeout(() => {
+            this.showToastNotification = false; // Automatically hide after 3 seconds
+            this.router.navigate(['/login']);
+          }, 3000);
         },
         error => {
           console.error('Signup failed', error);
@@ -88,20 +88,11 @@ export class SignupComponent implements OnInit {
   closeErrorModal() {
     this.showErrorModal = false;
     this.router.navigate(['/register']).then(() => {
-        window.location.reload();
+      window.location.reload();
     });
-}
+  }
 
   login() {
     this.router.navigate(['/login']);
   }
-
-  closeModal() {
-    this.showSuccessModal = false;
-    this.router.navigate(['/login']);
-  }
-
-
-
-
 }
