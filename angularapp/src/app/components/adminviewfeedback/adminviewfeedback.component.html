@@ -1,13 +1,6 @@
 <div class="container">
   <!-- Navbar -->
   <div class="navbar">
-    <div class="logo">Admin Dashboard</div>
-    <div class="nav-links">
-      <a href="#" (click)="fetchAllFeedbacks()">Admin View Feedback</a>
-      <a href="#" class="logout" (click)="showLogoutConfirmation()">Logout</a>
-    </div>
-  </div>
-
   <!-- Feedback Section -->
   <div class="feedback-section">
     <h2>All Feedbacks</h2>
@@ -21,7 +14,6 @@
             <th>Feedback ID</th>
             <th>User ID</th>
             <th>Feedback Text</th>
-            <!-- <th>Date</th> -->
             <th>Actions</th>
           </tr>
         </thead>
@@ -30,7 +22,6 @@
             <td>{{ feedback.feedbackId }}</td>
             <td>{{ feedback.user?.userId }}</td>
             <td>{{ feedback.feedbackText }}</td>
-            <!-- <td>{{ feedback.date | date: 'shortDate' }}</td> -->
             <td>
               <button class="show-profile" (click)="showUserDetails(feedback)">
                 Show Profile

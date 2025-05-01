@@ -12,4 +12,15 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    });
+   
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+  }
 }

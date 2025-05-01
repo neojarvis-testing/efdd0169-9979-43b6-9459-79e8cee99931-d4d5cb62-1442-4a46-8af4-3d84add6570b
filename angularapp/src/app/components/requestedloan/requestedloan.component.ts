@@ -1,4 +1,3 @@
-// requestedloan.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
