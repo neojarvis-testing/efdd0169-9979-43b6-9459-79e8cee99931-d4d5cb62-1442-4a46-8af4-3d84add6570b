@@ -1,0 +1,103 @@
+.home-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero {
+    background: url('/assets/images/background.webp') center center/cover no-repeat;
+    height: 100vh;
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 4px black;
+}
+
+.hero-content {
+    max-width: 700px;
+    text-align: center;
+}
+
+.hero-text-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.features .feature-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    margin-bottom: 20px;
+}
+
+.feature-card:hover {
+    background: #e0f7fa;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.step {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.step:hover {
+    transform: translateY(-10px) scale(1.03);
+    background-color: #f1f8e9;
+}
+
+.step-number {
+    display: inline-block;
+    background: #2196f3;
+    color: white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.testimonial-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.testimonial-card:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+.cta {
+    background-color: #00695c;
+}
+
+/* Scroll-triggered animation */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+.scroll-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}

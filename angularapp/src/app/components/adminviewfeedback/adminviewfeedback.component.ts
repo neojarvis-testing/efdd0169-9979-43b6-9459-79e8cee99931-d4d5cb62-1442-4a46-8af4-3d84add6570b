@@ -14,7 +14,13 @@ export class AdminviewfeedbackComponent implements OnInit {
   feedbacks: Feedback[] = []; // Array to store all feedbacks fetched from the API
   showLogoutPopup: boolean = false; // Flag for logout confirmation modal visibility
   showDialog:boolean=false
-  user:User
+  user:User={
+    email: '', 
+    username: '',
+    mobileNumber: '',
+    password: '',
+    userRole: ''
+  }; 
   constructor(
     private feedbackService: FeedbackService,
     private authService: AuthService, // Using AuthService to fetch user details
@@ -40,6 +46,9 @@ export class AdminviewfeedbackComponent implements OnInit {
     );
   }
 
+
+  
+
   // Show user details in an alert box using AuthService
   
   showUserDetails(feedback: Feedback): void {
@@ -55,18 +64,22 @@ export class AdminviewfeedbackComponent implements OnInit {
     this.authService.getUserById(feedback.user.userId).subscribe(
       (data) => {
         this.user=feedback.user;
-        console.log('User data:', data); // Log the user data to check its structure
+        // console.log('User data:', data); // Log the user data to check its structure
         if (!data) {
           alert('User data is undefined.');
           return;
         }
 
         // Access the user details directly from the response object
-        const userDetails = {
-          email: data[0].user.email || 'N/A',
-          username: data[0].user.username || 'N/A',
-          mobileNumber: data[0].user.mobileNumber || 'N/A',
-        };
+        
+  this.user = {
+   email: data[0].user.email || 'N/A',
+   username: data[0].user.username || 'N/A',
+   mobileNumber: data[0].user.mobileNumber || 'N/A',
+   password:'',
+   userRole:''
+ };
+  
 
         // alert(
         //   `Email: ${userDetails.email}\n` +
