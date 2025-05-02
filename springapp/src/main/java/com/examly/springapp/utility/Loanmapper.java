@@ -5,6 +5,10 @@ import com.examly.springapp.model.LoanDTO;
 
 public class Loanmapper {
 
+    private Loanmapper() {
+        throw new UnsupportedOperationException("Utility class");
+     }
+
     public static LoanDTO mapToLoanDTO(Loan loan){
         LoanDTO loanDTO=new LoanDTO();
         loanDTO.setLoanType(loan.getLoanType());

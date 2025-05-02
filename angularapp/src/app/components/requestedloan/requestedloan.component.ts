@@ -19,7 +19,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   noDataFound: boolean = false;
   showRejectionModal: boolean = false;
   showDialog = false;
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly loanService: LoanService,
@@ -35,7 +35,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (data: LoanApplication[]) => {
-          this.loans = data.reverse();
+          this.loans = data.toReversed();
           this.filteredLoans = [...this.loans];
           this.noDataFound = this.loans.length === 0;
         },
@@ -45,6 +45,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
         }
       );
   }
+  
  
   approveLoan(loan: LoanApplication): void {
     loan.loanStatus = 'Approved';

@@ -11,11 +11,11 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './useraddfeedback.component.html',
   styleUrls: ['./useraddfeedback.component.css']
 })
-export class UseraddfeedbackComponent implements OnInit, OnDestroy {
+export class UseraddfeedbackComponent implements OnDestroy {
   feedbackForm: FormGroup;
   userId: number = +sessionStorage.getItem('userId');
   toastMessage: string = '';
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly fb: FormBuilder,
@@ -29,7 +29,6 @@ this.feedbackForm = this.fb.group({
     });
   }
  
-  ngOnInit(): void {}
  
   onSubmit(): void {
     if (this.feedbackForm.invalid) return;

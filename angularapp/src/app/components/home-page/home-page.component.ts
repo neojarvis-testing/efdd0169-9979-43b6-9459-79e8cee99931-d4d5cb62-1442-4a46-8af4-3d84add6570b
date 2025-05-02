@@ -6,12 +6,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
 
   constructor(public readonly authService:AuthService) { }
 
-  ngOnInit(): void {
-  }
+
 
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(entries => {

@@ -20,7 +20,7 @@ export class UserviewfeedbackComponent implements OnInit, OnDestroy {
   confirmationMessage: string = '';
   confirmationCallback: () => void = () => {};
  
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly feedbackService: FeedbackService,

@@ -5,6 +5,10 @@ import com.examly.springapp.model.FeedbackDTO;
 
 public class Feedbackmapper {
 
+    private Feedbackmapper() {
+        throw new UnsupportedOperationException("Utility class");
+     }
+
      public static FeedbackDTO mapToFeedbackDTO(Feedback feedback){
         FeedbackDTO feedbackDTO= new FeedbackDTO();
         feedbackDTO.setFeedbackText(feedback.getFeedbackText());

@@ -17,7 +17,7 @@ export class LoanformComponent implements OnInit, OnDestroy {
   loanId: any;
   selectedFile: File | null = null;
   toastMessage: string = '';
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly service: LoanService,

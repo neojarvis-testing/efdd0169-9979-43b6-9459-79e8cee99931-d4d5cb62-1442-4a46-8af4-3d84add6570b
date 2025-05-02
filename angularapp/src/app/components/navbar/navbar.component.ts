@@ -7,12 +7,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(public readonly authService:AuthService,private readonly router:Router) { }
  
-  ngOnInit(): void {
-  }
+
  
   logout(){
     this.authService.logout()

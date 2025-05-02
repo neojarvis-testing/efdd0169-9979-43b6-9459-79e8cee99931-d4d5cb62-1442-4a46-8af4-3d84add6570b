@@ -10,12 +10,12 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnDestroy {
   signupForm: FormGroup;
   showToastNotification: boolean = false;
   showErrorModal: boolean = false;
   errorMessage: string = '';
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly authService: AuthService,
@@ -32,7 +32,6 @@ this.signupForm = this.fb.group({
     }, { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
  
-  ngOnInit(): void {}
  
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup) => {
@@ -66,7 +65,7 @@ this.signupForm = this.fb.group({
   }
  
   handleError(error: any): void {
-    if (error && error.status) {
+    if (error?.status) {
       if (error.status === 401) {
         this.errorMessage = 'User with this email already exists!!';
         this.router.navigate(['/register']);

@@ -17,7 +17,7 @@ export class CreateloanComponent implements OnInit, OnDestroy {
   loan: Loan;
   editMode: boolean = false;
   toastMessage: string = '';
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly service: LoanService,

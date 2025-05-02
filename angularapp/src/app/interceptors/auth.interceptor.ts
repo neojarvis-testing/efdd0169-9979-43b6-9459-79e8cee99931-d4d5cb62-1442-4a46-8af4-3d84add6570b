@@ -11,7 +11,7 @@ import { ErrorService } from '../services/error.service';
 export class AuthInterceptor implements HttpInterceptor 
 {
 
-  constructor(private authService: AuthService,private errorService:ErrorService) { }
+  constructor(private readonly authService: AuthService,private readonly errorService:ErrorService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler) {
     if(request.url.includes("/login") || request.url.includes("/register")){
