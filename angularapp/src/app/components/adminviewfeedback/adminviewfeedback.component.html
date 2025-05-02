@@ -1,55 +1,80 @@
 <div class="container">
   <!-- Navbar -->
   <div class="navbar">
+    <!-- Placeholder for navbar content -->
+  </div>
+
   <!-- Feedback Section -->
   <div class="feedback-section">
-    <h2>All Feedbacks</h2>
-    <div *ngIf="feedbacks.length === 0" class="no-data">
-      No data found
-    </div>
-    <div *ngIf="feedbacks.length > 0">
-      <table class="feedback-table">
-        <thead>
-          <tr>
-            <th>Feedback ID</th>
-            <th>User ID</th>
-            <th>Feedback Text</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let feedback of feedbacks">
-            <td>{{ feedback.feedbackId }}</td>
-            <td>{{ feedback.user?.userId }}</td>
-            <td>{{ feedback.feedbackText }}</td>
-            <td>
-              <button class="show-profile" (click)="showUserDetails(feedback)">
-                Show Profile
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="feedback-box">
+      <h2>All Feedbacks</h2>
+
+      <div *ngIf="feedbacks.length === 0" class="no-data">
+        No data found
+      </div>
+
+      <div *ngIf="feedbacks.length > 0" class="table-container">
+        <table class="feedback-table">
+          <thead>
+            <tr>
+              <th>Feedback ID</th>
+              <th>User ID</th>
+              <th>Feedback Text</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.feedbackId }}</td>
+              <td>{{ feedback.user?.userId }}</td>
+              <td>{{ feedback.feedbackText }}</td>
+              <td>
+                <button class="show-profile" (click)="showUserDetails(feedback)">
+                  Show Profile
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
+  <!-- User Details Dialog -->
   <div class="dialog-overlay" *ngIf="showDialog">
     <div class="dialog-box">
       <h3>User Details</h3>
       <p>Email: {{ user.email }}</p>
       <p>Username: {{ user.username }}</p>
       <p>Mobile Number: {{ user.mobileNumber }}</p>
-      <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
-     </div>
+      <button class="btn btn-confirm" (click)="onDialogConfirm()">Ok</button>
+    </div>
   </div>
 
-  <!-- Logout Confirmation Modal -->
-  <div class="modal" *ngIf="showLogoutPopup">
-    <div class="modal-content">
-      <h3>Logout</h3>
-      <p>Are you sure you want to logout?</p>
-      <div class="modal-buttons">
-        <button class="cancel-button" (click)="cancelLogout()">Cancel</button>
-        <button class="confirm-button" (click)="confirmLogout()">Yes, Logout</button>
+  <!-- Confirmation Modal -->
+  <div class="modal fade show d-block" *ngIf="confirmationModalVisible" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-modal animate__animated animate__zoomIn">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Action</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ confirmationMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-cancel" (click)="onCancelConfirmation()">Cancel</button>
+          <button class="btn btn-danger" (click)="onConfirmAction()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" *ngIf="toastMessage">
+    <div class="toast">
+      <div class="toast-body">
+        {{ toastMessage }}
+        <button class="btn-close" (click)="toastMessage = ''">×</button>
       </div>
     </div>
   </div>

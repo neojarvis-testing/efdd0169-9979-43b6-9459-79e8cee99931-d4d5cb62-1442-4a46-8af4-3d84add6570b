@@ -88,5 +88,9 @@ export class ViewloanComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  resetSearch(){
+    this.searchTerm=''
+  }
+
 }
 
