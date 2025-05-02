@@ -1,24 +1,25 @@
-<!-- requestedloan.component.html -->
 <div class="container">
-    <h2 class="header">Loan Requests For Approval</h2>
-    <hr>
-  
-    <div class="search-filter-container">
-      <div class="filter-status">
-        <label for="filter">Filter by Status:</label>
-        <select #filter (change)="filterByStatus(filter.value)">
-          <option value="all">ALL</option>
-          <option value="pending">PENDING</option>
-          <option value="rejected">REJECTED</option>
-          <option value="approved">APPROVED</option>
-        </select>
-      </div>
-  
-      <input type="text" id="search" placeholder="Search by Loan Type..." (input)="onSearch($event)">
+  <h2 class="header">Loan Requests For Approval</h2>
+  <hr />
+
+  <div class="search-filter-container">
+    <div class="filter-status">
+      <label for="filter">Filter by Status:</label>
+      <select #filter (change)="filterByStatus(filter.value)">
+        <option value="all">ALL</option>
+        <option value="pending">PENDING</option>
+        <option value="rejected">REJECTED</option>
+        <option value="approved">APPROVED</option>
+      </select>
     </div>
-  
-    <div *ngIf="noDataFound">Oops! No records Found</div>
-    <table *ngIf="!noDataFound" class="table">
+
+    <input type="text" id="search" placeholder="Search by Loan Type..." (input)="onSearch($event)" />
+  </div>
+
+  <div *ngIf="noDataFound" class="no-data">Oops! No records Found</div>
+
+  <div class="table-responsive" *ngIf="!noDataFound">
+    <table class="custom-table">
       <thead>
         <tr>
           <th>S.No</th>
@@ -37,53 +38,44 @@
           <td>{{ loan.user.username }}</td>
           <td>{{ loan.loan.loanType }}</td>
           <td>{{ loan.farmLocation }}</td>
-          <td>{{ loan.submissionDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ loan.submissionDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ loan.farmSizeInAcres }}</td>
           <td>{{ loan.loanStatus }}</td>
           <td>
-            <button style="background-color: green;" *ngIf="loan.loanStatus !== 'Approved'" (click)="approveLoan(loan)">Approve</button>&nbsp;
-            <button style="background-color: red;" *ngIf="loan.loanStatus !== 'Rejected'" (click)="rejectLoan(loan)">Reject</button>&nbsp;
-            <button style="background-color: blue;" (click)="showMore(loan)">Show More</button>
+            <button class="btn green" *ngIf="loan.loanStatus !== 'Approved'" (click)="approveLoan(loan)">Approve</button>
+            <button class="btn red" *ngIf="loan.loanStatus !== 'Rejected'" (click)="rejectLoan(loan)">Reject</button>
+            <button class="btn blue" (click)="showMore(loan)">Show More</button>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
 
-    <div class="dialog-overlay" *ngIf="showDialog">
-      <div class="dialog-box">
-        <h2>Loan Details</h2>
-        <p>Farm Location: {{ selectedLoan?.farmLocation }}</p>
-        <p>Farmer Address: {{ selectedLoan?.farmerAddress }}</p>
-        <p>Farm Size: {{ selectedLoan?.farmSizeInAcres }} Acres</p>
-        <p>Farm Purpose: {{ selectedLoan?.farmpurpose }}</p>
-        <p>File: </p>
-         <!-- <img [src]="selectedLoan.file" alt="{{ selectedLoan.file }}">` -->
-         <img [src]="selectedLoan.file" [alt]="selectedLoan.file" class="img-thumbnail product-img" style="height: 80px; width: 80px;"><br>
-        <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
-    </div>
-  
-    <div *ngIf="selectedLoan" class="modal">
-      <div class="modal-content">
-        <span class="close" (click)="closeModal()">&times;</span>
-        <h2>Loan Details</h2>
-        <p>Farm Location: {{ selectedLoan?.farmLocation }}</p>
-        <p>Farmer Address: {{ selectedLoan?.farmerAddress }}</p>
-        <p>Farm Size: {{ selectedLoan?.farmSizeInAcres }} Acres</p>
-        <p>Farm Purpose: {{ selectedLoan?.farmpurpose }}</p>
-        <button (click)="closeModal()">Close</button>
-      </div>
-    </div>
-  
-    <div *ngIf="showRejectionModal" class="modal">
-      <div class="modal-content" [formGroup]="rejectionForm">
-        <span class="close" (click)="closeRejectionModal()">&times;</span>
-        <h2>Rejection Reason</h2>
-        <textarea formControlName="rejectionReason" placeholder="Enter reason for rejection" rows="5" cols="40"></textarea>
-        <div *ngIf="rejectionForm.get('rejectionReason')?.invalid && rejectionForm.get('rejectionReason')?.touched" class="error-message" style="color: red;">
-          Rejection reason is required.
-        </div>
-        <button (click)="confirmRejectLoan()" [disabled]="rejectionForm.invalid">Post</button>
-      </div>
+  <!-- Dialog -->
+  <div class="dialog-overlay" *ngIf="showDialog">
+    <div class="dialog-box">
+      <h2>Loan Details</h2>
+      <p>Farm Location: {{ selectedLoan?.farmLocation }}</p>
+      <p>Farmer Address: {{ selectedLoan?.farmerAddress }}</p>
+      <p>Farm Size: {{ selectedLoan?.farmSizeInAcres }} Acres</p>
+      <p>Farm Purpose: {{ selectedLoan?.farmpurpose }}</p>
+      <p>File: </p>
+      <img [src]="selectedLoan.file" [alt]="File"/><br>
+      
+      <button class="btn green" (click)="onDialogConfirm()">Ok</button>
     </div>
   </div>
-  
+
+  <!-- Rejection Modal -->
+  <div *ngIf="showRejectionModal" class="dialog-overlay">
+    <div class="dialog-box" [formGroup]="rejectionForm">
+      <span class="close" (click)="closeRejectionModal()">&times;</span>
+      <h2>Rejection Reason</h2>
+      <textarea formControlName="rejectionReason" placeholder="Enter reason for rejection" rows="5" cols="40"></textarea>
+      <div *ngIf="rejectionForm.get('rejectionReason')?.invalid && rejectionForm.get('rejectionReason')?.touched" class="error-message">
+        Rejection reason is required.
+      </div>
+      <button class="btn red" (click)="confirmRejectLoan()" [disabled]="rejectionForm.invalid">Post</button>
+    </div>
+  </div>
+</div>
