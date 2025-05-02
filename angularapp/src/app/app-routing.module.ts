@@ -14,27 +14,30 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { AdminGuard } from './admin.guard';
+import { UserGuard } from './user.guard';
+import { CombinedGuard } from './combined.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomePageComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
-  {path:'addloanapplication', component:LoanformComponent},
-  {path:'addloanapplication.:id', component:LoanformComponent},
-  {path:'viewloan',component:ViewloanComponent},
-  {path:'addloan', component:CreateloanComponent},
-  {path:'addloan/:id', component:CreateloanComponent},
-  {path:'adminnav', component:AdminnavComponent},
-  {path:'viewfeedback', component:AdminviewfeedbackComponent},
+  {path:'addloanapplication', component:LoanformComponent,canActivate:[UserGuard]},
+  {path:'addloanapplication.:id', component:LoanformComponent,canActivate:[UserGuard]},
+  {path:'viewloan',component:ViewloanComponent,canActivate:[CombinedGuard]},
+  {path:'addloan', component:CreateloanComponent,canActivate:[AdminGuard]},
+  {path:'addloan/:id', component:CreateloanComponent,canActivate:[AdminGuard]},
+  {path:'adminnav', component:AdminnavComponent,canActivate:[AdminGuard]},
+  {path:'viewfeedback', component:AdminviewfeedbackComponent,canActivate:[AdminGuard]},
   {path:'requestedloan', component:RequestedloanComponent},
-  {path:'useraddfeedback', component:UseraddfeedbackComponent},
-  {path:'userviewloan', component: UserviewloanComponent},
-  {path:'userviewfeedback', component: UserviewfeedbackComponent},
- {path:'userviewfeedback/:id', component: UserviewfeedbackComponent},
+  {path:'useraddfeedback', component:UseraddfeedbackComponent,canActivate:[UserGuard]},
+  {path:'userviewloan', component: UserviewloanComponent,canActivate:[UserGuard]},
+  {path:'userviewfeedback', component: UserviewfeedbackComponent,canActivate:[UserGuard]},
+ {path:'userviewfeedback/:id', component: UserviewfeedbackComponent,canActivate:[UserGuard]},
   {path:'navbar', component:NavbarComponent},
-  { path: 'loanform/:id', component: LoanformComponent},
-  {path:'userappliedloans', component:UserappliedloanComponent}
+  { path: 'loanform/:id', component: LoanformComponent,canActivate:[UserGuard]},
+  {path:'userappliedloans', component:UserappliedloanComponent,canActivate:[UserGuard]}
 ];
 
 @NgModule({

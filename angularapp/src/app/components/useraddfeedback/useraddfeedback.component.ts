@@ -76,22 +76,24 @@
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChangeDetectorRef } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
  
 @Component({
   selector: 'app-useraddfeedback',
   templateUrl: './useraddfeedback.component.html',
   styleUrls: ['./useraddfeedback.component.css']
 })
-export class UseraddfeedbackComponent implements OnInit {
+export class UseraddfeedbackComponent implements OnInit, OnDestroy {
   feedbackForm: FormGroup;
   userId: number = +sessionStorage.getItem('userId');
   toastMessage: string = '';
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
     private fb: FormBuilder,
@@ -117,17 +119,19 @@ this.feedbackForm = this.fb.group({
       date: new Date()
     };
  
-    this.feedbackService.sendFeedback(feedback, this.userId).subscribe(
-      () => {
-        this.feedbackForm.reset();
-        this.showToast('Feedback successfully submitted!');
-        setTimeout(() => this.router.navigate(['/userviewfeedback', this.userId]), 1000);
-      },
-      error => {
-        console.error('Error adding feedback:', error);
-        this.showToast('Error submitting feedback. Try again.');
-      }
-    );
+    this.feedbackService.sendFeedback(feedback, this.userId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        () => {
+          this.feedbackForm.reset();
+          this.showToast('Feedback successfully submitted!');
+          setTimeout(() => this.router.navigate(['/userviewfeedback', this.userId]), 1000);
+        },
+        error => {
+          console.error('Error adding feedback:', error);
+          this.showToast('Error submitting feedback. Try again.');
+        }
+      );
   }
  
   showToast(message: string): void {
@@ -141,5 +145,10 @@ this.feedbackForm = this.fb.group({
  
   get f() {
     return this.feedbackForm.controls;
+  }
+ 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

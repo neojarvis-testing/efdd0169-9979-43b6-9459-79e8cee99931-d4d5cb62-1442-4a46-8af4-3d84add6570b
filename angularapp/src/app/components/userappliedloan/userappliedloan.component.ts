@@ -102,17 +102,18 @@
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
-import { ChangeDetectorRef } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
  
 @Component({
   selector: 'app-userappliedloan',
   templateUrl: './userappliedloan.component.html',
   styleUrls: ['./userappliedloan.component.css']
 })
-export class UserappliedloanComponent implements OnInit {
+export class UserappliedloanComponent implements OnInit, OnDestroy {
   loans: LoanApplication[] = [];
   filteredLoans: LoanApplication[] = [];
   selectedLoan: LoanApplication | null = null;
@@ -122,6 +123,8 @@ export class UserappliedloanComponent implements OnInit {
   loanToDelete: number | null = null;
   noDataFound: boolean = false;
   toastMessage: string = '';
+ 
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
     private loanService: LoanService,
@@ -133,18 +136,20 @@ export class UserappliedloanComponent implements OnInit {
   }
  
   loadLoans(): void {
-    this.loanService.getAllLoanApplications().subscribe(
-      (data: LoanApplication[]) => {
-this.loans = data;
-        this.filteredLoans = [...data];
-        this.noDataFound = data.length === 0;
-      },
-      error => {
-        console.error('Error fetching loan applications', error);
-        this.noDataFound = true;
-        this.showToast('Failed to load loan applications');
-      }
-    );
+    this.loanService.getAllLoanApplications()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (data: LoanApplication[]) => {
+          this.loans = data;
+          this.filteredLoans = [...data];
+          this.noDataFound = data.length === 0;
+        },
+        error => {
+          console.error('Error fetching loan applications', error);
+          this.noDataFound = true;
+          this.showToast('Failed to load loan applications');
+        }
+      );
   }
  
   onSearch(event: any): void {
@@ -152,11 +157,11 @@ this.loans = data;
     this.search = query;
  
     if (!query) {
-this.filteredLoans = [...this.loans];
+      this.filteredLoans = [...this.loans];
       return;
     }
  
-this.filteredLoans = this.loans.filter(item =>
+    this.filteredLoans = this.loans.filter(item =>
       Object.keys(item).some(key => {
         const value = item[key];
         if (key === 'loan' && value) {
@@ -184,17 +189,19 @@ this.filteredLoans = this.loans.filter(item =>
  
   deleteLoanApplication(): void {
     if (this.loanToDelete !== null) {
-      this.loanService.deleteLoanApplication(this.loanToDelete).subscribe(
-        () => {
-          this.showToast('Loan application deleted.');
-          this.loadLoans();
-          this.closeDeletePopup();
-        },
-        error => {
-          console.error('Error deleting loan application', error);
-          this.showToast('Failed to delete loan.');
-        }
-      );
+      this.loanService.deleteLoanApplication(this.loanToDelete)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(
+          () => {
+            this.showToast('Loan application deleted.');
+            this.loadLoans();
+            this.closeDeletePopup();
+          },
+          error => {
+            console.error('Error deleting loan application', error);
+            this.showToast('Failed to delete loan.');
+          }
+        );
     }
   }
  
@@ -205,10 +212,16 @@ this.filteredLoans = this.loans.filter(item =>
  
   showToast(message: string): void {
     this.toastMessage = message;
-    this.cdRef.detectChanges(); // ensures toast appears
+    this.cdRef.detectChanges();
     setTimeout(() => {
       this.toastMessage = '';
-      this.cdRef.detectChanges(); // ensures it disappears
+      this.cdRef.detectChanges();
     }, 4000);
   }
+ 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
+ 
