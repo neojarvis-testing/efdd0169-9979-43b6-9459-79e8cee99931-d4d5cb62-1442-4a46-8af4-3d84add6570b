@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:host {
+  display: block;
+  background-color: #e8f5e9;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.login-container {
+  width: 90%;
+  max-width: 420px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.welcome-back {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+h2.text-center {
+  font-weight: 600;
+  color: #1b5e20;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #2e7d32;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.form-group.has-error .form-control {
+  border-color: #e53935;
+}
+
+.small-text {
+  font-size: 0.85rem;
+  color: #e53935;
+  margin-top: 4px;
+}
+
+.error-message {
+  margin-bottom: 4px;
+}
+
+.form-check-label {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.btn-primary {
+  background-color: #43a047;
+  border: none;
+  padding: 10px 0;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2e7d32;
+}
+
+.signup-container {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.signup-container a {
+  color: #2e7d32;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signup-container a:hover {
+  text-decoration: underline;
+}
+
+.text-danger {
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  :host {
+    padding-top: 30px;
+  }
+
+  .login-container {
+    padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .welcome-back {
+    font-size: 1.4rem;
+  }
+
+  h2.text-center {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding-top: 20px;
+  }
+
+  .login-container {
+    padding: 1rem;
+    box-shadow: none;
+    border: 1px solid #c8e6c9;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  .btn-primary {
+    font-size: 0.95rem;
+  }
+}

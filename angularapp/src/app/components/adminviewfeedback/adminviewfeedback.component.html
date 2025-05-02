@@ -1,45 +1,60 @@
 <div class="container">
   <!-- Navbar -->
   <div class="navbar">
+    <!-- Placeholder for navbar content -->
+  </div>
+
   <!-- Feedback Section -->
   <div class="feedback-section">
-    <h2>All Feedbacks</h2>
-    <div *ngIf="feedbacks.length === 0" class="no-data">
-      No data found
+    <div class="feedback-box">
+      <h2>All Feedbacks</h2>
+
+      <div *ngIf="feedbacks.length === 0" class="no-data">
+        No data found
+      </div>
+
+      <div *ngIf="feedbacks.length > 0" class="table-container">
+        <table class="feedback-table">
+          <thead>
+            <tr>
+              <th>Feedback ID</th>
+              <th>User ID</th>
+              <th>Feedback Text</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.feedbackId }}</td>
+              <td>{{ feedback.user?.userId }}</td>
+              <td>{{ feedback.feedbackText }}</td>
+              <td>
+                <button class="show-profile" (click)="showUserDetails(feedback)">
+                  Show Profile
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div *ngIf="feedbacks.length > 0">
-      <table class="feedback-table">
-        <thead>
-          <tr>
-            <th>Feedback ID</th>
-            <th>User ID</th>
-            <th>Feedback Text</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let feedback of feedbacks">
-            <td>{{ feedback.feedbackId }}</td>
-            <td>{{ feedback.user?.userId }}</td>
-            <td>{{ feedback.feedbackText }}</td>
-            <td>
-              <button class="show-profile" (click)="showUserDetails(feedback)">Show Profile</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>  <!-- User Details Dialog -->  <div class="dialog-overlay" *ngIf="showDialog">
+  </div>
+
+  <!-- User Details Dialog -->
+  <div class="dialog-overlay" *ngIf="showDialog">
     <div class="dialog-box">
       <h3>User Details</h3>
       <p>Email: {{ user.email }}</p>
       <p>Username: {{ user.username }}</p>
       <p>Mobile Number: {{ user.mobileNumber }}</p>
-      <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
+      <button class="btn btn-confirm" (click)="onDialogConfirm()">Ok</button>
     </div>
-  </div>  <!-- Confirmation Modal -->  <div class="modal fade show d-block" tabindex="-1" *ngIf="confirmationModalVisible" style="background: rgba(0,0,0,0.4); z-index: 1050;">
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade show d-block" *ngIf="confirmationModalVisible" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content animate__animated animate__zoomIn">
+      <div class="modal-content custom-modal animate__animated animate__zoomIn">
         <div class="modal-header">
           <h5 class="modal-title">Confirm Action</h5>
         </div>
@@ -47,24 +62,19 @@
           <p>{{ confirmationMessage }}</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" (click)="onCancelConfirmation()">Cancel</button>
+          <button class="btn btn-cancel" (click)="onCancelConfirmation()">Cancel</button>
           <button class="btn btn-danger" (click)="onConfirmAction()">Confirm</button>
         </div>
       </div>
     </div>
-  </div>  <!-- Toast Notification -->  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
-    <div
-      class="toast align-items-center text-bg-danger border-0 fade show"
-      *ngIf="toastMessage"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      <div class="d-flex">
-        <div class="toast-body">
-          {{ toastMessage }}
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" *ngIf="toastMessage">
+    <div class="toast">
+      <div class="toast-body">
+        {{ toastMessage }}
+        <button class="btn-close" (click)="toastMessage = ''">×</button>
       </div>
     </div>
   </div>
