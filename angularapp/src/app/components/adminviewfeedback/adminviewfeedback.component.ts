@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { User } from 'src/app/models/user.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
  
 @Component({
   selector: 'app-adminviewfeedback',
   templateUrl: './adminviewfeedback.component.html',
   styleUrls: ['./adminviewfeedback.component.css']
 })
-export class AdminviewfeedbackComponent implements OnInit {
+export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   feedbacks: Feedback[] = [];
   showLogoutPopup: boolean = false;
   showDialog: boolean = false;
@@ -27,6 +29,8 @@ export class AdminviewfeedbackComponent implements OnInit {
   confirmationMessage: string = '';
   confirmationCallback: () => void = () => {};
  
+  private unsubscribe$ = new Subject<void>();
+ 
   constructor(
     private feedbackService: FeedbackService,
     private authService: AuthService,
@@ -38,16 +42,18 @@ export class AdminviewfeedbackComponent implements OnInit {
   }
  
   fetchAllFeedbacks(): void {
-    this.feedbackService.getFeedbacks().subscribe(
-      (data: Feedback[]) => {
-        this.feedbacks = data;
-        console.log('Feedbacks fetched successfully:', this.feedbacks);
-      },
-      (error) => {
-        console.error('Error fetching feedbacks:', error);
-        this.feedbacks = [];
-      }
-    );
+    this.feedbackService.getFeedbacks()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (data: Feedback[]) => {
+          this.feedbacks = data;
+          console.log('Feedbacks fetched successfully:', this.feedbacks);
+        },
+        (error) => {
+          console.error('Error fetching feedbacks:', error);
+          this.feedbacks = [];
+        }
+      );
   }
  
   showUserDetails(feedback: Feedback): void {
@@ -58,28 +64,28 @@ export class AdminviewfeedbackComponent implements OnInit {
       return;
     }
  
-    console.log('Fetching details for user ID=' + feedback.user.userId);
+    this.authService.getUserById(feedback.user.userId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (data) => {
+          if (!data || !data[0] || !data[0].user) {
+            this.showToast('User data is undefined.');
+            return;
+          }
  
-    this.authService.getUserById(feedback.user.userId).subscribe(
-      (data) => {
-        if (!data || !data[0] || !data[0].user) {
-          this.showToast('User data is undefined.');
-          return;
-        }
- 
-        this.user = {
+          this.user = {
 email: data[0].user.email || 'N/A',
-          username: data[0].user.username || 'N/A',
-          mobileNumber: data[0].user.mobileNumber || 'N/A',
-          password: '',
-          userRole: ''
-        };
-      },
-      (error) => {
-        console.error('Error fetching user details:', error);
-        this.showToast('Failed to retrieve user details.');
-      }
-    );
+            username: data[0].user.username || 'N/A',
+            mobileNumber: data[0].user.mobileNumber || 'N/A',
+            password: '',
+            userRole: ''
+          };
+        },
+        (error) => {
+          console.error('Error fetching user details:', error);
+          this.showToast('Failed to retrieve user details.');
+        }
+      );
   }
  
   onDialogConfirm(): void {
@@ -119,5 +125,10 @@ email: data[0].user.email || 'N/A',
  
   cancelLogout(): void {
     this.confirmationModalVisible = false;
+  }
+ 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

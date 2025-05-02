@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
  
 @Component({
   selector: 'app-loanform',
   templateUrl: './loanform.component.html',
   styleUrls: ['./loanform.component.css']
 })
-export class LoanformComponent implements OnInit {
+export class LoanformComponent implements OnInit, OnDestroy {
  
   loanApplicationForm: FormGroup;
   loanId: any;
   selectedFile: File | null = null;
   toastMessage: string = '';
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
     private service: LoanService,
@@ -22,7 +25,7 @@ export class LoanformComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-this.loanApplicationForm = this.fb.group({
+    this.loanApplicationForm = this.fb.group({
       farmLocation: ['', Validators.required],
       farmerAddress: ['', Validators.required],
       farmSizeInAcres: [null, Validators.required],
@@ -36,26 +39,29 @@ this.loanApplicationForm = this.fb.group({
   }
  
   onSubmit(): void {
-    if (this.loanApplicationForm.valid) {
-      let loanApplication: LoanApplication = {
-        ...this.loanApplicationForm.value,
-        user: { userId: +sessionStorage.getItem('userId') },
-        loan: { loanId: +this.loanId }
-      };
+    if (!this.loanApplicationForm.valid) {
+      this.showToast('Invalid Form Input!');
+      return;
+    }
  
-      this.service.addLoanApplication(loanApplication).subscribe(
+    const loanApplication: LoanApplication = {
+      ...this.loanApplicationForm.value,
+      user: { userId: +sessionStorage.getItem('userId') },
+      loan: { loanId: +this.loanId }
+    };
+ 
+    this.service.addLoanApplication(loanApplication)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
         () => {
           this.showToast('Loan Application Submitted Successfully!');
           setTimeout(() => this.router.navigate(['/userappliedloans']), 1000);
         },
         (error) => {
-          console.log('Error: ' + JSON.stringify(error));
+          console.error('Error:', error);
           this.showToast('Failed to submit loan application.');
         }
       );
-    } else {
-      this.showToast('Invalid Form Input!');
-    }
   }
  
   onFileChange(event: any): void {
@@ -72,4 +78,10 @@ this.loanApplicationForm = this.fb.group({
     this.toastMessage = message;
     setTimeout(() => (this.toastMessage = ''), 4000);
   }
+ 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
+ 
