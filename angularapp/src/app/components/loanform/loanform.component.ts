@@ -23,7 +23,7 @@ export class LoanformComponent implements OnInit {
       farmerAddress: ['', Validators.required],
       farmSizeInAcres: [null, Validators.required],
       farmpurpose: ['', Validators.required],
-      file: ['', Validators.required]
+      file: ['']
 
     })
   }
@@ -63,13 +63,23 @@ export class LoanformComponent implements OnInit {
   get f() {
     return this.loanApplicationForm.controls;
   }
-
-  onFileChange(event: any) {
-
-    if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
+  
+  onFileChange(event: Event, fileType: string): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0]; // Get the selected file
+      const reader = new FileReader();
+      
+      reader.onload = () => {
+        if (fileType === 'file') {
+          console.log('Photo added');
+          // Update the FormControl value with the base64 string
+          this.loanApplicationForm.get('file')?.setValue(reader.result as string);
+        }
+      };
+  
+      reader.readAsDataURL(file); // Convert the file to Base64 format
     }
-
   }
 
 }

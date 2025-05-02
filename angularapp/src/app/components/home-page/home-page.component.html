@@ -1,1 +1,135 @@
-<h2>Home Page Works!</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Aid Project</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .navbar {
+            background-color: #6c757d;
+        }
+        .hero {
+            background: url('https://example.com/hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            color: #ffffff;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+        }
+        .hero p {
+            font-size: 1.5rem;
+        }
+        .services {
+            padding: 50px 0;
+        }
+        .service-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .service-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .form-section {
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: -50px;
+        }
+        .footer {
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Farm Aid</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to the Farm Aid Project</h1>
+        <p>Helping farmers thrive with sustainable practices.</p>
+    </div>
+
+    <div class="container services">
+        <div class="row">
+            <div class="col-md-4 service-item">
+                <img src="https://example.com/service1.jpg" alt="Service 1">
+                <h3>Service 1</h3>
+                <p>Description of service 1.</p>
+            </div>
+            <div class="col-md-4 service-item">
+                <img src="https://example.com/service2.jpg" alt="Service 2">
+                <h3>Service 2</h3>
+                <p>Description of service 2.</p>
+            </div>
+            <div class="col-md-4 service-item">
+                <img src="https://example.com/service3.jpg" alt="Service 3">
+                <h3>Service 3</h3>
+                <p>Description of service 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-section">
+                    <h2>Contact Us</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Farm Aid Project. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

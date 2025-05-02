@@ -78,6 +78,7 @@ export class RequestedloanComponent implements OnInit {
   }
 
   showMore(loan: LoanApplication): void {
+   // console.log(this.selectedLoan.file)
     this.selectedLoan = loan;
     this.showDialog=true;
   }

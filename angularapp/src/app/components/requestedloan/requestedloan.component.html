@@ -56,7 +56,9 @@
         <p>Farmer Address: {{ selectedLoan?.farmerAddress }}</p>
         <p>Farm Size: {{ selectedLoan?.farmSizeInAcres }} Acres</p>
         <p>Farm Purpose: {{ selectedLoan?.farmpurpose }}</p>
-        <p>File: {{ selectedLoan?.file }}</p>
+        <p>File: </p>
+         <!-- <img [src]="selectedLoan.file" alt="{{ selectedLoan.file }}">` -->
+         <img [src]="selectedLoan.file" [alt]="selectedLoan.file" class="img-thumbnail product-img" style="height: 80px; width: 80px;"><br>
         <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
     </div>
   

@@ -32,14 +32,8 @@
       </div> 
     <div class="col-md-6 mb-3">
         <label for="file" class="form-label">File :</label>
-        <input type="file" id="file" name="file" (change)="onFileChange($event)" formControlName="file" class="form-control">
-        <div *ngIf="f.file.invalid && (f.file.dirty || f.file.touched)" class="invalid-feedback">
-            File is Required.
-        </div>
+        <input type="file" id="file" name="file" accept=".jpg,.png,.jpeg" (change)="onFileChange($event,'file')" class="form-control">
     </div>
-
-
-
 
     <button type="submit">Submit </button>
 
