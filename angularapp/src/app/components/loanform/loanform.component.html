@@ -1,60 +1,3 @@
-<!-- <form [formGroup]="loanApplicationForm" (ngSubmit)="onSubmit()">
-    <div class="col-md-6 mb-3">
-      <label for="farmLocation" class="form-label">Farm Location :</label>
-      <input type="text" id="farmLocation" formControlName="farmLocation"
-             class="form-control"
-             [ngClass]="{ 'is-invalid': f.farmLocation.invalid && (f.farmLocation.dirty || f.farmLocation.touched) }">
-      <div *ngIf="f.farmLocation.invalid && (f.farmLocation.dirty || f.farmLocation.touched)" class="invalid-feedback">
-        Farm Location is Required.
-      </div>
-    </div>
-   
-    <div class="col-md-6 mb-3">
-      <label for="farmerAddress" class="form-label">Farmer Address :</label>
-      <input type="text" id="farmerAddress" formControlName="farmerAddress"
-             class="form-control"
-             [ngClass]="{ 'is-invalid': f.farmerAddress.invalid && (f.farmerAddress.dirty || f.farmerAddress.touched) }">
-      <div *ngIf="f.farmerAddress.invalid && (f.farmerAddress.dirty || f.farmerAddress.touched)" class="invalid-feedback">
-        Farmer Address is Required.
-      </div>
-    </div>
-   
-    <div class="col-md-6 mb-3">
-      <label for="farmSizeInAcres" class="form-label">Farm Size in Acres :</label>
-      <input type="number" id="farmSizeInAcres" formControlName="farmSizeInAcres"
-             class="form-control"
-             [ngClass]="{ 'is-invalid': f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched) }">
-      <div *ngIf="f.farmSizeInAcres.invalid && (f.farmSizeInAcres.dirty || f.farmSizeInAcres.touched)" class="invalid-feedback">
-        Farm Size in Acres is Required.
-      </div>
-    </div>
-   
-    <div class="col-md-6 mb-3">
-      <label for="farmpurpose" class="form-label">Farm Purpose :</label>
-      <input type="text" id="farmpurpose" formControlName="farmpurpose"
-             class="form-control"
-             [ngClass]="{ 'is-invalid': f.farmpurpose.invalid && (f.farmpurpose.dirty || f.farmpurpose.touched) }">
-      <div *ngIf="f.farmpurpose.invalid && (f.farmpurpose.dirty || f.farmpurpose.touched)" class="invalid-feedback">
-        Farm Purpose is Required.
-      </div>
-    </div>
-   
-    <div class="col-md-6 mb-3">
-        <label for="file" class="form-label">File :</label>
-        <input type="file" id="file" name="file" accept=".jpg,.png,.jpeg" (change)="onFileChange($event,'file')" class="form-control">
-    </div>
-
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-success px-4 py-2">Submit</button>
-    </div>
-  </form>
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
-    <div class="toast custom-toast fade show" *ngIf="toastMessage">
-      <div class="d-flex">
-        <div class="toast-body">{{ toastMessage }}</div>
-        <button class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
-      </div> -->
-
       <div class="loan-form-wrapper py-4">
         <div class="container">
           <div class="card shadow rounded">
@@ -155,3 +98,4 @@
         </div>
       </div>
       
+
