@@ -1,21 +1,60 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:host {
+  display: block;
+  background-color: #e8f5e9;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px 10px;
+}
+
+.loan-form-wrapper {
+  background-color: #f1f8e9;
+  min-height: 100vh;
+}
+
+.card {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.card-header {
+  background: linear-gradient(to right, #2e7d32, #66bb6a) !important;
+  color: white !important;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #2e7d32;
+}
+
+.form-control:focus {
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.25);
+}
+
+.invalid-feedback {
+  font-size: 0.85rem;
+}
+
 .toast-container {
-    animation: fadeInDown 0.8s ease-in-out;
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+.custom-toast {
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-   
-  .custom-toast {
-    background-color: #333;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-   
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}

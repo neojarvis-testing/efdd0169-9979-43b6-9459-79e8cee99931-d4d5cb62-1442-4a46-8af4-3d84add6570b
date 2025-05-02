@@ -20,10 +20,10 @@ export class LoanformComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private service: LoanService,
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute
+    private readonly service: LoanService,
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
     this.loanApplicationForm = this.fb.group({
       farmLocation: ['', Validators.required],
