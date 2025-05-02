@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  background-color: #e8f5e9; /* Light green background */
+  background-color: #e8f5e9; 
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
 }
@@ -10,7 +10,7 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px 10px; /* Removed extra left-right spacing */
+  padding: 20px 10px; 
 }
 
 header {

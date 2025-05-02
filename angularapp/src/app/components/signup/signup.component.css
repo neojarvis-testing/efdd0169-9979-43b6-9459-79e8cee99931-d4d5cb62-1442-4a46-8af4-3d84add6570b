@@ -1,99 +1,151 @@
-/* General Styling */
-body {
-  background: linear-gradient(to bottom, #66BB6A, #81C784, #A5D6A7); /* Green gradient background */
-  font-family: 'Arial', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:host {
+  display: block;
+  background-color: #e8f5e9;
+  font-family: 'Poppins', sans-serif;
   min-height: 100vh;
   display: flex;
+  align-items: start;
   justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 15px; /* Adds spacing for smaller screens */
+  padding-top: 40px;
 }
 
 .signup-container {
-  background: linear-gradient(to right, #A5D6A7, #81C784); /* Light green gradient for container */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 30px;
-  width: 100%;
-  max-width: 500px; /* Responsive sizing */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition effects added */
+  width: 90%;
+  max-width: 450px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.signup-container:hover {
-  transform: scale(1.02); /* Slight scaling on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow effect */
-}
-
-h2 {
-  color: #388E3C; /* Dark green header text */
-  margin-bottom: 20px;
+.signup-box h2 {
   text-align: center;
-  animation: fluctuate 2s infinite ease-in-out; /* Fluctuating text animation */
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 
-@keyframes fluctuate {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
 }
 
 .form-control {
-  border-radius: 8px; /* Rounded inputs for modern look */
-  transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transitions for focus */
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-control:focus {
-  box-shadow: 0 0 10px rgba(56, 142, 60, 0.5); /* Green glow effect */
-  border-color: #66BB6A; /* Matches the green theme */
+  border-color: #2e7d32;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
-.btn-primary {
-  background-color: #388E3C; /* Bold green button */
-  border: none;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth button transitions */
-}
-
-.btn-primary:hover {
-  background-color: #1B5E20; /* Darker green hover effect */
-  transform: scale(1.05); /* Slight scaling effect */
+.form-group.has-error .form-control {
+  border-color: #e53935;
 }
 
 .error-message {
-  color: #d9534f; /* Bright red for error messages */
-  font-size: 0.875rem;
-  margin-top: 5px; /* Adds spacing above */
+  font-size: 0.85rem;
+  color: #e53935;
+  margin-top: 4px;
 }
 
-a {
-  color: #388E3C; /* Link color matching theme */
-  font-weight: bold;
+.btn-primary {
+  background-color: #43a047;
+  border: none;
+  padding: 10px 0;
+  font-weight: 600;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2e7d32;
+}
+
+p.text-center {
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+p.text-center a {
+  color: #2e7d32;
+  font-weight: 500;
   text-decoration: none;
-  transition: color 0.3s ease; /* Smooth link transitions */
+  cursor: pointer;
 }
 
-a:hover {
-  color: #1B5E20; /* Dark green hover effect */
+p.text-center a:hover {
   text-decoration: underline;
 }
 
+/* Toast styling */
 .toast-container {
-  z-index: 1050;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  z-index: 1055;
 }
 
-.toast {
-  background-color: #388E3C; /* Green shade for success toast */
-  color: white; /* White text for better readability */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth appearance/disappearance */
+.toast-body {
+  color: #155724;
+  background-color: #d4edda;
+  border-radius: 4px;
+}
+
+.toast-header {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :host {
+    padding-top: 30px;
+  }
+
+  .signup-container {
+    padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .signup-box h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding-top: 20px;
+  }
+
+  .signup-container {
+    padding: 1rem;
+    box-shadow: none;
+    border: 1px solid #c8e6c9;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  .btn-primary {
+    font-size: 0.95rem;
+  }
 }
