@@ -17,13 +17,13 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { CreateloanComponent } from './components/createloan/createloan.component';
 import { LoanformComponent } from './components/loanform/loanform.component';
-import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserappliedloanComponent } from './components/userappliedloan/userappliedloan.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
+import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
 
 
 @NgModule({

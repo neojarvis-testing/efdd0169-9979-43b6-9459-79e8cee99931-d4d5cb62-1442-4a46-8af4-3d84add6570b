@@ -82,6 +82,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   }
  
   showMore(loan: LoanApplication): void {
+   // console.log(this.selectedLoan.file)
     this.selectedLoan = loan;
     this.showDialog = true;
   }
