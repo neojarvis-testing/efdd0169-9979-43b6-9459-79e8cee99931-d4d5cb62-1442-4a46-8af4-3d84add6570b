@@ -34,7 +34,7 @@ const routes: Routes = [
  {path:'userviewfeedback/:id', component: UserviewfeedbackComponent },
   {path:'navbar', component:NavbarComponent},
   { path: 'loanform/:id', component: LoanformComponent },
-  {path:'userappliedloan', component:UserappliedloanComponent}
+  {path:'userappliedloans', component:UserappliedloanComponent}
 ];
 
 @NgModule({

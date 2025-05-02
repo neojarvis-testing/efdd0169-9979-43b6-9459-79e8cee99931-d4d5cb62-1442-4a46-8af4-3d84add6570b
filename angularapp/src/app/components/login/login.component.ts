@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginFailed: boolean = false;
   passwordVisible: boolean = false; // Added this property
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,private ngxService:NgxUiLoaderService) {}
 
   onSubmit() {
     this.authService.login(this.loginData.email, this.loginData.password).subscribe(

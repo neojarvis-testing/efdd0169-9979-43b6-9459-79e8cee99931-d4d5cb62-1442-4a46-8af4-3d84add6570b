@@ -49,7 +49,7 @@ export class LoanformComponent implements OnInit {
       this.service.addLoanApplication(loanApplication).subscribe(
         (data) => {
           alert("Loan Application Added Successfully!!!");
-          this.router.navigate(['/userappliedloan']);
+          this.router.navigate(['/userappliedloans']);
         },
         (error) => {
           console.log("Error: " + JSON.stringify(error));
