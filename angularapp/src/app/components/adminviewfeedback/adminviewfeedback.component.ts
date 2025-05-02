@@ -29,7 +29,7 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   confirmationMessage: string = '';
   confirmationCallback: () => void = () => {};
  
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly feedbackService: FeedbackService,
@@ -59,7 +59,7 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   showUserDetails(feedback: Feedback): void {
     this.showDialog = true;
  
-    if (!feedback.user || !feedback.user.userId) {
+    if (!feedback.user?.userId) {
       this.showToast('User ID is undefined.');
       return;
     }
@@ -68,7 +68,7 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (data) => {
-          if (!data || !data[0] || !data[0].user) {
+          if (!data?.[0]?.user) {
             this.showToast('User data is undefined.');
             return;
           }

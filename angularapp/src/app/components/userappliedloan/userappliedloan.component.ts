@@ -3,7 +3,6 @@ import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
  
 @Component({
   selector: 'app-userappliedloan',
@@ -21,7 +20,7 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
   noDataFound: boolean = false;
   toastMessage: string = '';
  
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(
     private readonly loanService: LoanService,

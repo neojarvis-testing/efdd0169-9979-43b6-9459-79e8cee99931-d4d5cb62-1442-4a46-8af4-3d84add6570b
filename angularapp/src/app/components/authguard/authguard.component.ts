@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './authguard.component.html',
   styleUrls: ['./authguard.component.css']
 })
-export class AuthguardComponent implements OnInit {
+export class AuthguardComponent{
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

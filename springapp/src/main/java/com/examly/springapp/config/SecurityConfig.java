@@ -45,18 +45,19 @@ public AuthenticationManager authenticationManager(HttpSecurity http) throws Exc
 }
 @Bean
 public SecurityFilterChain cFilterChain(HttpSecurity http)throws Exception{
+    final String LOAN_APPLICATION_PATH = "/api/loanapplication/{loanapplicationId}";
      http.cors(cors->cors.disable())
     .csrf(csrf->csrf.disable()) // Disables CSRF protection (not needed for token-based authentication)
     .authorizeHttpRequests(auth->auth  // Defines access rules for specific endpoints
     .requestMatchers("/api/register","/api/login","/api/loan","/api/feedback","/api/actuator/**").permitAll() // Allows public access to these endpoints
-    .requestMatchers(HttpMethod.GET,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasAnyRole("ADMIN","USER") // Accessible by both ADMIN and USER roles
+    .requestMatchers(HttpMethod.GET,LOAN_APPLICATION_PATH,"/api/feedback/{id}").hasAnyRole("ADMIN","USER") // Accessible by both ADMIN and USER roles
     .requestMatchers(HttpMethod.GET,"/api/loan/{loanId}","/api/loanapplication").hasRole("ADMIN")
-    .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}","/api/loanapplication/{loanapplicationId}").hasRole("ADMIN")
+    .requestMatchers(HttpMethod.PUT,"/api/loan/{loanId}",LOAN_APPLICATION_PATH).hasRole("ADMIN")
     .requestMatchers(HttpMethod.POST,"/api/loan").hasRole("ADMIN") 
     .requestMatchers(HttpMethod.DELETE,"/api/loan/{loanId}").hasRole("ADMIN")
     .requestMatchers(HttpMethod.POST,"/api/loanapplication","/api/feedback/{userId}").hasRole("USER")
     .requestMatchers(HttpMethod.GET,"/api/loanapplication/user/{userId}","/api/feedback/user/{userId}").hasRole("USER")
-    .requestMatchers(HttpMethod.DELETE,"/api/loanapplication/{loanapplicationId}","/api/feedback/{id}").hasRole("USER")
+    .requestMatchers(HttpMethod.DELETE,LOAN_APPLICATION_PATH,"/api/feedback/{id}").hasRole("USER")
     // .anyRequest().authenticated())
     .anyRequest().permitAll()) // Allows unrestricted access to all other requests
     .exceptionHandling(exception -> exception.authenticationEntryPoint(entryPoint)) // Specifies custom entry point for unauthorized access

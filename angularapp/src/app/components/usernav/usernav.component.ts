@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './usernav.component.html',
   styleUrls: ['./usernav.component.css']
 })
-export class UsernavComponent implements OnInit {
+export class UsernavComponent {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

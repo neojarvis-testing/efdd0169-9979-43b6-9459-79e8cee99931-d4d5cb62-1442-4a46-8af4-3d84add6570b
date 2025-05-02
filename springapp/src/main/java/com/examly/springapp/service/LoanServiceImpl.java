@@ -39,7 +39,6 @@ public class LoanServiceImpl implements LoanService {
         log.info("Fetching loan with ID: {}", loanId);
         return loanRepository.findById(loanId)
                 .orElseThrow(() -> {
-                    log.error("Loan not found with ID: {}", loanId);
                     return new LoanNotFoundException("Loan not found with ID: " + loanId);
                 });
     }
@@ -71,7 +70,6 @@ public class LoanServiceImpl implements LoanService {
             log.info("Loan successfully updated with ID: {}", savedLoan.getLoanId());
             return Loanmapper.mapToLoanDTO(savedLoan);
         } else {
-            log.error("Loan not found with ID: {}", loanId);
             throw new LoanNotFoundException("Loan not found with ID: " + loanId);
         }
     }

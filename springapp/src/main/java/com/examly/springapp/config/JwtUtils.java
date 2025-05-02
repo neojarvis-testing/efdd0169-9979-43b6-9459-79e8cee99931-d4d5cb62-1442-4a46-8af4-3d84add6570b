@@ -13,27 +13,27 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtUtils {
-    @Value("${SECRET_KEY}")// in application property add SECRET_KEY
-     private String SECRET_KEY;
+    @Value("${secretKey}")// in application property add SECRET_KEY
+     private String secretKey;
     public String genrateToken(Authentication authentication) {
           UserDetails userDetails = (UserDetails) authentication.getPrincipal();
           return Jwts.builder()
           .setSubject(userDetails.getUsername())   // Set username as the token subject
           .setIssuedAt(new Date())
           .setExpiration(new Date(System.currentTimeMillis()+(5*60*60*1000)))     // Set the token expiration time to 30 minutes from now
-          .signWith(SignatureAlgorithm.HS256,SECRET_KEY)
+          .signWith(SignatureAlgorithm.HS256,secretKey)
           .compact();
 
     }
     // Use the secret key to validate the token,// Retrieve the subject (username) from the claims
     public String extractUsername(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
 
     public Date extractExperation(String token){   // Use the secret key to validate the token
 
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration();    // Retrieve the expiration date from the claims
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration();    // Retrieve the expiration date from the claims
     }
 
 

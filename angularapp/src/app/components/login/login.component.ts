@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
  
   loginData = {
     email: '',
@@ -18,11 +17,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
   loginFailed: boolean = false;
   passwordVisible: boolean = false;
-  private unsubscribe$ = new Subject<void>();
+  private readonly unsubscribe$ = new Subject<void>();
  
   constructor(private readonly authService: AuthService, private readonly router: Router) {}
  
-  ngOnInit(): void {}
  
   onSubmit(): void {
 this.authService.login(this.loginData.email, this.loginData.password)
