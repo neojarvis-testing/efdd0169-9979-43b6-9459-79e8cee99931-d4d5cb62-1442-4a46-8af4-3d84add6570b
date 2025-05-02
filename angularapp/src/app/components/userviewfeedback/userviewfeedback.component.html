@@ -1,4 +1,3 @@
-
 <div class="container">
   <h2>My Feedback</h2>
   <hr>
@@ -29,36 +28,36 @@
       </tbody>
     </table>
   </div>
- 
-  <div class="no-feedback-message" *ngIf="feedbackList.length === 0">
-    No feedback found.
+
+  <div class="empty-state" *ngIf="feedbackList.length === 0">
+    <h3>No feedback found</h3>
+    <p>Try adding some feedback.</p>
   </div>
+
+  <div class="toast-container" *ngIf="toastMessage">
+    <div class="toast custom-toast fade show">
  
   <!-- Toast Notification -->
   <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
     <div class="toast custom-toast fade show" *ngIf="toastMessage">
       <div class="d-flex">
         <div class="toast-body">{{ toastMessage }}</div>
-        <button class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
+        <button class="btn-close btn-close-white" (click)="toastMessage = ''"></button>
       </div>
     </div>
   </div>
- 
-  <!-- Confirmation Modal -->
-  <div class="modal fade show d-block" *ngIf="confirmationModalVisible" tabindex="-1" style="background: rgba(0, 0, 0, 0.4); z-index: 1050;">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content animate__animated animate__fadeInDown">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Action</h5>
-        </div>
-        <div class="modal-body">
-          <p>{{ confirmationMessage }}</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" (click)="onCancelConfirmation()">Cancel</button>
-          <button class="btn btn-danger" (click)="onConfirmAction()">Confirm</button>
-        </div>
+
+  <div class="modal-overlay" *ngIf="confirmationModalVisible">
+    <div class="modal-box">
+      <h5>Confirm Action</h5>
+      <p>{{ confirmationMessage }}</p>
+      <div class="modal-actions">
+        <button class="btn cancel-btn" (click)="onCancelConfirmation()">Cancel</button>
+        <button class="btn confirm-btn" (click)="onConfirmAction()">Confirm</button>
       </div>
     </div>
   </div>
 </div>
+
+
+
