@@ -22,8 +22,8 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private loanService: LoanService,
-    private fb: FormBuilder
+    private readonly loanService: LoanService,
+    private readonly fb: FormBuilder
   ) {}
  
   ngOnInit(): void {
@@ -82,7 +82,6 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   }
  
   showMore(loan: LoanApplication): void {
-   // console.log(this.selectedLoan.file)
     this.selectedLoan = loan;
     this.showDialog = true;
   }

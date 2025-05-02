@@ -23,10 +23,10 @@ export class UserviewfeedbackComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private feedbackService: FeedbackService,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router
+    private readonly feedbackService: FeedbackService,
+    private readonly authService: AuthService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {}
  
   ngOnInit(): void {

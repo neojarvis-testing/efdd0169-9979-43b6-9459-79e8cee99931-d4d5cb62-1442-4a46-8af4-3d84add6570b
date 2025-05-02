@@ -18,9 +18,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private fb: FormBuilder
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
   ) {
 this.signupForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   passwordVisible: boolean = false;
   private unsubscribe$ = new Subject<void>();
  
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
  
   ngOnInit(): void {}
  
@@ -30,11 +30,8 @@ this.authService.login(this.loginData.email, this.loginData.password)
         response => {
           console.log('Login successful', response);
           this.loginFailed = false;
-          if (response.userRole === 'USER') {
             this.router.navigate(['/home']);
-          } else {
-            this.router.navigate(['/home']);
-          }
+          
         },
         error => {
           console.error('Login failed', error);

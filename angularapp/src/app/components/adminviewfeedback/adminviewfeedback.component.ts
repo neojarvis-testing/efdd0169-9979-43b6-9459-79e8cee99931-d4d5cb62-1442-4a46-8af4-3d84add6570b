@@ -32,9 +32,9 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private feedbackService: FeedbackService,
-    private authService: AuthService,
-    private router: Router
+    private readonly feedbackService: FeedbackService,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
  
   ngOnInit(): void {
@@ -74,9 +74,9 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
           }
  
           this.user = {
-email: data[0].user.email || 'N/A',
-            username: data[0].user.username || 'N/A',
-            mobileNumber: data[0].user.mobileNumber || 'N/A',
+            email: data[0].user.email ,
+            username: data[0].user.username,
+            mobileNumber: data[0].user.mobileNumber ,
             password: '',
             userRole: ''
           };

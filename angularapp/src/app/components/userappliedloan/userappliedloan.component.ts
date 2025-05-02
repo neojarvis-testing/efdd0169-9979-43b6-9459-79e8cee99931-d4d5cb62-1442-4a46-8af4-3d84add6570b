@@ -23,8 +23,8 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private loanService: LoanService,
-    private cdRef: ChangeDetectorRef
+    private readonly loanService: LoanService,
+    private readonly cdRef: ChangeDetectorRef
   ) {}
  
   ngOnInit(): void {

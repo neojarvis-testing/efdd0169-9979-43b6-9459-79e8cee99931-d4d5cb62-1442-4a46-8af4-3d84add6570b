@@ -1,14 +1,13 @@
 <div class="container">
-  <header>
-    <h2>My Feedback</h2>
-  </header>
-
+  <h2>My Feedback</h2>
+  <hr>
+ 
   <div class="error-message" *ngIf="errorMessage">
     {{ errorMessage }}
   </div>
-
-  <div class="table-responsive" *ngIf="feedbackList.length > 0">
-    <table>
+ 
+  <div class="feedback-table-container" *ngIf="feedbackList.length > 0">
+    <table border="2">
       <thead>
         <tr>
           <th>S.No</th>
@@ -21,7 +20,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ feedback.feedbackText }}</td>
           <td>
-            <button (click)="confirmDelete(feedback.feedbackId)" class="delete-btn">
+            <button (click)="confirmDelete(feedback.feedbackId)" class="delete-button">
               Delete
             </button>
           </td>
@@ -37,6 +36,10 @@
 
   <div class="toast-container" *ngIf="toastMessage">
     <div class="toast custom-toast fade show">
+ 
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+    <div class="toast custom-toast fade show" *ngIf="toastMessage">
       <div class="d-flex">
         <div class="toast-body">{{ toastMessage }}</div>
         <button class="btn-close btn-close-white" (click)="toastMessage = ''"></button>

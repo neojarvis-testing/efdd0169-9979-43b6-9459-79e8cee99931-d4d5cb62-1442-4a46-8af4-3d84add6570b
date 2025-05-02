@@ -21,7 +21,7 @@ export class ViewloanComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   private subscription: Subscription = new Subscription();
 
-  constructor(private loanService: LoanService, private authService: AuthService, private router: Router) { }
+  constructor(private readonly loanService: LoanService, private readonly authService: AuthService, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.getAllLoans();
