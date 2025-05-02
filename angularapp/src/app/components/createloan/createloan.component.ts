@@ -20,12 +20,12 @@ export class CreateloanComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private service: LoanService,
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute
+    private readonly service: LoanService,
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
-this.loanform = this.fb.group({
+    this.loanform = this.fb.group({
       loanId: [''],
       loanType: ['', Validators.required],
       description: ['', Validators.required],
@@ -38,7 +38,7 @@ this.loanform = this.fb.group({
   }
  
   ngOnInit(): void {
-this.id = +this.route.snapshot.paramMap.get('id');
+this.id=+this.route.snapshot.paramMap.get('id');
 this.editMode = !!this.id;
  
     if (this.editMode) {

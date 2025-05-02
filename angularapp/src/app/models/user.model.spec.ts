@@ -7,7 +7,7 @@ describe('User Model', () => {
     const user: User = {
       userId: 1,
       email: 'user@example.com',
-      password: 'password123',
+      password: 'pwd',
       username: 'user123',
       mobileNumber: '1234567890',
       userRole: 'farmer'

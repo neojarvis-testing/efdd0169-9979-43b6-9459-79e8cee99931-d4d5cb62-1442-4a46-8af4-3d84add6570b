@@ -96,11 +96,11 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private fb: FormBuilder,
-    private feedbackService: FeedbackService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private cdRef: ChangeDetectorRef
+    private readonly fb: FormBuilder,
+    private readonly feedbackService: FeedbackService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly cdRef: ChangeDetectorRef
   ) {
 this.feedbackForm = this.fb.group({
       feedbackText: ['', [Validators.required, Validators.minLength(3)]]

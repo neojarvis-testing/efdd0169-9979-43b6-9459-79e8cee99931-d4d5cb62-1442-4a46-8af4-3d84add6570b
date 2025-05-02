@@ -69,7 +69,13 @@
   <!-- Rejection Modal -->
   <div *ngIf="showRejectionModal" class="dialog-overlay">
     <div class="dialog-box" [formGroup]="rejectionForm">
-      <span class="close" (click)="closeRejectionModal()">&times;</span>
+      <span 
+      class="close" 
+            (click)="closeRejectionModal()" 
+            (keypress)="handleKeyPress($event)" 
+            (keydown)="handleKeyDown($event)" 
+            (keyup)="handleKeyUp($event)"
+      class="close" (click)="closeRejectionModal()">&times;</span>
       <h2>Rejection Reason</h2>
       <textarea formControlName="rejectionReason" placeholder="Enter reason for rejection" rows="5" cols="40"></textarea>
       <div *ngIf="rejectionForm.get('rejectionReason')?.invalid && rejectionForm.get('rejectionReason')?.touched" class="error-message">
