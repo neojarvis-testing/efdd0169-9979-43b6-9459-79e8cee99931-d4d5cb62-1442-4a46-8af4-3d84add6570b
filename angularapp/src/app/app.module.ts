@@ -24,6 +24,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -56,6 +57,10 @@ import { RequestedloanComponent } from './components/requestedloan/requestedloan
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule
+    
+    
+    
+   
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
