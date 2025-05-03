@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
- 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
- 
+
   loginData = {
     email: '',
     password: ''
@@ -18,13 +18,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFailed: boolean = false;
   passwordVisible: boolean = false;
   private unsubscribe$ = new Subject<void>();
- 
+
   constructor(private authService: AuthService, private router: Router) {}
- 
+
   ngOnInit(): void {}
- 
+
   onSubmit(): void {
-this.authService.login(this.loginData.email, this.loginData.password)
+    if (!this.loginData.email || !this.loginData.password) {
+      this.loginFailed = true;
+      return;
+    }
+
+    this.authService.login(this.loginData.email, this.loginData.password)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         response => {
@@ -42,15 +47,15 @@ this.authService.login(this.loginData.email, this.loginData.password)
         }
       );
   }
- 
+
   signUp(): void {
     this.router.navigate(['/register']);
   }
- 
+
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
- 
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

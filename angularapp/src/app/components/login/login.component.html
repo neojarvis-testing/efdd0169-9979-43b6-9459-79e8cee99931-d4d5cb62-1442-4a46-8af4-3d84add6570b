@@ -9,28 +9,22 @@
       <!-- Email Field -->
       <div class="mb-3">
         <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
-        <div class="form-group" [ngClass]="{'has-error': email.invalid && (email.dirty || email.touched)}">
+        <div class="form-group">
           <input
             type="email"
             id="email"
             [(ngModel)]="loginData.email"
             name="email"
             class="form-control"
-            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
             required
-            #email="ngModel"
             placeholder=" ">
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="small-text">
-            <div *ngIf="email.errors?.required" class="error-message">* Email is required</div>
-            <div *ngIf="email.errors?.pattern" class="error-message">* Please enter a valid email</div>
-          </div>
         </div>
       </div>
 
       <!-- Password Field -->
       <div class="mb-3">
         <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
-        <div class="form-group" [ngClass]="{'has-error': password.invalid && (password.touched || password.dirty)}">
+        <div class="form-group">
           <input
             [type]="passwordVisible ? 'text' : 'password'"
             id="password"
@@ -38,15 +32,7 @@
             name="password"
             class="form-control"
             required
-            minlength="6"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}"
-            #password="ngModel"
             placeholder=" ">
-          <div *ngIf="password.invalid && (password.touched || password.dirty)" class="small-text">
-            <div *ngIf="password.errors?.required" class="error-message">* Password is required</div>
-            <div *ngIf="password.errors?.minlength" class="error-message">Must be at least 6 characters long</div>
-            <div *ngIf="password.errors?.pattern" class="error-message">Must contain uppercase, lowercase, special character & digit</div>
-          </div>
         </div>
       </div>
 
