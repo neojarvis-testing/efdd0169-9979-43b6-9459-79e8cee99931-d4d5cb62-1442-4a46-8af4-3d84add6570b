@@ -1,21 +1,34 @@
+.word-count {
+  text-align: right;
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
 .toast-container {
-    animation: fadeInDown 0.5s ease-in-out;
+  animation: fadeInDown 0.5s ease-in-out;
+}
+
+.custom-toast {
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-   
-  .custom-toast {
-    background-color: #333;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-   
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
