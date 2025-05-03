@@ -3,7 +3,8 @@
 }
 
 .hero {
-    background: url('/assets/images/background.webp') center center/cover no-repeat;
+    background: url('/assets/images/Homepage.jpg') center center/cover no-repeat;
+    /* background: url('/assets/images/background.webp') center center/cover no-repeat; */
     height: 100vh;
     color: white;
     padding: 0 20px;
