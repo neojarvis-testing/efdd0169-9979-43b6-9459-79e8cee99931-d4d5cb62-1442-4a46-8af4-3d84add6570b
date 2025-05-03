@@ -1,5 +1,7 @@
 package com.examly.springapp.utility;
 
+import java.time.LocalDate;
+
 import com.examly.springapp.model.LoanApplication;
 import com.examly.springapp.model.LoanApplicationDTO;
 
@@ -18,22 +20,24 @@ public class LoanApplicationMappers {
         loanDTO.setFile(loanApplication.getFile());
         loanDTO.setLoanStatus(loanApplication.getLoanStatus());
         loanDTO.setFarmpurpose(loanApplication.getFarmpurpose());
-        loanDTO.setLoan(loanApplication.getLoan());
-        loanDTO.setUser(loanApplication.getUser());
+        loanDTO.setUserId(loanApplication.getUser().getUserId());
+        loanDTO.setLoanId(loanApplication.getLoan().getLoanId());
+        // loanDTO.setLoan(loanApplication.getLoan());
+        // loanDTO.setUser(loanApplication.getUser());
         return loanDTO;
     }
 
     public static LoanApplication mapToLoanApplication(LoanApplicationDTO loanApplicationDTO) {
         LoanApplication loan = new LoanApplication();
-        loan.setSubmissionDate(loanApplicationDTO.getSubmissionDate());
+        loan.setSubmissionDate(LocalDate.now());
         loan.setFarmLocation(loanApplicationDTO.getFarmLocation());
         loan.setFarmSizeInAcres(loanApplicationDTO.getFarmSizeInAcres());
         loan.setFarmerAddress(loanApplicationDTO.getFarmerAddress());
         loan.setFile(loanApplicationDTO.getFile());
         loan.setLoanStatus(loanApplicationDTO.getLoanStatus());
         loan.setFarmpurpose(loanApplicationDTO.getFarmpurpose());
-        loan.setLoan(loanApplicationDTO.getLoan());
-        loan.setUser(loanApplicationDTO.getUser());
+        // loan.setLoan(loanApplicationDTO.getLoan());
+        // loan.setUser(loanApplicationDTO.getUser());
         return loan;
 
     }

@@ -38,8 +38,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     // adds a loan application
     public LoanApplicationDTO addLoanApplication(LoanApplicationDTO loanApplicationDTO) {
         LoanApplication loanApplication = LoanApplicationMappers.mapToLoanApplication(loanApplicationDTO);
-        Loan loan = loanRepo.findById(loanApplication.getLoan().getLoanId()).orElse(null);
-        User user = userRepo.findById(loanApplication.getUser().getUserId()).orElse(null);
+        Loan loan = loanRepo.findById(loanApplicationDTO.getLoanId()).orElse(null);
+        User user = userRepo.findById(loanApplicationDTO.getUserId()).orElse(null);
 
         if (loan == null || user == null) {
             throw new UserNotFoundException("User or Loan does not exist!!");
@@ -47,7 +47,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
         loanApplication.setLoan(loan);
         loanApplication.setUser(user);
-        loanApplication.setSubmissionDate(LocalDate.now());
         loanApplication.setLoanStatus("Pending");
         LoanApplication saved = loanApplicationRepo.save(loanApplication);
         return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
@@ -91,8 +90,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
             loan.setFile(loanApplicationDTO.getFile());
             loan.setLoanStatus(loanApplicationDTO.getLoanStatus());
             loan.setFarmpurpose(loanApplicationDTO.getFarmpurpose());
-            loan.setLoan(loanApplicationDTO.getLoan());
-            loan.setUser(loanApplicationDTO.getUser());
             LoanApplication saved = loanApplicationRepo.save(loan);
             return LoanApplicationMappers.mapToLoanApplicationDTO(saved);
 

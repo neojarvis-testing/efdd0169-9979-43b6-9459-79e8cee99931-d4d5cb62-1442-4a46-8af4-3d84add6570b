@@ -46,10 +46,18 @@ export class LoanformComponent implements OnInit, OnDestroy {
     }
  
     const loanApplication: LoanApplication = {
-      ...this.loanApplicationForm.value,
-      user: { userId: +sessionStorage.getItem('userId') },
-      loan: { loanId: +this.loanId }
+      ...this.loanApplicationForm.value, 
+      userId:  +sessionStorage.getItem('userId'),
+      loanId:  +this.loanId 
     };
+
+    console.log(loanApplication)
+    // const loanApplication: LoanApplication = {
+    //   ...this.loanApplicationForm.value, 
+      
+    //   user: { userId: +sessionStorage.getItem('userId') },
+    //   loan: { loanId: +this.loanId }
+    // };
  
     this.service.addLoanApplication(loanApplication)
       .pipe(takeUntil(this.unsubscribe$))
