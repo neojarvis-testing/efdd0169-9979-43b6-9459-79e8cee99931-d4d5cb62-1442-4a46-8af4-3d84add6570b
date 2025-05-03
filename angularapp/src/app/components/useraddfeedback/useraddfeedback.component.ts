@@ -1,81 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FeedbackService } from 'src/app/services/feedback.service';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { Feedback } from 'src/app/models/feedback.model';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-// @Component({
-//   selector: 'app-useraddfeedback',
-//   templateUrl: './useraddfeedback.component.html',
-//   styleUrls: ['./useraddfeedback.component.css']
-// })
-// export class UseraddfeedbackComponent implements OnInit {
-//   feedbackForm: FormGroup;
-//   showPopup: boolean = false;
-
-//   userId:number=+sessionStorage.getItem('userId'); // Ensure userId is initialized dynamically
-
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private feedbackService: FeedbackService,
-//     private router: Router,
-//     private route: ActivatedRoute
-//   ) {
-//     this.feedbackForm = this.fb.group({
-//       feedbackText: ['', [Validators.required, Validators.minLength(3)]]
-//     });
-//   }
-
-//   ngOnInit(): void {
-
-//     //Dynamically retrieve userId from route parameters
-//     // this.route.params.subscribe(params => {
-//     //   this.userId = +params['userId']; // Convert to number
-//     //   console.log('Retrieved userId:', this.userId); // Debug log
-//     // });
-
-//   }
-
-//   onSubmit(): void {
-//     if (this.feedbackForm.invalid) {
-//       return; // Prevent submission if form is invalid
-//     }
-
-//     // Create feedback object with userId and form data
-//     const feedback: Feedback = {
-//       feedbackId: undefined, // Backend generates feedback ID
-//       userId: this.userId, // Use the dynamic userId from route
-//       feedbackText: this.feedbackForm.value.feedbackText,
-//       date: new Date() // Set the current date
-//     };
-
-//     this.feedbackService.sendFeedback(feedback, this.userId).subscribe(
-//       response => {
-//         this.feedbackForm.reset(); // Clear the form
-//         alert("Successfully Added!")// Show success popup
-
-//         this.router.navigate(['/userviewfeedback',this.userId])
-
-//       },
-//       error => {
-//         console.error('Error adding feedback:', error); // Log error for debugging
-//         alert('Error adding feedback');
-//       }
-//     );
-//   }
-
-//   closePopup(): void {
-//     this.showPopup = false;
-//   this.router.navigate(['/userviewfeedback',this.userId]); // Reload the component
-//   }
-// }
-
-
-
-
-
-
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -83,7 +5,7 @@ import { Feedback } from 'src/app/models/feedback.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
- 
+
 @Component({
   selector: 'app-useraddfeedback',
   templateUrl: './useraddfeedback.component.html',
@@ -93,8 +15,9 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
   feedbackForm: FormGroup;
   userId: number = +sessionStorage.getItem('userId');
   toastMessage: string = '';
+  wordCount: number = 0;
   private unsubscribe$ = new Subject<void>();
- 
+
   constructor(
     private fb: FormBuilder,
     private feedbackService: FeedbackService,
@@ -102,23 +25,29 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef
   ) {
-this.feedbackForm = this.fb.group({
+    this.feedbackForm = this.fb.group({
       feedbackText: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
- 
-  ngOnInit(): void {}
- 
+
+  ngOnInit(): void {
+    this.feedbackForm.get('feedbackText').valueChanges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.updateWordCount();
+      });
+  }
+
   onSubmit(): void {
-    if (this.feedbackForm.invalid) return;
- 
+    if (this.feedbackForm.invalid || this.wordCount > 1000) return;
+
     const feedback: Feedback = {
       feedbackId: undefined,
       userId: this.userId,
       feedbackText: this.feedbackForm.value.feedbackText,
       date: new Date()
     };
- 
+
     this.feedbackService.sendFeedback(feedback, this.userId)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
@@ -133,7 +62,17 @@ this.feedbackForm = this.fb.group({
         }
       );
   }
- 
+
+  updateWordCount(): void {
+    const text = this.feedbackForm.get('feedbackText').value || '';
+    this.wordCount = text.trim().split(/\s+/).length;
+    if (this.wordCount > 1000) {
+      const truncatedText = text.trim().split(/\s+/).slice(0, 1000).join(' ');
+      this.feedbackForm.get('feedbackText').setValue(truncatedText, { emitEvent: false });
+      this.wordCount = 1000;
+    }
+  }
+
   showToast(message: string): void {
     this.toastMessage = message;
     this.cdRef.detectChanges();
@@ -142,11 +81,11 @@ this.feedbackForm = this.fb.group({
       this.cdRef.detectChanges();
     }, 4000);
   }
- 
+
   get f() {
     return this.feedbackForm.controls;
   }
- 
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

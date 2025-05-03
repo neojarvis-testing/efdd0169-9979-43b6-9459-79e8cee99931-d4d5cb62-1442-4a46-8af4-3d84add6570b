@@ -1,72 +1,15 @@
-<!-- <div class="container">
-  <h2>Applied Loans</h2>
-  <input type="text" placeholder="Search by Loan Name" [(ngModel)]="search" (input)="onSearch($event)" />
-  
-  <div *ngIf="noDataFound" class="no-data-message">
-    Oops! No records found.
-  </div>
-
-  <table *ngIf="!noDataFound">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Loan Name</th>
-        <th>Submission Date</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let loan of filteredLoans; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ loan.loan.loanType }}</td>
-        <td>{{ loan.submissionDate | date:'yyyy-MM-dd' }}</td>
-        <td>{{ loan.loanStatus }}</td>
-        <td>
-          <button (click)="showDetails(loan)">View</button>
-          <button (click)="confirmDelete(loan.loanApplicationId)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="dialog-overlay" *ngIf="showDialog">
-    <div class="dialog-box">
-    <h3>Loan Details</h3>
-    <p><strong>Loan Name:</strong> {{ selectedLoan.loan.loanType }}</p>
-    <p><strong>Submission Date:</strong> {{ selectedLoan.submissionDate | date:'yyyy-MM-dd' }}</p>
-    <p><strong>Status:</strong> {{ selectedLoan.loanStatus }}</p>
-    <p><strong>Farm Location:</strong> {{ selectedLoan.farmLocation }}</p>
-    <p><strong>Farmer Address:</strong> {{ selectedLoan.farmerAddress }}</p>
-    <p><strong>Farm Size (in acres):</strong> {{ selectedLoan.farmSizeInAcres }}</p>
-    <p><strong>Farm Purpose:</strong> {{ selectedLoan.farmpurpose }}</p>
-      <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
-  </div>
-
-  <div *ngIf="showDeletePopup" class="delete-popup">
-    <p>Are you sure you want to delete this loan application?</p>
-    <button (click)="deleteLoanApplication()">Yes</button>
-    <button (click)="closeDeletePopup()">No</button>
-  </div>
-</div> -->
-
-
-
-
-
-
-
-<!-- newcomponent.component.html -->
 <div class="container">
   <header>
     <h2>Applied Loans</h2>
   </header>
-  
+
   <div class="search-section">
     <div class="search-container">
-      <input id="search-focus" type="search" placeholder="Search by Loan Name" [(ngModel)]="search" (input)="onSearch($event)" />
+      <input id="search-focus" type="search" placeholder="Search by Loan Name" [(ngModel)]="search"
+        (input)="onSearch($event)" />
     </div>
   </div>
-  
+
   <div class="table-responsive">
     <table>
       <thead>
@@ -94,14 +37,14 @@
       </tbody>
     </table>
   </div>
-  
+
   <!-- Empty state (shown when no results) -->
   <div class="empty-state" *ngIf="filteredLoans.length === 0">
     <h3>No loans found</h3>
     <p>Try changing your search criteria or check back later for new loan options.</p>
     <button class="reset-btn" (click)="resetSearch()">Reset Search</button>
   </div>
-  
+
   <!-- Loan Details Dialog -->
   <div class="dialog-overlay" *ngIf="showDialog">
     <div class="dialog-box animate__animated animate__zoomIn">
@@ -115,7 +58,7 @@
       <button class="btn btn-primary mt-3" (click)="onDialogConfirm()">Ok</button>
     </div>
   </div>
-  
+
   <!-- Confirmation Modal -->
   <div class="dialog-overlay" *ngIf="showDeletePopup">
     <div class="dialog-box animate__animated animate__fadeInDown">
@@ -126,7 +69,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Toast Notification -->
   <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
     <div class="toast custom-toast fade show" *ngIf="toastMessage">
