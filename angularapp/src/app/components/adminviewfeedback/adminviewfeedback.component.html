@@ -17,16 +17,14 @@
         <table class="feedback-table">
           <thead>
             <tr>
-              <th>Feedback ID</th>
-              <th>User ID</th>
+              <th>Name</th>
               <th>Feedback Text</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let feedback of feedbacks">
-              <td>{{ feedback.feedbackId }}</td>
-              <td>{{ feedback.user?.userId }}</td>
+              <td>{{ feedback.user?.username }}</td>
               <td>{{ feedback.feedbackText }}</td>
               <td>
                 <button class="show-profile" (click)="showUserDetails(feedback)">
