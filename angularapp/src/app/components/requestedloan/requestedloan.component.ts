@@ -19,11 +19,11 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   noDataFound: boolean = false;
   showRejectionModal: boolean = false;
   showDialog = false;
-  private readonly unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private readonly loanService: LoanService,
-    private readonly fb: FormBuilder
+    private loanService: LoanService,
+    private fb: FormBuilder
   ) {}
  
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (data: LoanApplication[]) => {
-          this.loans = data.toReversed();
+          this.loans = data.reverse();
           this.filteredLoans = [...this.loans];
           this.noDataFound = this.loans.length === 0;
         },
@@ -45,7 +45,6 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
         }
       );
   }
-  
  
   approveLoan(loan: LoanApplication): void {
     loan.loanStatus = 'Approved';
@@ -83,6 +82,7 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   }
  
   showMore(loan: LoanApplication): void {
+   // console.log(this.selectedLoan.file)
     this.selectedLoan = loan;
     this.showDialog = true;
   }

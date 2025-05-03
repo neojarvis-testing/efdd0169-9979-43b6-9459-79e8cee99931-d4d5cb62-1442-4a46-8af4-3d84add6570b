@@ -29,12 +29,12 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   confirmationMessage: string = '';
   confirmationCallback: () => void = () => {};
  
-  private readonly unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private readonly feedbackService: FeedbackService,
-    private readonly authService: AuthService,
-    private readonly router: Router
+    private feedbackService: FeedbackService,
+    private authService: AuthService,
+    private router: Router
   ) {}
  
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   showUserDetails(feedback: Feedback): void {
     this.showDialog = true;
  
-    if (!feedback.user?.userId) {
+    if (!feedback.user || !feedback.user.userId) {
       this.showToast('User ID is undefined.');
       return;
     }
@@ -68,15 +68,15 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (data) => {
-          if (!data?.[0]?.user) {
+          if (!data || !data[0] || !data[0].user) {
             this.showToast('User data is undefined.');
             return;
           }
  
           this.user = {
-            email: data[0].user.email ,
-            username: data[0].user.username,
-            mobileNumber: data[0].user.mobileNumber ,
+email: data[0].user.email || 'N/A',
+            username: data[0].user.username || 'N/A',
+            mobileNumber: data[0].user.mobileNumber || 'N/A',
             password: '',
             userRole: ''
           };

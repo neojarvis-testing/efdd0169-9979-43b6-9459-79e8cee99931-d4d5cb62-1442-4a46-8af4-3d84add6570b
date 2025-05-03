@@ -5,12 +5,6 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 
 public class Usermapper {
-
-    
-    private Usermapper() {
-        throw new UnsupportedOperationException("Utility class");
-     }
-
     public static UserDTO mapToUserDTO(User user){
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(user.getEmail());

@@ -20,13 +20,13 @@ export class UserviewfeedbackComponent implements OnInit, OnDestroy {
   confirmationMessage: string = '';
   confirmationCallback: () => void = () => {};
  
-  private readonly unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private readonly feedbackService: FeedbackService,
-    private readonly authService: AuthService,
-    private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private feedbackService: FeedbackService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
  
   ngOnInit(): void {

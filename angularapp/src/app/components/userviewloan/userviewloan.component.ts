@@ -21,7 +21,7 @@ export class UserviewloanComponent implements OnInit {
     loanType: new FormControl('all')
   });
 
-  constructor(private readonly service: LoanService, private readonly router: Router, private readonly route: ActivatedRoute) {}
+  constructor(private service: LoanService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getAllLoans();

@@ -1,15 +1,15 @@
-<!-- newcomponent.component.html -->
 <div class="container">
   <header>
     <h2>Applied Loans</h2>
   </header>
-  
+
   <div class="search-section">
     <div class="search-container">
-      <input id="search-focus" type="search" placeholder="Search by Loan Name" [(ngModel)]="search" (input)="onSearch($event)" />
+      <input id="search-focus" type="search" placeholder="Search by Loan Name" [(ngModel)]="search"
+        (input)="onSearch($event)" />
     </div>
   </div>
-  
+
   <div class="table-responsive">
     <table>
       <thead>
@@ -35,14 +35,14 @@
       </tbody>
     </table>
   </div>
-  
+
   <!-- Empty state (shown when no results) -->
   <div class="empty-state" *ngIf="filteredLoans.length === 0">
     <h3>No loans found</h3>
     <p>Try changing your search criteria or check back later for new loan options.</p>
     <button class="reset-btn" (click)="resetSearch()">Reset Search</button>
   </div>
-  
+
   <!-- Loan Details Dialog -->
   <div class="dialog-overlay" *ngIf="showDialog">
     <div class="dialog-box animate__animated animate__zoomIn">
@@ -56,7 +56,7 @@
       <button class="btn btn-primary mt-3" (click)="onDialogConfirm()">Ok</button>
     </div>
   </div>
-  
+
   <!-- Confirmation Modal -->
   <div class="dialog-overlay" *ngIf="showDeletePopup">
     <div class="dialog-box animate__animated animate__fadeInDown">
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Toast Notification -->
   <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
     <div class="toast custom-toast fade show" *ngIf="toastMessage">
