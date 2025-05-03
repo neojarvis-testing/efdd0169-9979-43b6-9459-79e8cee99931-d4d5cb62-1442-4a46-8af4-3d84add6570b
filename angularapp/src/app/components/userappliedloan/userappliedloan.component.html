@@ -73,6 +73,7 @@
         <tr>
           <th>No</th>
           <th>Loan Name</th>
+          <th>Submission Date</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -81,6 +82,7 @@
         <tr *ngFor="let loan of filteredLoans; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ loan.loan?.loanType }}</td>
+          <td>{{ loan.submissionDate|date}}</td>
           <td>{{ loan.loanStatus }}</td>
           <td>
             <div class="action-btns">

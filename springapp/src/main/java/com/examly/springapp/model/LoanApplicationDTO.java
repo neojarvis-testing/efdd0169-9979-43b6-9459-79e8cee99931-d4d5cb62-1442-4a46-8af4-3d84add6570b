@@ -23,7 +23,7 @@ public class LoanApplicationDTO {
     //@NotBlank(message="Purpose must not be blank")
     private String farmpurpose;
     private String file;
-    private User user;
-    private Loan loan;
+    private long userId;
+    private long loanId; 
 
 }
