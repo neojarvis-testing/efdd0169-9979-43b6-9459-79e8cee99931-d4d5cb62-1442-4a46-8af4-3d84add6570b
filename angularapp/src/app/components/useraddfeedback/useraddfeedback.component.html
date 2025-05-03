@@ -16,13 +16,13 @@
         Feedback is required
       </div>
       <div class="word-count">
-        {{ wordCount }}/1000
+        {{ wordCount }}/500
       </div>
-      <div class="text-danger" *ngIf="wordCount > 1000">
-        Word limit exceeded! Please reduce your feedback to 1000 words or less.
+      <div class="text-danger" *ngIf="wordCount > 500">
+        Word limit exceeded! Please reduce your feedback to 500 words or less.
       </div>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid || wordCount > 1000">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid || wordCount > 500">Submit</button>
   </form>
 </div>
 
