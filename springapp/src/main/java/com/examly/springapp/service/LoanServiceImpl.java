@@ -38,9 +38,9 @@ public class LoanServiceImpl implements LoanService {
     public Loan getLoanById(Long loanId) {
         log.info("Fetching loan with ID: {}", loanId);
         return loanRepository.findById(loanId)
-                .orElseThrow(() -> {
-                    return new LoanNotFoundException("Loan not found with ID: " + loanId);
-                });
+                .orElseThrow(() -> 
+                    new LoanNotFoundException("Loan not found with ID: " + loanId)
+                );
     }
 
     // Method to get all loans.
