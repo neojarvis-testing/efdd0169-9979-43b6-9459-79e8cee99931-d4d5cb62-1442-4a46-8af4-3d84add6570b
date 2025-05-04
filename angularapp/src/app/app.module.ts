@@ -56,10 +56,6 @@ import { RequestedloanComponent } from './components/requestedloan/requestedloan
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule
-    
-    
-    
-   
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

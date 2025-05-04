@@ -12,5 +12,5 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.isUser();
   }
-  constructor(private readonly authService:AuthService){}
+  constructor(private authService:AuthService){}
 }

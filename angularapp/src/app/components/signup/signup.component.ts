@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,17 +10,17 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
   showToastNotification: boolean = false;
   showErrorModal: boolean = false;
   errorMessage: string = '';
-  private readonly unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly fb: FormBuilder
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
   ) {
 this.signupForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -32,6 +32,7 @@ this.signupForm = this.fb.group({
     }, { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
  
+  ngOnInit(): void {}
  
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup) => {
@@ -65,7 +66,7 @@ this.signupForm = this.fb.group({
   }
  
   handleError(error: any): void {
-    if (error?.status) {
+    if (error && error.status) {
       if (error.status === 401) {
         this.errorMessage = 'User with this email already exists!!';
         this.router.navigate(['/register']);
