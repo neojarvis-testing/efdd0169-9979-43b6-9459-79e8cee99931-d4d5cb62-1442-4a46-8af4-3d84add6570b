@@ -9,32 +9,38 @@
     <div class="feedback-box">
       <h2>All Feedbacks</h2>
 
-      <div *ngIf="feedbacks.length === 0" class="no-data">
-        No data found
+      <div *ngIf="isLoading; else feedbackTable" class="loader-container">
+        <app-loader></app-loader>
       </div>
 
-      <div *ngIf="feedbacks.length > 0" class="table-container">
-        <table class="feedback-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Feedback Text</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let feedback of paginatedFeedbacks; let i = index">
-              <td>{{ feedback.user?.username }}</td>
-              <td>{{ feedback.feedbackText }}</td>
-              <td>
-                <button class="show-profile" (click)="showUserDetails(feedback)">
-                  Show Profile
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <ng-template #feedbackTable>
+        <div *ngIf="feedbacks.length === 0" class="no-data">
+          No data found
+        </div>
+
+        <div *ngIf="feedbacks.length > 0" class="table-container">
+          <table class="feedback-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Feedback Text</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let feedback of paginatedFeedbacks; let i = index">
+                <td>{{ feedback.user?.username }}</td>
+                <td>{{ feedback.feedbackText }}</td>
+                <td>
+                  <button class="show-profile" (click)="showUserDetails(feedback)">
+                    Show Profile
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
     </div>
   </div>
 

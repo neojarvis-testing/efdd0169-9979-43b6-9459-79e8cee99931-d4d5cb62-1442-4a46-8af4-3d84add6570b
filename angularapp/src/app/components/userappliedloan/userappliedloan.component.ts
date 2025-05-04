@@ -24,6 +24,7 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
+  isLoading: boolean = true;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -47,11 +48,17 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
           this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
           this.paginateLoans();
           this.noDataFound = data.length === 0;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         },
         error => {
           console.error('Error fetching loan applications', error);
           this.noDataFound = true;
           this.showToast('Failed to load loan applications');
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         }
       );
   }
