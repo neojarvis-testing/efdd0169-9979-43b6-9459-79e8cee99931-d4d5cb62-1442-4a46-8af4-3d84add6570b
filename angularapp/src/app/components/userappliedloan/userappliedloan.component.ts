@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class UserappliedloanComponent implements OnInit, OnDestroy {
   loans: LoanApplication[] = [];
   filteredLoans: LoanApplication[] = [];
+  paginatedLoans: LoanApplication[] = [];
   selectedLoan: LoanApplication | null = null;
   search: string = '';
   showDialog: boolean = false;
@@ -19,12 +20,17 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
   loanToDelete: number | null = null;
   noDataFound: boolean = false;
   toastMessage: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0;
+  pages: number[] = [];
+  isLoading: boolean = true;
  
-  private readonly unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
  
   constructor(
-    private readonly loanService: LoanService,
-    private readonly cdRef: ChangeDetectorRef
+    private loanService: LoanService,
+    private cdRef: ChangeDetectorRef
   ) {}
  
   ngOnInit(): void {
@@ -38,12 +44,19 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
         (data: LoanApplication[]) => {
           this.loans = data;
           this.filteredLoans = [...data];
+          this.updatePagination();
           this.noDataFound = data.length === 0;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         },
         error => {
           console.error('Error fetching loan applications', error);
           this.noDataFound = true;
           this.showToast('Failed to load loan applications');
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         }
       );
   }
@@ -54,18 +67,42 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
  
     if (!query) {
       this.filteredLoans = [...this.loans];
-      return;
+    } else {
+      this.filteredLoans = this.loans.filter(item =>
+        Object.keys(item).some(key => {
+          const value = item[key];
+          if (key === 'loan' && value) {
+            return value.loanType?.toLowerCase().includes(query);
+          }
+          return value?.toString().toLowerCase().includes(query);
+        })
+      );
     }
  
-    this.filteredLoans = this.loans.filter(item =>
-      Object.keys(item).some(key => {
-        const value = item[key];
-        if (key === 'loan' && value) {
-          return value.loanType?.toLowerCase().includes(query);
-        }
-        return value?.toString().toLowerCase().includes(query);
-      })
-    );
+    this.updatePagination();
+  }
+ 
+  // New method to centralize pagination logic
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    
+    // Reset to first page when filtering changes results
+    this.currentPage = 1;
+    this.paginateLoans();
+  }
+ 
+  paginateLoans(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedLoans = this.filteredLoans.slice(start, end);
+  }
+ 
+  changePage(page: number, event: Event): void {
+    event.preventDefault(); // Prevent the default anchor tag behavior
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.paginateLoans();
   }
  
   showDetails(loan: LoanApplication): void {
@@ -113,6 +150,12 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
       this.toastMessage = '';
       this.cdRef.detectChanges();
     }, 4000);
+  }
+ 
+  resetSearch(): void {
+    this.search = '';
+    this.filteredLoans = [...this.loans];
+    this.updatePagination();
   }
  
   ngOnDestroy(): void {

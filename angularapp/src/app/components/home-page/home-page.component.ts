@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,11 +6,12 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
 
-  constructor(public readonly authService:AuthService) { }
+  constructor(public authService:AuthService) { }
 
-
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(entries => {

@@ -13,7 +13,7 @@ export class LoanService {
   baseUrl:string=''
  
  
-  constructor(private readonly http:HttpClient) {
+  constructor(private http:HttpClient) {
     this.baseUrl=ApiUrl.apiUrl
     console.log('url:'+this.baseUrl)
   }

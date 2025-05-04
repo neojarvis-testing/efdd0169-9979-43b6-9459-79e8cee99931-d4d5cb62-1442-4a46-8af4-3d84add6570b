@@ -7,10 +7,6 @@ import com.examly.springapp.model.LoanApplicationDTO;
 
 public class LoanApplicationMappers {
 
-    private LoanApplicationMappers() {
-        throw new UnsupportedOperationException("Utility class");
-     }
-
     public static LoanApplicationDTO mapToLoanApplicationDTO(LoanApplication loanApplication) {
         LoanApplicationDTO loanDTO = new LoanApplicationDTO();
         loanDTO.setSubmissionDate(loanApplication.getSubmissionDate());

@@ -82,7 +82,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         if (user != null) {
             log.info("User found for email: {}", email);
-            return UserPrinciple.build(user);
+            UserDetails userDetails = UserPrinciple.build(user);
+            return userDetails;
         }
     
         log.warn("User not found for email: {}", email);

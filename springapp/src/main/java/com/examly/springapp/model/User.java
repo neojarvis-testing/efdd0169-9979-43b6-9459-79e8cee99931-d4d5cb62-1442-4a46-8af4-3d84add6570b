@@ -23,6 +23,4 @@ public class User {
     private String username;
     private String mobileNumber;
     private String userRole;
-
-    
 }

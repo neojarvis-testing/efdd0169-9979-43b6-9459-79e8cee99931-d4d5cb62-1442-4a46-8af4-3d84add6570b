@@ -29,7 +29,7 @@ export class AuthService {
   username: string = '';
   userRole: string = '';
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.baseUrl = ApiUrl.apiUrl;
   }
 
@@ -81,7 +81,7 @@ export class AuthService {
 
   isUserLoggedIn(): boolean {
     let user = sessionStorage.getItem(AUTHENTICATED_EMAIL);
-    return user != null;
+    return !(user == null);
   }
 
   logout(): void {
