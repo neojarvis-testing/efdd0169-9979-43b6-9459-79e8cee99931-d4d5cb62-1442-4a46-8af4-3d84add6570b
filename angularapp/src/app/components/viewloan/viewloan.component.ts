@@ -5,14 +5,12 @@ import { of, Subject } from 'rxjs';
 import { Loan } from 'src/app/models/loan.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoanService } from 'src/app/services/loan.service';
- 
 @Component({
   selector: 'app-viewloan',
   templateUrl: './viewloan.component.html',
   styleUrls: ['./viewloan.component.css']
 })
 export class ViewloanComponent implements OnInit, OnDestroy {
- 
   loans: Loan[] = [];
   filteredLoans: Loan[] = [];
   paginatedLoans: Loan[] = [];
@@ -24,16 +22,12 @@ export class ViewloanComponent implements OnInit, OnDestroy {
   totalPages: number = 0;
   pages: number[] = [];
   isLoading: boolean = true;
- 
   private unsubscribe$ = new Subject<void>();
- 
   constructor(private loanService: LoanService, private authService: AuthService, private router: Router) {}
- 
   ngOnInit(): void {
     this.getAllLoans();
     this.checkUserRole();
   }
- 
   getAllLoans(): void {
     this.loanService.getAllLoans()
       .pipe(
@@ -47,43 +41,40 @@ export class ViewloanComponent implements OnInit, OnDestroy {
       .subscribe((data: Loan[]) => {
 this.loans = data;
         this.filteredLoans = data;
-        this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
-        this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-        this.paginateLoans();
+        this.updatePagination();
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
       });
   }
- 
   filterLoans(): void {
 this.filteredLoans = this.loans.filter(loan =>
       loan.loanType.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+  
+  updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    this.currentPage = 1;
     this.paginateLoans();
   }
- 
   paginateLoans(): void {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedLoans = this.filteredLoans.slice(start, end);
   }
- 
   changePage(page: number, event: Event): void {
     event.preventDefault();
     if (page < 1 || page > this.totalPages) return;
     this.currentPage = page;
     this.paginateLoans();
   }
- 
   checkUserRole(): void {
     const userRole = this.authService.getUserRole();
     this.isAdmin = userRole === 'ADMIN';
   }
- 
   deleteLoan(id: number): void {
     const confirmed = window.confirm('Are you sure you want to delete?');
     if (confirmed) {
@@ -97,21 +88,18 @@ this.filteredLoans = this.loans.filter(loan =>
         });
     }
   }
- 
   applyLoan(loanId: number): void {
     console.log(`Applying for loan with ID: ${loanId}`);
     this.router.navigate(['/loanform', loanId]);
   }
- 
   editLoan(loanId: number): void {
     this.router.navigate(['/addloan', loanId]);
   }
- 
   resetSearch(): void {
     this.searchTerm = '';
     this.filterLoans();
   }
- 
+  
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

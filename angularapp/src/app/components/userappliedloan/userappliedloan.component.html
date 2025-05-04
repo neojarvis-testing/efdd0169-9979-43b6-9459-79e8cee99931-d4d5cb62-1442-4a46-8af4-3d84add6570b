@@ -2,23 +2,23 @@
   <header>
     <h2>Applied Loans</h2>
   </header>
-
+ 
   <div class="search-section">
     <div class="search-container">
       <input id="search-focus" type="search" placeholder="Search by Loan Name" [(ngModel)]="search" (input)="onSearch($event)" />
     </div>
   </div>
-
+ 
   <div *ngIf="isLoading; else loanTable" class="loader-container">
     <app-loader></app-loader>
   </div>
-
+ 
   <ng-template #loanTable>
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="filteredLoans.length > 0">
       <table>
         <thead>
           <tr>
-            <th>No</th>
+            <th>No.</th>
             <th>Loan Name</th>
             <th>Submission Date</th>
             <th>Status</th>
@@ -41,14 +41,14 @@
         </tbody>
       </table>
     </div>
-
-    <!-- Pagination -->
-    <nav aria-label="Page navigation">
+ 
+    <!-- Pagination - Only show when we have results -->
+    <nav aria-label="Page navigation" *ngIf="filteredLoans.length > 0">
       <ul class="pagination">
         <li class="page-item" [class.disabled]="currentPage === 1">
           <a class="page-link" href="#" (click)="changePage(currentPage - 1, $event)">Previous</a>
         </li>
-        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <li class="page-item" *ngFor="let page of pages" class.active]="page === currentPage">
           <a class="page-link" href="#" (click)="changePage(page, $event)">{{ page }}</a>
         </li>
         <li class="page-item" [class.disabled]="currentPage === totalPages">
@@ -56,14 +56,14 @@
         </li>
       </ul>
     </nav>
-
+ 
     <!-- Empty state (shown when no results) -->
     <div class="empty-state" *ngIf="filteredLoans.length === 0">
       <h3>No loans found</h3>
       <p>Try changing your search criteria or check back later for new loan options.</p>
       <button class="reset-btn" (click)="resetSearch()">Reset Search</button>
     </div>
-
+ 
     <!-- Loan Details Dialog -->
     <div class="dialog-overlay" *ngIf="showDialog">
       <div class="dialog-box animate__animated animate__zoomIn">
@@ -77,7 +77,7 @@
         <button class="btn btn-primary mt-3" (click)="onDialogConfirm()">Ok</button>
       </div>
     </div>
-
+ 
     <!-- Confirmation Modal -->
     <div class="dialog-overlay" *ngIf="showDeletePopup">
       <div class="dialog-box animate__animated animate__fadeInDown">
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- Toast Notification -->
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
       <div class="toast custom-toast fade show" *ngIf="toastMessage">

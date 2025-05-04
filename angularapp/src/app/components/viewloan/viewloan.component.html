@@ -2,19 +2,19 @@
   <header>
     <h2>Loans Details</h2>
   </header>
-
+ 
   <div class="search-section">
     <div class="search-container">
       <input id="search-focus" type="search" placeholder="Search by Loan Type" [(ngModel)]="searchTerm" (input)="filterLoans()" />
     </div>
   </div>
-
+ 
   <div *ngIf="isLoading; else loanTable" class="loader-container">
     <app-loader></app-loader>
   </div>
-
+ 
   <ng-template #loanTable>
-    <div class="table-responsive">
+    <div *ngIf="filteredLoans.length > 0" class="table-responsive">
       <table>
         <thead>
           <tr>
@@ -50,8 +50,9 @@
         </tbody>
       </table>
     </div>
-
-    <nav aria-label="Page navigation">
+ 
+    <!-- Only show pagination if there are loans -->
+    <nav *ngIf="filteredLoans.length > 0" aria-label="Page navigation">
       <ul class="pagination">
         <li class="page-item" [class.disabled]="currentPage === 1">
           <a class="page-link" href="#" (click)="changePage(currentPage - 1, $event)">Previous</a>
@@ -64,7 +65,7 @@
         </li>
       </ul>
     </nav>
-
+ 
     <div class="empty-state" *ngIf="filteredLoans.length === 0">
       <h3>No loans found</h3>
       <p>Try changing your search criteria or check back later for new loan options.</p>
