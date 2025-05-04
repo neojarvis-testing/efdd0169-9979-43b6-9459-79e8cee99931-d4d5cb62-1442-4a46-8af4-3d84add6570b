@@ -1,31 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-:host {
+/* :host {
   display: block;
-  background-color: #e8f5e9; 
+  background-color: #F4FFFD;
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
+  color: #011936;
+} */
+
+:host {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  color: #011936;
+  position: relative;
+  z-index: 0;
 }
+
+/* Blurred Background Image */
+:host::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/background-image-1.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px 10px; 
+  padding: 20px 10px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 header {
-  background: linear-gradient(to right, #2e7d32, #66bb6a);
-  color: white;
+  background-color: #011936;
+  color: #F4FFFD;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
+  color: #F4FFFD;
 }
 
 .search-section {
@@ -42,18 +79,18 @@ h2 {
 .search-container input {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #4caf50;
+  border: 2px solid #465362;
   border-radius: 8px;
-  background-color: white;
+  background-color: #FFFFFF;
   font-size: 1rem;
   transition: all 0.3s ease;
-  color: #333;
+  color: #011936;
 }
 
 .search-container input:focus {
   outline: none;
-  border-color: #2e7d32;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+  border-color: #5BC0BE; /* Teal Accent */
+  box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.3);
 }
 
 .search-container input::placeholder {
@@ -62,10 +99,10 @@ h2 {
 
 .table-responsive {
   overflow-x: auto;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #FFFFFF;
   border-radius: 10px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 table {
@@ -76,24 +113,37 @@ table {
 }
 
 thead {
-  background-color: #2e7d32;
-  color: white;
+  background-color: #011936;
+  color: #F4FFFD;
 }
 
 th, td {
   padding: 14px 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #E0E0E0;
   font-size: 0.95rem;
 }
 
-th {
-  font-weight: 600;
+.role-label {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+  color: #000000;
+}
+
+.role-admin {
+  background-color: #FFEE58; /* Soft Yellow */
+}
+
+.role-user {
+  background-color: #81C784; /* Soft Green */
 }
 
 tbody tr:hover {
-  background-color: #e0f2f1;
+  background-color: #E8F0F7;
+  transition: background-color 0.3s ease;
 }
 
 .action-btns {
@@ -112,46 +162,45 @@ tbody tr:hover {
 }
 
 .edit-btn {
-  background-color: #4dabf5;
+  background-color: #5BC0BE; /* Teal */
 }
 
 .edit-btn:hover {
-  background-color: #1976d2;
+  background-color: #379a98;
 }
 
 .delete-btn {
-  background-color: #e53935;
+  background-color: #E53935;
 }
 
 .delete-btn:hover {
-  background-color: #c62828;
+  background-color: #C62828;
 }
 
 .apply-btn, .reset-btn {
-  background-color: #43a047;
+  background-color: #4682B4; /* Leaf Green */
 }
 
 .apply-btn:hover, .reset-btn:hover {
-  background-color: #2e7d32;
+  background-color: #356a94;
 }
-
 
 .empty-state {
   text-align: center;
   padding: 40px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .empty-state h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #1b5e20;
+  color: #011936;
 }
 
 .empty-state p {
-  color: #777;
+  color: #666;
   margin-bottom: 20px;
 }
 
