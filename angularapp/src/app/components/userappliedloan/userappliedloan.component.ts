@@ -3,7 +3,7 @@ import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
+ 
 @Component({
   selector: 'app-userappliedloan',
   templateUrl: './userappliedloan.component.html',
@@ -24,18 +24,19 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
-
+  isLoading: boolean = true;
+ 
   private unsubscribe$ = new Subject<void>();
-
+ 
   constructor(
     private loanService: LoanService,
     private cdRef: ChangeDetectorRef
   ) {}
-
+ 
   ngOnInit(): void {
     this.loadLoans();
   }
-
+ 
   loadLoans(): void {
     this.loanService.getAllLoanApplications()
       .pipe(takeUntil(this.unsubscribe$))
@@ -43,23 +44,27 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
         (data: LoanApplication[]) => {
           this.loans = data;
           this.filteredLoans = [...data];
-          this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
-          this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-          this.paginateLoans();
+          this.updatePagination();
           this.noDataFound = data.length === 0;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         },
         error => {
           console.error('Error fetching loan applications', error);
           this.noDataFound = true;
           this.showToast('Failed to load loan applications');
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         }
       );
   }
-
+ 
   onSearch(event: any): void {
     const query = event.target.value.toLowerCase();
     this.search = query;
-
+ 
     if (!query) {
       this.filteredLoans = [...this.loans];
     } else {
@@ -73,41 +78,48 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
         })
       );
     }
-
+ 
+    this.updatePagination();
+  }
+ 
+  // New method to centralize pagination logic
+  updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    
+    // Reset to first page when filtering changes results
     this.currentPage = 1;
     this.paginateLoans();
   }
-
+ 
   paginateLoans(): void {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedLoans = this.filteredLoans.slice(start, end);
   }
-
+ 
   changePage(page: number, event: Event): void {
     event.preventDefault(); // Prevent the default anchor tag behavior
     if (page < 1 || page > this.totalPages) return;
     this.currentPage = page;
     this.paginateLoans();
   }
-
+ 
   showDetails(loan: LoanApplication): void {
     this.selectedLoan = loan;
     this.showDialog = true;
   }
-
+ 
   onDialogConfirm(): void {
     this.showDialog = false;
     this.selectedLoan = null;
   }
-
+ 
   confirmDelete(loanId: number): void {
     this.loanToDelete = loanId;
     this.showDeletePopup = true;
   }
-
+ 
   deleteLoanApplication(): void {
     if (this.loanToDelete !== null) {
       this.loanService.deleteLoanApplication(this.loanToDelete)
@@ -125,12 +137,12 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
         );
     }
   }
-
+ 
   closeDeletePopup(): void {
     this.showDeletePopup = false;
     this.loanToDelete = null;
   }
-
+ 
   showToast(message: string): void {
     this.toastMessage = message;
     this.cdRef.detectChanges();
@@ -139,9 +151,16 @@ export class UserappliedloanComponent implements OnInit, OnDestroy {
       this.cdRef.detectChanges();
     }, 4000);
   }
-
+ 
+  resetSearch(): void {
+    this.search = '';
+    this.filteredLoans = [...this.loans];
+    this.updatePagination();
+  }
+ 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 }
+ 

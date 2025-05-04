@@ -25,6 +25,7 @@ export class UserviewfeedbackComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
+  isLoading: boolean = true;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -50,10 +51,16 @@ export class UserviewfeedbackComponent implements OnInit, OnDestroy {
           this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
           this.paginateFeedback();
           this.errorMessage = '';
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         },
         (error) => {
           this.errorMessage = 'Failed to load feedback.';
           this.showToast(this.errorMessage);
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         }
       );
   }

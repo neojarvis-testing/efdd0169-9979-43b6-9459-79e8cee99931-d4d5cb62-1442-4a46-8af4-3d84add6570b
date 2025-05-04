@@ -1,9 +1,47 @@
-.home-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* General Reset for Scroll-Triggered Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
 }
 
+.scroll-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(135deg, #000000, #001f3d); /* Deep Navy + Black Gradient */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px;
+    color: #F4F4F9 !important; /* White shade for text */
+    opacity: 0.9; /* Slight transparency */
+}
+
+.navbar a,
+.navbar .nav-link {
+    color: #F4F4F9 !important; /* Text color in white shade */
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-item.active .nav-link {
+    color: #f1f1f1 !important; /* Slightly lighter shade on hover */
+}
+
+.navbar-brand {
+    color: #F4F4F9 !important; /* Text color for brand */
+}
+
+.navbar-toggler-icon {
+    background-color: #F4F4F9 !important; /* Toggler icon color */
+}
+
+/* Hero Section */
 .hero {
-    background: url('/assets/images/background.webp') center center/cover no-repeat;
+    background: url('/assets/images/Homepage.jpg') center center/cover no-repeat;
     height: 100vh;
     color: white;
     padding: 0 20px;
@@ -26,6 +64,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Feature Cards */
 .features .feature-icon {
     font-size: 48px;
     margin-bottom: 20px;
@@ -47,6 +86,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Step Section */
 .step {
     background: white;
     padding: 30px;
@@ -74,6 +114,7 @@
     margin-bottom: 15px;
 }
 
+/* Testimonial Cards */
 .testimonial-card {
     background-color: rgba(255, 255, 255, 0.05);
     padding: 25px;
@@ -86,6 +127,7 @@
     transform: translateY(-5px);
 }
 
+/* Call To Action */
 .cta {
     background-color: #00695c;
 }
