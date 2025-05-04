@@ -4,6 +4,7 @@ import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-requestedloan',
@@ -24,6 +25,8 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
+  isLoading: boolean = true;
+
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -46,10 +49,12 @@ export class RequestedloanComponent implements OnInit, OnDestroy {
           this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
           this.paginateLoans();
           this.noDataFound = this.loans.length === 0;
+          this.isLoading = false;
         },
         error => {
           console.error('Error fetching loan applications', error);
           this.noDataFound = true;
+          this.isLoading = false;
         }
       );
   }
