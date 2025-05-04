@@ -1,61 +1,99 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :host {
   display: block;
-  background-color: #e8f5e9;
+  background-color: #F4FFFD;
   font-family: 'Poppins', sans-serif;
   padding: 20px 10px;
+  position: relative;
+  z-index: 0;
+}
+
+/* Optional blurred background image */
+:host::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/background-image-1.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.5;
+  z-index: -1;
 }
 
 .loan-form-wrapper {
-  background-color: #f1f8e9;
   min-height: 100vh;
+  padding: 20px;
 }
 
 .card {
-  border: none;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #f0f4f8; /* Soft blueish background */
+  border-radius: 12px;
+  border: 2px solid #001f3d; /* Deep blue border */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 20px;
 }
 
 .card-header {
-  background: linear-gradient(to right, #2e7d32, #66bb6a) !important;
-  color: white !important;
-  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: #001f3d !important; /* Deep navy blue */
+  color: #ffffff !important;
+  /* border-radius: 12px 12px 0 0; */
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-label {
   font-weight: 500;
-  color: #2e7d32;
+  color: #001f3d;
+}
+
+.form-control {
+  background-color: #ffffff;
+  border: 2px solid #465362;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  color: #011936;
 }
 
 .form-control:focus {
-  border-color: #66bb6a;
-  box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.25);
+  outline: none;
+  border-color: #5BC0BE;
+  box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.3);
 }
 
 .invalid-feedback {
   font-size: 0.85rem;
+  color: #e53935;
 }
 
 .toast-container {
-    animation: fadeInDown 0.5s ease-in-out;
+  animation: fadeInDown 0.5s ease-in-out;
+}
+
+.custom-toast {
+  background-color: #011936;
+  color: #F4FFFD;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  padding: 12px 16px;
+  font-size: 0.95rem;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-   
-  .custom-toast {
-    background-color: #333;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-   
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
