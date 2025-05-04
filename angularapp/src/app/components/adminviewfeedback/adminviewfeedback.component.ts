@@ -32,6 +32,7 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
+  isLoading: boolean = true;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -55,10 +56,12 @@ export class AdminviewfeedbackComponent implements OnInit, OnDestroy {
           this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
           this.paginateFeedbacks();
           console.log('Feedbacks fetched successfully:', this.feedbacks);
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error fetching feedbacks:', error);
           this.feedbacks = [];
+          this.isLoading = false;
         }
       );
   }
