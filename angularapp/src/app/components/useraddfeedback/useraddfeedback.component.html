@@ -1,29 +1,40 @@
-<div class="container mt-4">
-  <h2>Add Feedback</h2>
-  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" novalidate>
-    <div class="mb-3">
-      <label for="feedbackText" class="form-label">Feedback:</label>
-      <textarea
-        id="feedbackText"
-        formControlName="feedbackText"
-        placeholder="Write your feedback here..."
-        class="form-control"
-        rows="4"
-        (input)="updateWordCount()"
-        [ngClass]="{ 'is-invalid': feedbackForm.controls['feedbackText'].invalid && feedbackForm.controls['feedbackText'].touched }"
-      ></textarea>
-      <div class="invalid-feedback" *ngIf="feedbackForm.controls['feedbackText'].invalid && feedbackForm.controls['feedbackText'].touched">
-        Feedback is required
-      </div>
-      <div class="word-count">
-        {{ wordCount }}/500
-      </div>
-      <div class="text-danger" *ngIf="wordCount > 500">
-        Word limit exceeded! Please reduce your feedback to 500 words or less.
+<div class="feedback-form-wrapper">
+  <div class="container">
+    <header>
+      <h2>Submit Feedback</h2>
+    </header>
+
+    <div class="glass-card shadow rounded">
+      <div class="card-body">
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="mb-3 form-group">
+            <label for="feedbackText" class="form-label">Your Feedback:</label>
+            <textarea
+              id="feedbackText"
+              formControlName="feedbackText"
+              placeholder="Write your feedback here..."
+              class="form-control"
+              rows="4"
+              (input)="updateWordCount()"
+            ></textarea>
+            <div class="invalid-feedback" *ngIf="feedbackForm.controls['feedbackText'].invalid && feedbackForm.controls['feedbackText'].touched">
+              Feedback is required.
+            </div>
+            <div class="word-count">
+              {{ wordCount }}/500
+            </div>
+            <div class="text-danger" *ngIf="wordCount > 500">
+              Word limit exceeded! Please reduce your feedback to 500 words or less.
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid || wordCount > 500">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid || wordCount > 500">Submit</button>
-  </form>
+  </div>
 </div>
 
 <!-- Toast Notification -->

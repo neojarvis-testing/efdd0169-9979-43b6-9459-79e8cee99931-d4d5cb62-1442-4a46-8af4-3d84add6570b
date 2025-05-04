@@ -1,84 +1,85 @@
-<div class="container">
-  <h2>My Feedback</h2>
-  <hr>
+<div class="feedback-container">
+  <div class="container">
+    <header>
+      <h2>My Feedback</h2>
+    </header>
 
-  <div class="error-message" *ngIf="errorMessage">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="isLoading; else feedbackTable" class="loader-container">
-    <app-loader></app-loader>
-  </div>
-
-  <ng-template #feedbackTable>
-    <div class="feedback-table-container" *ngIf="feedbackList.length > 0">
-      <table border="2">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Feedback</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let feedback of paginatedFeedback; let i = index">
-            <td>{{ i + 1 + (currentPage - 1) * itemsPerPage }}</td>
-            <td>{{ feedback.feedbackText }}</td>
-            <td>
-              <button (click)="confirmDelete(feedback.feedbackId)" class="delete-button">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
     </div>
 
-    <!-- Pagination -->
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" href="#" (click)="changePage(currentPage - 1, $event)">Previous</a>
-        </li>
-        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
-          <a class="page-link" href="#" (click)="changePage(page, $event)">{{ page }}</a>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" href="#" (click)="changePage(currentPage + 1, $event)">Next</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="no-feedback-message" *ngIf="feedbackList.length === 0">
-      No feedback found.
+    <div *ngIf="isLoading; else feedbackTable" class="loader-container">
+      <app-loader></app-loader>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
-      <div class="toast custom-toast fade show" *ngIf="toastMessage">
-        <div class="d-flex">
-          <div class="toast-body">{{ toastMessage }}</div>
-          <button class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
-        </div>
+    <ng-template #feedbackTable>
+      <div class="glass-card table-container" *ngIf="feedbackList.length > 0">
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Feedback</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of paginatedFeedback; let i = index">
+              <td>{{ i + 1 + (currentPage - 1) * itemsPerPage }}</td>
+              <td>{{ feedback.feedbackText }}</td>
+              <td>
+                <button (click)="confirmDelete(feedback.feedbackId)" class="delete-btn">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
 
-    <!-- Confirmation Modal -->
-    <div class="modal fade show d-block" *ngIf="confirmationModalVisible" tabindex="-1" style="background: rgba(0, 0, 0, 0.4); z-index: 1050;">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content animate__animated animate__fadeInDown">
-          <div class="modal-header">
-            <h5 class="modal-title">Confirm Action</h5>
-          </div>
-          <div class="modal-body">
-            <p>{{ confirmationMessage }}</p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" (click)="onCancelConfirmation()">Cancel</button>
-            <button class="btn btn-danger" (click)="onConfirmAction()">Confirm</button>
+      <!-- Pagination -->
+      <nav *ngIf="feedbackList.length > 0" aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" href="#" (click)="changePage(currentPage - 1, $event)">Previous</a>
+          </li>
+          <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+            <a class="page-link" href="#" (click)="changePage(page, $event)">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" href="#" (click)="changePage(currentPage + 1, $event)">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="no-feedback-message" *ngIf="feedbackList.length === 0">
+        No feedback found.
+      </div>
+
+      <!-- Toast Notification -->
+      <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast custom-toast fade show" *ngIf="toastMessage">
+          <div class="d-flex">
+            <div class="toast-body">{{ toastMessage }}</div>
+            <button class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
           </div>
         </div>
       </div>
-    </div>
-  </ng-template>
+
+      <!-- Confirmation Modal -->
+      <div class="modal fade show d-block" *ngIf="confirmationModalVisible" style="background: rgba(0, 0, 0, 0.4);">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content animate__animated animate__fadeInDown">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirm Action</h5>
+            </div>
+            <div class="modal-body">
+              <p>{{ confirmationMessage }}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" (click)="onCancelConfirmation()">Cancel</button>
+              <button class="btn btn-danger" (click)="onConfirmAction()">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>
