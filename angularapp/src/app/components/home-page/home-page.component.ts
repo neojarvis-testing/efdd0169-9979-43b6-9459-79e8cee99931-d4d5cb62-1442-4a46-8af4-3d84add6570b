@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,20 +9,26 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(public authService:AuthService) { }
+  constructor(public authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    this.addScrollAnimations();
   }
 
-  ngAfterViewInit(): void {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
+  // Add scroll animations when sections come into view
+  addScrollAnimations(): void {
+    const sections = document.querySelectorAll('.features-section, .stats-section, .testimonials-section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add('visible');
         }
       });
     });
-   
-    document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+  }
+
+  applyBtn(){
+    this.router.navigate(['/login'])
   }
 }

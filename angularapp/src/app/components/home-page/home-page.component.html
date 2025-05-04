@@ -1,101 +1,118 @@
-<div class="home-container">
-    <!-- Hero Section -->
-    <section class="hero d-flex align-items-center justify-content-center text-center">
-        <div class="hero-content animate__animated animate__backInDown">
-            <div class="hero-text-wrapper">
-                <h1 class="display-4" style="color: #f1f1f1;">Empowering Farmers, One Loan at a Time</h1>
-                <p class="lead" style="color: #f1f1f1;">Your gateway to fast and secure agricultural support.</p>
-            </div>
-            <a routerLink="/register"
-                class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite animate__delay-2s" 
-                *ngIf="!authService.isUserLoggedIn()">Get Started</a>
+<div class="homepage-container">
+    <!-- Top Section: Heading + Carousel -->
+    <div class="top-section d-flex flex-wrap align-items-center justify-content-between">
+      <!-- Left Heading -->
+      <div class="text-section p-5">
+        <h1 class="main-heading">Welcome to <span>FarmAid</span></h1>
+        <p class="sub-text">Empowering farmers with accessible and transparent loans.</p>
+        <button *ngIf="!authService.isUserLoggedIn()" class="cta-button" (click)="applyBtn()">Apply Now</button>
+      </div>
+  
+      <!-- Right Carousel -->
+      <div id="carouselExampleIndicators" class="carousel slide carousel-container" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/images/background.webp" class="d-block w-100" alt="Farm Image 1" />
+          </div>
+          <div class="carousel-item">
+            <img src="assets/images/Homepage.jpg" class="d-block w-100" alt="Farm Image 2" />
+          </div>
+          <div class="carousel-item">
+            <img src="assets/images/background-image-1.jpg" class="d-block w-100" alt="Farm Image 3" />
+          </div>
         </div>
-    </section>
-
+      </div>
+    </div>
+  
     <!-- Features Section -->
-    <section class="features container py-5 scroll-animate">
-        <h2 class="text-center mb-5" style="color: #f1f1f1;">Why Choose Farm Aid?</h2>
-        <div class="row text-center">
-            <div class="col-md-4 feature-card">
-                <i class="bi bi-cash-coin feature-icon text-primary"></i>
-                <h4 style="color: #f1f1f1;">Quick Loan Approvals</h4>
-                <p>Speedy, hassle-free loan approval system designed for you.</p>
+    <section class="features-section py-5">
+      <div class="container text-center">
+        <h2 class="section-title mb-4">Why Choose FarmAid?</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="feature-card p-4">
+              <h4>Fast Approval</h4>
+              <p>No hassle, no delays. Get your loan processed quickly.</p>
             </div>
-            <div class="col-md-4 feature-card">
-                <i class="bi bi-bar-chart-steps feature-icon text-warning"></i>
-                <h4 style="color: #f1f1f1;">Track Progress</h4>
-                <p>Real-time updates and transparency throughout the process.</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="feature-card p-4">
+              <h4>Low Interest</h4>
+              <p>Special loan rates crafted for rural and agricultural needs.</p>
             </div>
-            <div class="col-md-4 feature-card">
-                <i class="bi bi-person-check feature-icon text-danger"></i>
-                <h4 style="color: #f1f1f1;">User First Approach</h4>
-                <p>Accessible interface built with the farmer's needs in mind.</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="feature-card p-4">
+              <h4>Farmer-Centric</h4>
+              <p>Tailored services designed specifically for farmers and their family.</p>
             </div>
+          </div>
         </div>
+      </div>
     </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works bg-light py-5 scroll-animate">
-        <div class="container">
-            <h2 class="text-center mb-5" style="color: #f1f1f1;">How It Works</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="step">
-                        <span class="step-number">1</span>
-                        <h5 style="color: #f1f1f1;">Create Account</h5>
-                        <p>Sign up and verify your profile to begin your loan journey.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="step">
-                        <span class="step-number">2</span>
-                        <h5 style="color: #f1f1f1;">Apply Easily</h5>
-                        <p>Submit your loan request with just a few clicks and docs.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="step">
-                        <span class="step-number">3</span>
-                        <h5 style="color: #f1f1f1;">Approval & Growth</h5>
-                        <p>Get notified, receive funds, and cultivate your farm with ease.</p>
-                    </div>
-                </div>
+  
+    <!-- Stats Section -->
+    <section class="stats-section py-5">
+      <div class="container text-center">
+        <h2 class="section-title mb-5">Our Impact</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="stat-card p-4">
+              <h3>5000+</h3>
+              <p>Farmers Helped</p>
             </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="stat-card p-4">
+              <h3>₹50 Crores</h3>
+              <p>Loans Disbursed</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="stat-card p-4">
+              <h3>98%</h3>
+              <p>Loan Repayment Rate</p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-
+  
     <!-- Testimonials Section -->
-    <section class="testimonials py-5 text-center bg-secondary text-white scroll-animate">
-        <div class="container">
-            <h2 class="mb-5">What Farmers Say</h2>
-            <div class="row">
-                <div class="col-md-4 testimonial-card">
-                    <blockquote class="blockquote">
-                        <p>"Farm Aid turned my small idea into a profitable business!"</p>
-                        <footer class="blockquote-footer text-white">Ramesh Kumar</footer>
-                    </blockquote>
-                </div>
-                <div class="col-md-4 testimonial-card">
-                    <blockquote class="blockquote">
-                        <p>"I never thought loans could be this easy and fast."</p>
-                        <footer class="blockquote-footer text-white">Sita Devi</footer>
-                    </blockquote>
-                </div>
-                <div class="col-md-4 testimonial-card">
-                    <blockquote class="blockquote">
-                        <p>"Everything was online. I didn’t have to step out of my village."</p>
-                        <footer class="blockquote-footer text-white">Mukesh Lal</footer>
-                    </blockquote>
-                </div>
+    <section class="testimonials-section py-5">
+      <div class="container text-center">
+        <h2 class="section-title mb-5">What Our Users Say</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="testimonial-card p-4">
+              <p>"FarmAid helped me get a loan in just 2 days. Super easy!"</p>
+              <h5>- Ramesh Kumar, Bihar</h5>
             </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="testimonial-card p-4">
+              <p>"Thanks to FarmAid, I expanded my farm without financial stress."</p>
+              <h5>- Sita Devi, Jharkhand</h5>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="testimonial-card p-4">
+              <p>"User-friendly platform and genuine support for farmers."</p>
+              <h5>- Harish Patel, MP</h5>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-
-    <!-- Call To Action -->
-    <section class="cta py-5 text-center text-white scroll-animate" style="background-color: #004d40">
-        <h2 class="mb-3">Are You Ready?</h2>
-        <p>Let us help you secure your future and grow your dream farm.</p>
-        <a routerLink="/register" class="btn btn-warning btn-lg animate__animated animate__bounceInUp" 
-           *ngIf="!authService.isUserLoggedIn()">Join Now</a>
-    </section>
-</div>
+  
+    <!-- Footer Section -->
+    <footer class="footer py-4 text-center">
+      <p>&copy; 2025 FarmAid | All Rights Reserved</p>
+      <p>Follow Us: 
+        <a routerLink="/home" class="social-link">Facebook</a> | 
+        <a routerLink="/home" class="social-link">Twitter</a> | 
+        <a routerLink="/home" class="social-link">Instagram</a>
+      </p>
+    </footer>
+  </div>
+  

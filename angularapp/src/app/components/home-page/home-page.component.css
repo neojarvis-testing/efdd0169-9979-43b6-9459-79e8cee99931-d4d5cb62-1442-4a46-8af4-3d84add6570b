@@ -1,145 +1,174 @@
-/* General Reset for Scroll-Triggered Animations */
-.scroll-animate {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s ease;
-}
 
-.scroll-animate.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Navbar Styling */
-.navbar {
-    background: linear-gradient(135deg, #000000, #001f3d); /* Deep Navy + Black Gradient */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px;
-    color: #F4F4F9 !important; /* White shade for text */
-    opacity: 0.9; /* Slight transparency */
-}
-
-.navbar a,
-.navbar .nav-link {
-    color: #F4F4F9 !important; /* Text color in white shade */
-}
-
-.navbar .nav-link:hover,
-.navbar .nav-item.active .nav-link {
-    color: #f1f1f1 !important; /* Slightly lighter shade on hover */
-}
-
-.navbar-brand {
-    color: #F4F4F9 !important; /* Text color for brand */
-}
-
-.navbar-toggler-icon {
-    background-color: #F4F4F9 !important; /* Toggler icon color */
-}
-
-/* Hero Section */
-.hero {
-    background: url('/assets/images/Homepage.jpg') center center/cover no-repeat;
-    height: 100vh;
-    color: white;
-    padding: 0 20px;
+.homepage-container {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4fffd;
+    color: #011936;
+  }
+  
+  /* === TOP SECTION === */
+  .top-section {
+    background: rgba(244, 255, 253, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 20px 20px;
+    padding: 3rem 2rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 1px 1px 4px black;
-}
-
-.hero-content {
-    max-width: 700px;
-    text-align: center;
-}
-
-.hero-text-wrapper {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Feature Cards */
-.features .feature-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.feature-card {
-    background: #f8f9fa;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    margin-bottom: 20px;
-}
-
-.feature-card:hover {
-    background: #e0f7fa;
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Step Section */
-.step {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.step:hover {
-    transform: translateY(-10px) scale(1.03);
-    background-color: #f1f8e9;
-}
-
-.step-number {
-    display: inline-block;
-    background: #2196f3;
-    color: white;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 50%;
+    flex-wrap: wrap;
+  }
+  
+  .text-section {
+    flex: 1 1 45%;
+  }
+  
+  .main-heading {
+    font-size: 3rem;
     font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-/* Testimonial Cards */
-.testimonial-card {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 25px;
+  }
+  
+  .main-heading span {
+    color: #465362;
+  }
+  
+  .sub-text {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  .cta-button {
+    margin-top: 1.5rem;
+    background-color: #465362;
+    color: #f4fffd;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #000;
+    transform: scale(1.05);
+  }
+  
+  .carousel-container {
+    flex: 1 1 50%;
+    max-width: 800px;
     border-radius: 12px;
-    transition: background-color 0.3s ease;
-}
-
-.testimonial-card:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-5px);
-}
-
-/* Call To Action */
-.cta {
-    background-color: #00695c;
-}
-
-/* Scroll-triggered animation */
-.scroll-animate {
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  
+  .carousel-container img {
+    height: 500px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 12px;
+  }
+  
+  /* === FEATURES === */
+  .features-section {
+    background-color: #011936;
+    color: #f4fffd;
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s ease;
-}
-
-.scroll-animate.active {
+    transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  
+  .features-section.visible {
     opacity: 1;
     transform: translateY(0);
-}
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+  
+  .feature-card {
+    background-color: #465362;
+    border-radius: 12px;
+    color: #f4fffd;
+    transition: transform 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  /* === STATS === */
+  .stats-section {
+    background-color: #f4fffd;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  
+  .stats-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .stat-card {
+    background-color: #465362;
+    color: #f4fffd;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-card h3 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .stat-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* === TESTIMONIALS === */
+  .testimonials-section {
+    background-color: #f4fffd;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  
+  .testimonials-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .testimonial-card {
+    background-color: #e9f5f2;
+    border-left: 4px solid #011936;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .testimonial-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .testimonial-card h5 {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #011936;
+  }
+  
+  /* === FOOTER === */
+  .footer {
+    background-color: #011936;
+    color: #f4fffd;
+    font-size: 1rem;
+  }
+  
+  .social-link {
+    color: #f4fffd;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .social-link:hover {
+    color: #465362;
+  }
+  
