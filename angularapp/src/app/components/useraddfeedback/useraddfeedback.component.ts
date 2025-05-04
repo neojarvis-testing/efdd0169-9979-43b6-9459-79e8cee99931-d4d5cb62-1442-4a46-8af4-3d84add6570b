@@ -39,7 +39,7 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.feedbackForm.invalid || this.wordCount > 1000) return;
+    if (this.feedbackForm.invalid || this.wordCount > 500) return;
 
     const feedback: Feedback = {
       feedbackId: undefined,
@@ -54,7 +54,7 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
         () => {
           this.feedbackForm.reset();
           this.showToast('Feedback successfully submitted!');
-          setTimeout(() => this.router.navigate(['/userviewfeedback', this.userId]), 1000);
+          setTimeout(() => this.router.navigate(['/userviewfeedback', this.userId]), 500);
         },
         error => {
           console.error('Error adding feedback:', error);
@@ -66,10 +66,10 @@ export class UseraddfeedbackComponent implements OnInit, OnDestroy {
   updateWordCount(): void {
     const text = this.feedbackForm.get('feedbackText').value || '';
     this.wordCount = text.trim().split(/\s+/).length;
-    if (this.wordCount > 1000) {
-      const truncatedText = text.trim().split(/\s+/).slice(0, 1000).join(' ');
+    if (this.wordCount > 500) {
+      const truncatedText = text.trim().split(/\s+/).slice(0, 500).join(' ');
       this.feedbackForm.get('feedbackText').setValue(truncatedText, { emitEvent: false });
-      this.wordCount = 1000;
+      this.wordCount = 500;
     }
   }
 
