@@ -16,9 +16,14 @@ export class ViewloanComponent implements OnInit, OnDestroy {
 
   loans: Loan[] = [];
   filteredLoans: Loan[] = [];
+  paginatedLoans: Loan[] = [];
   searchTerm: string = '';
   errorMessage: string = '';
   isAdmin: boolean = false;
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0;
+  pages: number[] = [];
   private subscription: Subscription = new Subscription();
 
   constructor(private loanService: LoanService, private authService: AuthService, private router: Router) { }
@@ -39,17 +44,35 @@ export class ViewloanComponent implements OnInit, OnDestroy {
       ).subscribe((data: Loan[]) => {
         this.loans = data;
         this.filteredLoans = data;
+        this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
+        this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+        this.paginateLoans();
       })
     );
   }
-
 
   filterLoans(): void {
     this.filteredLoans = this.loans.filter(loan =>
       loan.loanType.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+    this.totalPages = Math.ceil(this.filteredLoans.length / this.itemsPerPage);
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.currentPage = 1;
+    this.paginateLoans();
   }
 
+  paginateLoans(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedLoans = this.filteredLoans.slice(start, end);
+  }
+
+  changePage(page: number, event: Event): void {
+    event.preventDefault(); // Prevent the default anchor tag behavior
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.paginateLoans();
+  }
 
   checkUserRole(): void {
     const userRole = this.authService.getUserRole();
@@ -70,15 +93,10 @@ export class ViewloanComponent implements OnInit, OnDestroy {
     }
   }
 
-
   applyLoan(loanId: number): void {
-    // Implement the logic for applying for a loan
     console.log(`Applying for loan with ID: ${loanId}`);
-    // You can navigate to an application form or perform other actions here
     this.router.navigate(['/loanform', loanId]);
   }
-
-
 
   editLoan(loanId: number): void {
     this.router.navigate(['/addloan', loanId]);
@@ -88,9 +106,8 @@ export class ViewloanComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  resetSearch(){
-    this.searchTerm=''
+  resetSearch(): void {
+    this.searchTerm = '';
+    this.filterLoans();
   }
-
 }
-
