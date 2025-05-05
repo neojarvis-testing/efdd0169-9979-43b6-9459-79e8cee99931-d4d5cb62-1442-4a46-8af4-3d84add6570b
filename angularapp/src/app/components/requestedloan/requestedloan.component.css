@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
  
-:host {
-  display: block;
-  background-color: #e8f5e9; /* Light green background */
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  padding: 20px;
+
+
+:host::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/background-image-1.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
 }
  
 .container {
@@ -14,7 +23,7 @@
 }
  
 .header {
-  background: linear-gradient(to right, #2e7d32, #66bb6a);
+  background: linear-gradient(to right, #2e6c7d, #011936);
   color: white;
   padding: 1.2rem;
   border-radius: 8px;
@@ -40,7 +49,7 @@
  
 .filter-status select {
   padding: 10px;
-  border: 2px solid #4caf50;
+  border: 2px solid #011936;
   border-radius: 8px;
   background-color: white;
   color: #333;
@@ -48,7 +57,7 @@
  
 input[type="text"] {
   padding: 10px 14px;
-  border: 2px solid #4caf50;
+  border: 2px solid #011936;
   border-radius: 8px;
   width: 100%;
   max-width: 300px;
@@ -59,7 +68,7 @@ input[type="text"] {
  
 input[type="text"]:focus {
   outline: none;
-  border-color: #2e7d32;
+  border-color: #011936;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
 }
  
@@ -75,7 +84,7 @@ img {
   background-color: white;
   padding: 30px;
   text-align: center;
-  color: #1b5e20;
+  color: #011936;
   border-radius: 8px;
   font-size: 1.2rem;
   font-weight: 500;
@@ -86,7 +95,7 @@ img {
 .no-data h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #2e7d32;
+  color: #011936;
 }
  
 .no-data p {
@@ -108,7 +117,7 @@ img {
 }
  
 thead {
-  background-color: #2e7d32;
+  background-color: #011936;
   color: white;
 }
  
@@ -135,11 +144,11 @@ tbody tr:hover {
 }
  
 .btn.green {
-  background-color: #43a047;
+  background-color: #011936;
 }
  
 .btn.green:hover {
-  background-color: #2e7d32;
+  background-color: #011936;
 }
  
 .btn.red {
@@ -188,7 +197,7 @@ tbody tr:hover {
  
 .dialog-box h2 {
   margin-top: 0;
-  color: #2e7d32;
+  color: #011936;
 }
  
 .dialog-box p {
@@ -199,7 +208,7 @@ tbody tr:hover {
 textarea {
   width: 100%;
   padding: 10px;
-  border: 2px solid #4caf50;
+  border: 2px solid #011936;
   border-radius: 8px;
   font-size: 1rem;
   resize: vertical;
@@ -208,7 +217,7 @@ textarea {
  
 textarea:focus {
   outline: none;
-  border-color: #2e7d32;
+  border-color: #011936;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
  
@@ -276,22 +285,22 @@ textarea:focus {
 }
  
 .page-link {
-  color: #2e7d32;
-  border: 1px solid #2e7d32;
+  color: #011936;
+  border: 1px solid #011936;
   border-radius: 0.25rem;
   padding: 0.5rem 0.75rem;
   transition: background-color 0.3s, color 0.3s;
 }
  
 .page-link:hover {
-  background-color: #2e7d32;
+  background-color: #011936;
   color: white;
 }
  
 .page-item.active .page-link {
-  background-color: #2e7d32;
+  background-color: #011936;
   color: white;
-  border-color: #2e7d32;
+  border-color: #011936;
 }
  
 .page-item.disabled .page-link {
@@ -306,7 +315,7 @@ textarea:focus {
   align-items: center;
   min-height: 300px;
 }
-
+ 
 .reset-btn {
   border: none;
   padding: 8px 14px;
@@ -314,6 +323,7 @@ textarea:focus {
   cursor: pointer;
   font-weight: 500;
   color: white;
-  background-color: blue;
+  background-color: #011936;
   transition: all 0.3s ease;
 }
+ 
