@@ -96,6 +96,7 @@ this.filteredLoans = [...this.loans];
   }
  
   rejectLoan(loan: LoanApplication): void {
+    loan.loanStatus = 'Rejected';
     this.loanToReject = loan;
     this.rejectionForm.reset();
     this.showRejectionModal = true;
